@@ -1,0 +1,167 @@
+{
+  "title": "Cold Storage: The Faces We Left Behind",
+  "year": 2384,
+  "location": "Bay City — The Rainline",
+  "coldStorageYears": 110,
+  "premise": "Eight DHFs who exposed pieces of Project Palimpsest in 2274 awaken in unfamiliar sleeves. The people they knew have new faces, and each PC carries one hidden fragment of the evidence archive.",
+  "scenes": [
+    {
+      "id": "SC01",
+      "name": "The Resurrection Ward",
+      "minutes": 20,
+      "minimum": [
+        "Each active PC learns the physical facts of their current sleeve",
+        "Reveal the 110-year gap",
+        "Show the two reserve/missing bays"
+      ],
+      "optional": [
+        "Private sensory complication from a sleeve",
+        "Marlowe fragment on a damaged terminal"
+      ],
+      "cut": "Skip individual medical examinations and deliver sleeve complications as dossier cards.",
+      "failureForward": "No roll can prevent the PCs from leaving the ward; failed checks reveal that logs were deliberately cleaned.",
+      "clues": [
+        "Eight sealed continuity serials",
+        "Current sleeves were paid for anonymously",
+        "The two reserve bays are not empty by accident"
+      ],
+      "spotlight": "Every selected PC states one thing that feels physically wrong or unfamiliar."
+    },
+    {
+      "id": "SC02",
+      "name": "Breach of Cold Storage",
+      "minutes": 25,
+      "minimum": [
+        "Run one full Intent → Check → Resolution teaching cycle",
+        "Attackers demonstrate that intact stacks are the objective",
+        "Deliver first relationship familiarity trigger"
+      ],
+      "optional": [
+        "Capture an attacker",
+        "Recover a damaged extraction order"
+      ],
+      "cut": "End the attackers’ morale after one complete combat Turn once the players understand Speed Dice.",
+      "failureForward": "If overwhelmed, facility countermeasures or a contact opens an escape route; the consequence is lost equipment, not a dead-end.",
+      "clues": [
+        "Recovery order specifies living stacks",
+        "Protectorate-format authorization with a private corporate checksum",
+        "One attacker uses an old phrase known to a PC"
+      ],
+      "spotlight": "Give the first adversarial recognition moment to a PC whose active relationship has not yet appeared."
+    },
+    {
+      "id": "SC03",
+      "name": "The Dead City They Remember",
+      "minutes": 35,
+      "minimum": [
+        "Move through the Rainline",
+        "Show one location that replaced something from 2274",
+        "Deliver an ally or loved-one familiarity reveal"
+      ],
+      "optional": [
+        "Quiet Archive shelter",
+        "Blue Lotus market",
+        "Sable Needle transit checkpoint"
+      ],
+      "cut": "Use a montage with one meaningful decision instead of three location encounters.",
+      "failureForward": "Failed investigation points toward a less comfortable source rather than removing information.",
+      "clues": [
+        "Analogue date record surviving the purge",
+        "A current alias attached to an old access pattern",
+        "Proof the PCs were legally stored rather than executed"
+      ],
+      "spotlight": "Prioritise a social or investigative PC after the combat tutorial."
+    },
+    {
+      "id": "SC04",
+      "name": "Anansi House Safehouse",
+      "minutes": 40,
+      "minimum": [
+        "Meet Marlowe",
+        "Open the relationship board",
+        "Learn that Palimpsest survived institutional transformation",
+        "Choose a lead into Virtuality or the spire"
+      ],
+      "optional": [
+        "Private rooms trigger former-sleeve memories",
+        "Contact arrives in person",
+        "Examine century-old maintenance logs"
+      ],
+      "cut": "Marlowe can deliver the core lead directly if table discussion is already rich.",
+      "failureForward": "If the players distrust Marlowe, the same route appears in analogue safehouse records and a contact’s testimony.",
+      "clues": [
+        "Palimpsest became the Continuity Foundation",
+        "The eight fragments were deliberately separated",
+        "A benefactor financed the current sleeves"
+      ],
+      "spotlight": "Deliver one ally/loved-one reveal and one contradiction between PCs."
+    },
+    {
+      "id": "SC05",
+      "name": "Palimpsest Virtuality",
+      "minutes": 40,
+      "minimum": [
+        "Reconstruct the 2274 final mission",
+        "Show old sleeves",
+        "Reveal at least one false or incomplete memory",
+        "Identify the modern adversarial coalition"
+      ],
+      "optional": [
+        "Personal virtual room for each PC",
+        "Psychosurgery challenge",
+        "Encounter a copied impression of a contact"
+      ],
+      "cut": "Use three shared memory nodes rather than eight private scenes.",
+      "failureForward": "Virtual damage changes Ego/resources or exposes a secret early; it never deletes the only copy of a critical clue.",
+      "clues": [
+        "Archive architecture points to Anik’s route",
+        "Funding data links Meth clients",
+        "Checksum proves all eight fragments belong together"
+      ],
+      "spotlight": "Every selected PC receives a memory beat; compress to a sentence for players already spotlighted heavily."
+    },
+    {
+      "id": "SC06",
+      "name": "Needlecast Spire / Palimpsest Core",
+      "minutes": 55,
+      "minimum": [
+        "Allow infiltration, negotiation, hacking or assault",
+        "Put a personally connected adversary at the centre",
+        "Recombine enough evidence to make the final choice informed"
+      ],
+      "optional": [
+        "Contact betrayal",
+        "Stack-hostage complication",
+        "Corporate security wave"
+      ],
+      "cut": "Remove secondary security zones and begin at the core once the party obtains valid access.",
+      "failureForward": "Capture becomes negotiation inside the core; destroying one fragment still leaves redundant evidence sufficient to expose part of the truth.",
+      "clues": [
+        "True 2274 order",
+        "Modern client ledger",
+        "Complete Palimpsest procedure and publication path"
+      ],
+      "spotlight": "Call on each unresolved active relationship before the final decision."
+    },
+    {
+      "id": "SC07",
+      "name": "Epilogues",
+      "minutes": 25,
+      "minimum": [
+        "Publish, suppress, destroy or seize Palimpsest",
+        "Resolve current-sleeve choice",
+        "Give each PC one relationship decision"
+      ],
+      "optional": [
+        "Reserve-PC recovery",
+        "Quiet Archive deposition",
+        "Rainline aftermath"
+      ],
+      "cut": "Use one sentence per PC if the session is over time.",
+      "failureForward": "There is no single correct ending; consequences become campaign hooks.",
+      "clues": [],
+      "spotlight": "Every active PC gets the final word on their own identity."
+    }
+  ],
+  "redundancyRule": "Every essential revelation must be obtainable through at least a PC memory, independent physical/virtual evidence, and NPC testimony or equivalent independent source."
+}

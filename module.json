@@ -1,0 +1,44 @@
+{
+  "id": "cold-storage",
+  "title": "Cold Storage: The Faces We Left Behind",
+  "description": "Original Bay City 2384 one-shot module for the Altered Carbon RPG Foundry system. Includes eight mechanically loaded pregens, forty former sleeves, twenty recurring contacts, four adversaries, 160 relationship links, clues, factions and GM journals. Final bespoke maps/art/audio remain replaceable assets.",
+  "version": "1.0.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "Pacts & Polyhedrals",
+      "url": "https://github.com/pacts-and-polyhedrals/altered-carbon-cold-storage"
+    }
+  ],
+  "esmodules": [
+    "cold-storage.mjs"
+  ],
+  "styles": [
+    "styles/cold-storage.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "lang/en.json"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "altered-carbon-rpg",
+        "type": "system",
+        "compatibility": {
+          "minimum": "1.0.0"
+        },
+        "manifest": "https://raw.githubusercontent.com/pacts-and-polyhedrals/altered-carbon-rpg-foundry/main/system.json"
+      }
+    ]
+  },
+  "url": "https://github.com/pacts-and-polyhedrals/altered-carbon-cold-storage",
+  "manifest": "https://raw.githubusercontent.com/pacts-and-polyhedrals/altered-carbon-cold-storage/main/module.json",
+  "download": "https://github.com/pacts-and-polyhedrals/altered-carbon-cold-storage/releases/download/v1.0.0/cold-storage-v1.0.0.zip"
+}

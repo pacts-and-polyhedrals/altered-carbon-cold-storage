@@ -1,0 +1,20 @@
+<section class="cs-shell cs-dashboard">
+  <header class="cs-dashboard-head">
+    <div>
+      <p class="cs-kicker">IDENTITY CORRELATION // PALIMPSEST</p>
+      <h2>Relationship Dashboard</h2>
+    </div>
+    <button class="cs-primary" type="button" data-action="refreshBoard"><i class="fa-solid fa-arrows-rotate"></i> Refresh Player Board</button>
+  </header>
+  {{#each pcs}}
+  <section class="cs-pc cs-panel">
+    <div class="cs-panel-head"><h3>{{name}}</h3><span>DHF RELATIONSHIP MATRIX</span></div>
+    <div class="cs-table-wrap">
+      <table>
+        <thead><tr><th>Historical identity</th><th>Current face</th><th>Type</th><th>Status</th><th>Reveal</th></tr></thead>
+        <tbody>{{#each relationships}}<tr><td>{{name}}{{#if plotCritical}} <span class="cs-critical" title="Plot critical">◆</span>{{/if}}</td><td>{{current}}</td><td><span class="cs-tag">{{category}}</span></td><td><span class="cs-state">{{state}}</span></td><td class="cs-actions"><button type="button" data-action="setReveal" data-uuid="{{uuid}}" data-state="familiar">Familiar</button><button type="button" data-action="setReveal" data-uuid="{{uuid}}" data-state="suspected">Suspected</button><button type="button" data-action="setReveal" data-uuid="{{uuid}}" data-state="confirmed">Confirm</button></td></tr>{{/each}}</tbody>
+      </table>
+    </div>
+  </section>
+  {{/each}}
+</section>
