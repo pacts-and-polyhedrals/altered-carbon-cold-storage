@@ -1,0 +1,44 @@
+[
+  {
+    "id": "F01",
+    "name": "The Continuity Foundation",
+    "public": "Charity restoring damaged DHFs and supplying sleeves to victims.",
+    "secret": "Project Palimpsest's modern institutional form.",
+    "goal": "Commercialise editable continuity for wealthy and state clients."
+  },
+  {
+    "id": "F02",
+    "name": "Protectorate Continuity Office",
+    "public": "Stack evidence, state resleeving and continuity-crimes authority.",
+    "secret": "Its sealed order placed the PCs on ice; present officers are divided over disclosure.",
+    "goal": "Control legal continuity and the institutional consequences of the 2274 order."
+  },
+  {
+    "id": "F03",
+    "name": "Sable Needle Corporation",
+    "public": "Needlecast relays, clone storage and secure DHF transmission.",
+    "secret": "Moved fragments of the 2274 evidence and retains technical records.",
+    "goal": "Protect its infrastructure and surviving records."
+  },
+  {
+    "id": "F04",
+    "name": "Blue Lotus Combine",
+    "public": "Criminal network around sleeves and identity services.",
+    "secret": "Long history of illegal sleeves, identity laundering, stacks, backups and witness disappearance.",
+    "goal": "Profit while avoiding ownership by Palimpsest."
+  },
+  {
+    "id": "F05",
+    "name": "The Quiet Archive",
+    "public": "Neo-C organisation recording testimony without spinning up the dead.",
+    "secret": "Preserved analogue evidence resistant to memory tampering.",
+    "goal": "Protect testimony and religious autonomy."
+  },
+  {
+    "id": "F06",
+    "name": "The Chainbreakers",
+    "public": "Loose Quellist-influenced anti-Meth resistance.",
+    "secret": "Some members want Palimpsest repurposed to erase obedience conditioning.",
+    "goal": "Break Protectorate and Meth control without becoming a new continuity tyranny."
+  }
+]

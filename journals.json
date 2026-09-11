@@ -1,0 +1,116 @@
+[
+  {
+    "id": "J00",
+    "title": "00 — Start Here",
+    "visibility": "everyone",
+    "body": "<h2>Player Welcome</h2><p><strong>Bay City, Earth — 2384.</strong> Your DHF remembers 2274 and then nothing. One hundred and ten years have passed. You have awakened in a body that is not the one you remember, inside a resleeving ward that was never supposed to open.</p><p>Read the setting primer, the glossary, your current-sleeve dossier and your private historical dossier. You are allowed to know the faces and identities of people from your old lives. You are <em>not</em> allowed to assume that any stranger in 2384 is or is not one of those people.</p><h2>GM Canon Guide</h2><p>Cold Storage uses Netflix-series continuity first, official RPG mechanics second, and original adventure material third. The series protagonists, their relatives and their central investigations remain offstage. Historical public events can be referenced, but the PCs are not secretly connected to the television cast.</p><p>The central rule of the mystery is simple: appearance establishes almost nothing. Recognition progresses through familiarity, identification and verification.</p>"
+  },
+  {
+    "id": "J01",
+    "title": "01 — What Is a Person?",
+    "visibility": "everyone",
+    "body": "<p>A person is treated as more than the body currently carrying them. A Digital Human Freight identity persists through a cortical stack and can move between sleeves, while the sleeve contributes physical capability, chemistry, sensation and a social identity that other people may react to before they know who is inside.</p><p>Cold Storage uses that separation everywhere. Strength and Perception belong to the active sleeve; the Stack-facing Attributes and personal history belong to the DHF. Memories may survive a transfer, but memory continuity does not make memory infallible. Trauma, psychosurgery and deliberate alteration can all change what a person sincerely believes happened.</p><p>The adventure never asks the players to treat bodily incongruence as a joke. It is used to explore alienation, class, privilege, dependency, intimacy and the question of whether being recognised is the same thing as being known.</p>"
+  },
+  {
+    "id": "J02",
+    "title": "02 — Sleeves and Resleeving",
+    "visibility": "everyone",
+    "body": "<p>Organic, clone and synthetic sleeves exist across an economy that is anything but equal. A wealthy person can maintain preferred bodies and backups; a prisoner, worker or Grounder may receive whatever sleeve is available. Military and specialist bodies can be engineered around a purpose, while low-quality synthetic sleeves can create obvious sensory and social limitations.</p><p>Resleeving changes the body-dependent part of the character. A new sleeve can alter Strength, Perception, Health, Tech capacity, augmentations, inherited dependencies and the way strangers respond to the character. The DHF retains its accumulated identity, memories, relationships and Stack-facing capabilities unless something has damaged or altered them.</p><p>The eight pregens awaken in sleeves selected by somebody else. Each body is useful but uncomfortable in a different way, creating immediate questions: Who chose it? Why this one? What happened to its previous occupant? And which physical reactions belong to the DHF rather than the sleeve?</p>"
+  },
+  {
+    "id": "J03",
+    "title": "03 — Death in 2384",
+    "visibility": "everyone",
+    "body": "<p>Sleeve death and personal death are not automatically the same event. A dead body can leave an intact cortical stack behind; a recovered stack can allow the DHF to be resleeved. Real Death is the destruction or unrecoverable loss of the person’s continuity rather than merely the body.</p><p>Wealth determines how secure that promise actually is. Remote backups, clone banks, legal representation and rapid resleeving protect the rich. Grounders may depend on insurance, state property, borrowed sleeves or criminal markets. A missing stack can be evidence, contraband, leverage or a hostage.</p><p>Cold Storage uses five distinct states whenever death becomes important: the current sleeve, the stack, any known backup, the legal identity controlling access to those assets, and the memory gap between versions. That separation is crucial to Project Palimpsest because a witness can be made unavailable without being publicly declared dead.</p>"
+  },
+  {
+    "id": "J04",
+    "title": "04 — Bay City",
+    "visibility": "everyone",
+    "body": "<p>Bay City is a vertical city of persistent rain, surveillance, corporate glass and districts built beneath the wealth they support. Above the clouds, the Aerium isolates Meth society from the conditions at street level. Below it, cheap resleeving clinics, police checkpoints, AI-run services and black-market stack traffic exist within walking distance of one another.</p><h2>The Rainline</h2><p>Cold Storage takes place primarily in an original district called the Rainline: a flood-damaged industrial belt beneath the Aerium’s shadow. Condemned towers are occupied anyway. Old transit infrastructure has become markets and safe routes. Religious shelters preserve analogue records. Synthetic repair shops share walls with illegal memory dealers. Protectorate checkpoints appear whenever somebody important is frightened.</p><p>The Rainline is deliberately far from the television series’ signature locations. It should feel recognisably Bay City while remaining the PCs’ own corner of it.</p>"
+  },
+  {
+    "id": "J05",
+    "title": "05 — The Aerium",
+    "visibility": "everyone",
+    "body": "<p>The Aerium represents the physical distance between Meth wealth and Grounder life. Extreme longevity is reinforced by clone banks, protected backups, private infrastructure, influence and the ability to treat destroyed sleeves as replaceable assets. That does not make Meths literally immortal; it makes them extraordinarily difficult to remove from power.</p><p>Sabine Kade’s history gives the party an insider’s perspective on this culture. For everyone else, the Aerium is a reminder that the same technology can mean continuity for one class and dependency for another. Palimpsest’s wealthy clients are interested not merely in surviving death but in controlling the narrative continuity of families, witnesses and institutions.</p>"
+  },
+  {
+    "id": "J06",
+    "title": "06 — The Protectorate",
+    "visibility": "everyone",
+    "body": "<p>The Protectorate combines interplanetary authority with control over systems ordinary people depend on: law enforcement, stack evidence, needlecast jurisdiction, state resleeving and continuity crimes. Its authority can preserve a witness or disappear one under the same administrative logic.</p><p>The original <strong>Protectorate Continuity Office</strong> is responsible for the sealed 2274 order that put the PCs on ice. The present office is divided. Some officers see the order as an institutional crime that must finally be exposed. Others believe disclosure would undermine thousands of cases involving resleeving, testimony and state custody.</p><p>This tension is important: the Protectorate is not one villainous mind. Individual officials may be adversaries, allies, opportunists or all three at different moments.</p>"
+  },
+  {
+    "id": "J07",
+    "title": "07 — Faith and Resolution 653",
+    "visibility": "everyone",
+    "body": "<p>Neo-C religious coding makes resurrection, testimony and murder investigation political questions as well as technical ones. The controversy around overriding religious coding to spin up murder victims creates an obvious pressure point: if a dead witness can testify, then controlling what that witness remembers becomes enormously valuable.</p><p>Project Palimpsest exploits that pressure. It can forge the appearance of belief, manipulate testimony and make a victim seem to have chosen a religious restriction they never held. The Quiet Archive emerged from the conviction that analogue testimony and living witnesses must exist outside systems that can be rewritten.</p><p>The adventure does not require players to agree on the ethics of resleeving. It does require them to decide who should control a person’s memories and whether consent can survive institutional ownership of a stack.</p>"
+  },
+  {
+    "id": "J08",
+    "title": "08 — Needlecasting",
+    "visibility": "everyone",
+    "body": "<p>Needlecasting transmits DHF across enormous distances, separating travel from the movement of a body. A receiving location requires storage, identity controls and an available sleeve. That infrastructure creates points where a person can be delayed, intercepted, copied, corrupted or quietly redirected.</p><p>Sable Needle Corporation operated part of the technical chain around the 2274 Palimpsest evidence. Tomas “Latch” Araya understands the architecture well enough to recognise when a transmission record has been made deliberately plausible rather than genuinely clean.</p><p>Cold Storage treats duplicate identity as a serious legal and personal threat. When two records both claim continuity, the answer cannot be resolved by looking at a face.</p>"
+  },
+  {
+    "id": "J09",
+    "title": "09 — Virtuality and Psychosurgery",
+    "visibility": "everyone",
+    "body": "<p>Virtuality can be therapy room, interrogation chamber, data prison or shared dream depending on who controls it. Subjective experience can be manipulated without changing the physical room at all. Psychosurgery turns that plasticity inward, treating damaged DHF but also creating the possibility of memory alteration and coercion.</p><p>Palimpsest began as legitimate research into damaged continuity. Its corruption came from discovering that the same tools could suppress memories, manufacture plausible alternatives and separate emotion from remembered events. The party’s visit to Palimpsest Virtuality should therefore feel dangerous even when nobody is physically armed.</p><p>Anik Rao understands constructed reality well enough to distrust certainty. Edda Sorn understands the clinical language well enough to know that abuse can be described as treatment.</p>"
+  },
+  {
+    "id": "J10",
+    "title": "10 — Artificial Intelligence",
+    "visibility": "everyone",
+    "body": "<p>AIs can operate services, inhabit virtual spaces and remember human beings across changes of sleeve. That gives them a peculiar advantage in a mystery where every familiar face has vanished: an AI may remember a person’s behaviour for longer and with less dependence on appearance than a human witness.</p><h2>Marlowe</h2><p>Marlowe is the original AI manager of Anansi House, a safehouse the PCs used in 2274. The building is nearly abandoned in 2384, but Marlowe has endured in fragments across neglected systems. Marlowe can recognise old access habits, reconstruct partial records and contradict human memories—but an AI record can also be edited, forked or compromised.</p><p>Marlowe is therefore evidence, not an oracle.</p>"
+  },
+  {
+    "id": "J11",
+    "title": "11 — Harlan’s World and Elder Technology",
+    "visibility": "everyone",
+    "body": "<p>Harlan’s World and Elder-derived technology sit in the distant background of several former sleeves. Archaeological control, Protectorate extraction and the material history of stack technology make Elder material politically and commercially valuable far beyond its scientific importance.</p><p>Palimpsest acquired rare components through extraction and customs channels that some of the pregens encountered decades before the project’s final exposure. Those links explain why apparently unrelated careers—customs, military service, engineering and finance—keep converging on the same people.</p><p>Elder technology should remain rare and unsettling. It is not a convenient explanation for every unexplained effect in the scenario.</p>"
+  },
+  {
+    "id": "J12",
+    "title": "12 — Crime and the Sleeve Economy",
+    "visibility": "everyone",
+    "body": "<p>An illegal body market exists wherever legal access to bodies is unequal. Stolen sleeves, stack trafficking, backup theft, identity laundering, repossession and synthetic modification can all be profitable. A criminal network that can change someone’s face can also change the evidence trail around them.</p><p>The Blue Lotus Combine has survived long enough to remember several of the PCs under different names. Cass Ren’s histories intersect with it repeatedly, but the Combine is not merely a gang of disposable enemies. It is a network of debts, old loyalties and services that sometimes protected people from state systems while exploiting them in other ways.</p><p>Project Palimpsest used the illegal sleeve economy when official channels created too much paperwork, making criminal records an important independent source of evidence.</p>"
+  },
+  {
+    "id": "J13",
+    "title": "13 — Everyday Life",
+    "visibility": "everyone",
+    "body": "<p>In a society where bodies change, identity has to be carried by more than appearance. People rely on legal credentials, behavioural habits, private names, passwords, family memory and social trust. Photographs can matter emotionally without proving who inhabits a current sleeve.</p><p>Dating across sleeves, mourning a body while the person continues, inheriting another body’s dependencies and negotiating pronouns or presentation are ordinary complications rather than exotic exceptions. Employers and insurers can discriminate based on sleeve quality. Police identify legal continuity while ordinary people may still react to the body in front of them.</p><p>Cold Storage deliberately uses small details—voice rhythm, posture, repeated lies, religious practice, recreated scars—to make recognition intimate without making it certain.</p>"
+  },
+  {
+    "id": "J14",
+    "title": "14 — The Lost 110 Years",
+    "visibility": "everyone",
+    "body": "<p>The PCs did not experience the century that passed. Their families continued. Allies resleeved. Rivals inherited unfinished work. Enemies accumulated capital and institutional legitimacy. Some loved ones died; others survived long enough to become strangers by choice rather than body.</p><p>Project Palimpsest did not remain a single hidden laboratory. It was absorbed into contracts, continuity law, sleeve allocation, private clinical research and evidence procedures. The result is harder to expose than the original project because many people participating in its modern form have no idea where the techniques came from.</p><p>The players should feel dislocated rather than ignorant. Their characters are experts in a world that has moved on without them.</p>"
+  },
+  {
+    "id": "J15",
+    "title": "15 — Project Palimpsest",
+    "visibility": "gm",
+    "body": "<p>Palimpsest began as a psychosurgical programme for reconstructing damaged DHF. The breakthrough was learning that reconstruction did not have to be neutral. Researchers could suppress selected memories, implant plausible alternatives, detach emotional responses, forge religious coding and reconstruct missing experience from other people’s memories.</p><p>In 2274 the eight PCs discovered different parts of the programme. Latch divided the master evidence archive into experiential fragments and hid one inside each DHF. A sealed continuity order seized the witnesses before the fragments could be recombined. The conspirators chose storage over Real Death because they still hoped to recover or rewrite the embedded evidence.</p><p>The Continuity Foundation is Palimpsest’s modern institutional form. Lucan Vey still believes the project can perfect identity. The finale works best if he can argue that the party themselves are proof: damaged, displaced people whose continuity could supposedly be repaired if they surrender control.</p>"
+  },
+  {
+    "id": "J16",
+    "title": "16 — Original Factions",
+    "visibility": "everyone",
+    "body": "<p><strong>The Continuity Foundation</strong> publicly restores damaged DHFs and supplies sleeves to victims. <strong>The Protectorate Continuity Office</strong> handles stack evidence and state resleeving. <strong>Sable Needle Corporation</strong> operates transmission and storage infrastructure. <strong>Blue Lotus Combine</strong> controls parts of the illegal sleeve economy. <strong>The Quiet Archive</strong> preserves testimony outside manipulable digital systems. <strong>The Chainbreakers</strong> oppose Meth and state control over continuity.</p><p>Each faction contains people who disagree about Palimpsest. Treat faction affiliation as pressure and access, not as an automatic moral alignment.</p>"
+  },
+  {
+    "id": "J17",
+    "title": "17 — Relationship Archive",
+    "visibility": "gm",
+    "body": "<p>The archive contains 160 historical links: every one of the forty former PC sleeves has one Enemy, Rival, Ally and Loved One. Twenty persistent contact DHFs recur across those lives, meaning the same person can occupy different roles for different PCs.</p><p>Use three revelation stages. <strong>Familiarity</strong> is an emotional or behavioural echo. <strong>Identification</strong> is a claim that a present stranger corresponds to a historical person. <strong>Verification</strong> requires independent evidence. Because Palimpsest can manipulate memory, even an intimate recollection does not automatically reach the third stage.</p><p>The GM dashboard is the operational version of this journal. Promote only a manageable selection of relationships into active scenes; the rest create depth, backup clues and future campaign hooks.</p>"
+  },
+  {
+    "id": "J18",
+    "title": "18 — Glossary",
+    "visibility": "everyone",
+    "body": "<dl><dt>DHF</dt><dd>The persistent digital human identity carried by a cortical stack or related storage.</dd><dt>Sleeve</dt><dd>The current organic, clone or synthetic body inhabited by a DHF.</dd><dt>Real Death</dt><dd>Loss or destruction of recoverable continuity rather than merely sleeve death.</dd><dt>Resleeving</dt><dd>Installing a DHF into another body.</dd><dt>Needlecasting</dt><dd>Transmission of DHF rather than physical travel.</dd><dt>Virtuality</dt><dd>A constructed digital environment inhabited directly by DHF.</dd><dt>Psychosurgery</dt><dd>Clinical manipulation of memory and personality within DHF.</dd><dt>Meth</dt><dd>A person whose wealth and continuity infrastructure allow extreme longevity and political power.</dd><dt>Grounder</dt><dd>Everyday population living without Meth-level continuity security.</dd><dt>Palimpsest</dt><dd>The original adventure’s illegal memory-manipulation programme.</dd><dt>Familiar / Suspected / Confirmed</dt><dd>The three practical stages used by the relationship mystery.</dd></dl>"
+  }
+]

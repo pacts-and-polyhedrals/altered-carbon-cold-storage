@@ -1,0 +1,219 @@
+[
+  {
+    "id": "REV-PC01",
+    "revelation": "Names of compromised officials",
+    "essential": true,
+    "pcId": "PC01",
+    "clues": [
+      {
+        "channel": "memory",
+        "source": "PC01"
+      },
+      {
+        "channel": "evidence",
+        "source": "Palimpsest archive checksum"
+      },
+      {
+        "channel": "testimony",
+        "source": "Marlowe or linked contact"
+      }
+    ]
+  },
+  {
+    "id": "REV-PC02",
+    "revelation": "Palimpsest's encryption seed",
+    "essential": true,
+    "pcId": "PC02",
+    "clues": [
+      {
+        "channel": "memory",
+        "source": "PC02"
+      },
+      {
+        "channel": "evidence",
+        "source": "Palimpsest archive checksum"
+      },
+      {
+        "channel": "testimony",
+        "source": "Marlowe or linked contact"
+      }
+    ]
+  },
+  {
+    "id": "REV-PC03",
+    "revelation": "Funding and ownership records",
+    "essential": true,
+    "pcId": "PC03",
+    "clues": [
+      {
+        "channel": "memory",
+        "source": "PC03"
+      },
+      {
+        "channel": "evidence",
+        "source": "Palimpsest archive checksum"
+      },
+      {
+        "channel": "testimony",
+        "source": "Marlowe or linked contact"
+      }
+    ]
+  },
+  {
+    "id": "REV-PC04",
+    "revelation": "Security recordings of the 2274 raid",
+    "essential": true,
+    "pcId": "PC04",
+    "clues": [
+      {
+        "channel": "memory",
+        "source": "PC04"
+      },
+      {
+        "channel": "evidence",
+        "source": "Palimpsest archive checksum"
+      },
+      {
+        "channel": "testimony",
+        "source": "Marlowe or linked contact"
+      }
+    ]
+  },
+  {
+    "id": "REV-PC05",
+    "revelation": "Stack-transfer and smuggling routes",
+    "essential": true,
+    "pcId": "PC05",
+    "clues": [
+      {
+        "channel": "memory",
+        "source": "PC05"
+      },
+      {
+        "channel": "evidence",
+        "source": "Palimpsest archive checksum"
+      },
+      {
+        "channel": "testimony",
+        "source": "Marlowe or linked contact"
+      }
+    ]
+  },
+  {
+    "id": "REV-PC06",
+    "revelation": "Original memory-editing procedure",
+    "essential": true,
+    "pcId": "PC06",
+    "clues": [
+      {
+        "channel": "memory",
+        "source": "PC06"
+      },
+      {
+        "channel": "evidence",
+        "source": "Palimpsest archive checksum"
+      },
+      {
+        "channel": "testimony",
+        "source": "Marlowe or linked contact"
+      }
+    ]
+  },
+  {
+    "id": "REV-PC07",
+    "revelation": "Virtuality architecture and access path",
+    "essential": true,
+    "pcId": "PC07",
+    "clues": [
+      {
+        "channel": "memory",
+        "source": "PC07"
+      },
+      {
+        "channel": "evidence",
+        "source": "Palimpsest archive checksum"
+      },
+      {
+        "channel": "testimony",
+        "source": "Marlowe or linked contact"
+      }
+    ]
+  },
+  {
+    "id": "REV-PC08",
+    "revelation": "Publication key and complete accusation",
+    "essential": true,
+    "pcId": "PC08",
+    "clues": [
+      {
+        "channel": "memory",
+        "source": "PC08"
+      },
+      {
+        "channel": "evidence",
+        "source": "Palimpsest archive checksum"
+      },
+      {
+        "channel": "testimony",
+        "source": "Marlowe or linked contact"
+      }
+    ]
+  },
+  {
+    "id": "REV-CENTRAL-1",
+    "revelation": "The PCs were stored under a sealed Protectorate continuity order rather than lawfully executed.",
+    "essential": true,
+    "clues": [
+      {
+        "channel": "record",
+        "source": "Continuity order stub"
+      },
+      {
+        "channel": "testimony",
+        "source": "Continuity Office dissenter"
+      },
+      {
+        "channel": "memory",
+        "source": "2274 raid reconstruction"
+      }
+    ]
+  },
+  {
+    "id": "REV-CENTRAL-2",
+    "revelation": "The Continuity Foundation is the modern institutional shell of Project Palimpsest.",
+    "essential": true,
+    "clues": [
+      {
+        "channel": "finance",
+        "source": "Sabine-linked ledger"
+      },
+      {
+        "channel": "virtual",
+        "source": "Palimpsest architecture signature"
+      },
+      {
+        "channel": "testimony",
+        "source": "Talia or Arun"
+      }
+    ]
+  },
+  {
+    "id": "REV-CENTRAL-3",
+    "revelation": "Faces cannot verify identity; verification requires independent evidence because Palimpsest can copy memories.",
+    "essential": true,
+    "clues": [
+      {
+        "channel": "AI",
+        "source": "Marlowe behavioural archive"
+      },
+      {
+        "channel": "analogue",
+        "source": "Quiet Archive record"
+      },
+      {
+        "channel": "technical",
+        "source": "Sable Needle continuity logs"
+      }
+    ]
+  }
+]
