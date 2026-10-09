@@ -1,4 +1,4 @@
-/** Cold Storage 1.3.0: single access point for Altered Carbon RPG 2.4.0 helpers.
+/** Cold Storage 1.7.0: single access point for Altered Carbon RPG 2.4.0 helpers.
  * The module reuses the system's own creator, Trait automation, Baggage workflow and
  * adversary builders so imported Actors match characters made with the system tools.
  * Paths are relative to this file so Foundry route prefixes and The Forge resolve them.
@@ -19,7 +19,7 @@ export function versionAtLeast(version,minimum=REQUIRED_SYSTEM){const a=parts(ve
 export function systemVersion(){return game.system?.version||game.alteredCarbon?.version||'0';}
 export function assertSystem(){
  if(game.system?.id!==SYS)throw new Error('Cold Storage requires the Altered Carbon RPG system.');
- if(!versionAtLeast(systemVersion()))throw new Error(`Cold Storage 1.3 requires Altered Carbon RPG ${REQUIRED_SYSTEM} or newer (installed: ${systemVersion()}). Update the system first.`);
+ if(!versionAtLeast(systemVersion()))throw new Error(`Cold Storage 1.7 requires Altered Carbon RPG ${REQUIRED_SYSTEM} or newer (installed: ${systemVersion()}). Update the system first.`);
 }
 /** Same commonality rule as the system Character Creator (variants, Praxis, archetype trees).
  * Core 2020 Ch.2: a Civilian's Citizenship *branch* is Common. In the 2.4.0 catalog Citizenship is a

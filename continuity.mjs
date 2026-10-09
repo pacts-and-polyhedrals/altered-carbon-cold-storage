@@ -1,4 +1,4 @@
-/** GM-only continuity operations for Cold Storage 1.3.0 + Altered Carbon RPG 2.4.0.
+/** GM-only continuity operations for Cold Storage 1.7.0 + Altered Carbon RPG 2.4.0.
  * Never resolves medical treatment by inventing Core results. All Fray effects are
  * optional player-agreed Cold Storage house rules, distinct from actual Ego loss.
  */

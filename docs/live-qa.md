@@ -1,11 +1,11 @@
-# Cold Storage 1.3.0 — live Foundry v14 / Forge QA checklist
+# Cold Storage 1.7.0 — live Foundry v14 / Forge QA checklist
 
 **Not yet performed in a running licensed Foundry/Forge environment.** Automated tests and a mocked document/settings API do not substitute for these checks.
 
 ## Compatibility and startup
 
 1. Make a full backup of the original v1.1.1 game world. Test first in a **disposable duplicate**, never an active paid table.
-2. Verify Foundry v14 and the unofficial Altered Carbon RPG **v2.4.0** install. Enable Cold Storage v1.3.0. Confirm every Cold Storage window uses the Altered Carbon window look, and that the system's "Legacy Cold Storage Book" menu does not interfere (Book Only and Open GM Book must work). Check browser and Foundry console for module startup, data-model and deprecation errors.
+2. Verify Foundry v14 and the unofficial Altered Carbon RPG **v2.4.0** install. Enable Cold Storage v1.7.0. Run Install / Update Zoned Maps: confirm 14 map scenes, gridless with zone units; open the Zone Assistant on the Breach and confirm its four zones and links; drag a token between zones and confirm its zone updates and that the attack dialog pre-selects the right range; drag a token into a cover ring and confirm its sheet shows that cover, then out again and confirm it clears, and that hand-set cover survives a move; confirm a scene with replaced art keeps it. Open a GM chapter (e.g. G09): confirm the Altered Carbon journal look, then click a Skill in a check chip and confirm GM Control opens with that Skill, Difficulty, prompt and active pregens filled in; confirm a player sees the chip as plain text in the public Fray primer. Run Book Only twice and confirm the second run creates no Recovery Copies. Confirm imported gear, Networks and opponents (and opponent tokens) show noir emblems, that a compendium item dragged onto a sheet gets its emblem, that an item with custom art keeps it, and that Setup → Apply Noir Emblems updates an older world. Confirm every Cold Storage window uses the Altered Carbon window look, and that the system's "Legacy Cold Storage Book" menu does not interfere (Book Only and Open GM Book must work). Check browser and Foundry console for module startup, data-model and deprecation errors.
 3. Open Game Settings → Cold Storage Setup, Adventure Book, GM Relationships Dashboard and Continuity & Psychosurgery. Verify correct rendering, keyboard navigation and readable scrolling at desktop and mobile width.
 
 ## Fresh-world import (separate test world)

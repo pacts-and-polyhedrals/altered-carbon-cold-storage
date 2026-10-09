@@ -1,5 +1,36 @@
 # Cold Storage — release history
 
+## 1.7.0 — Mechanical cover on the zoned maps
+
+- Every cover marker on the maps is now a cover position: a dashed ring with its material and partial/full printed on the map (e.g. the Breach's ward partition is full wood cover; the movable trolley is partial metal; the Spire lift lobby has full ferrocrete heavy cover).
+- When a token's centre enters a ring, its actor receives that cover through the system's own cover state, so Defense and material Protection apply to incoming attacks; leaving the ring clears it, moving between rings switches it. Cover set by hand on a sheet is never overwritten. Toggle: Module Settings → Apply map cover automatically.
+- Range was already mechanical from 1.6.0 (automatic zone assignment feeds the system attack dialog); Engaged remains a declaration, as in the Core rules.
+- Existing worlds: run **Install / Update Zoned Maps** once to add the cover positions to scenes that use the module's maps.
+
+## 1.6.0 — Zoned maps for every location
+
+- 14 new scene maps (2800 × 1800 WebP, noir schematic style matching the emblems: ink ground, blind-slat light, film grain, bone furniture silhouettes, one accent colour per location): Resurrection Ward, Breach of Cold Storage, the Rainline, the Quiet Archive, Blue Lotus, Relay Seventeen, Anansi House, Palimpsest Virtuality, the Court, the Operating Theatre, the Last Broadcast, Entering the Spire, the Council and the Final Operation. Zones follow the chapter text (e.g. the Breach uses G09's ward entrance, viewing corridor and service stair; the Final Operation separates the life-safety bus as written).
+- Each map carries numbered zone plaques, door markers between adjacent zones, dashed routes for connected non-touching zones, cover/heavy-cover markers, labelled exits and a title cartouche with a legend.
+- Scenes are created gridless with Altered Carbon zone units and the system's zone graph already filled in, so the Zone Assistant and zone-range rules work straight away. A token dropped or moved into a zone is assigned to it automatically (Module Settings → Assign tokens to map zones automatically).
+- Each scene opens its chapter journal; the Core scene now opens the Final Operation (G21) and the Spire entry has its own scene (G19).
+- Full Import creates all 14 maps plus the landing and epilogue backdrops. In existing worlds use **Cold Storage Setup → Install / Update Zoned Maps**: missing scenes are created, scenes still using the module's placeholder art are upgraded (tokens, walls, notes and journal links kept), and scenes whose art you replaced are left alone apart from receiving a zone graph if they had none.
+- Generator source in `scripts/maps/`; tests check every location has a map, zones sit inside the art without overlapping, adjacency is symmetric and every zone is reachable.
+
+## 1.5.0 — Story journals in the Altered Carbon look, checks into GM Control
+
+- Cold Storage journal windows use the Altered Carbon palette and chrome (dark window, sidebar and contents, system buttons). Other journals in the world are untouched.
+- Each page is a case file: category kicker (GM ONLY / PLAYER BRIEFING / PRIVATE / EVIDENCE / REFERENCE) with its own accent, system-style headings and tables, READ ALOUD boxes for boxed text, chip-style journal links, and evidence handouts as typed amber documents with an EVIDENCE stamp.
+- All 31 check call-outs in the GM chapters (and the Fray Composure/Discipline checks) become check chips. For the GM, each Skill in a chip is a link that opens the system's GM Control with a custom request filled in — Skill, Difficulty, a player-facing prompt that reveals nothing from the GM text, and the six active pregens selected — scrolled into view and highlighted, ready to Send. Players see the same chip as plain text. Also `game.coldStorage.openCheck({skill, difficulty})`.
+- Book Only now backs up a page only when a GM actually edited it since the last managed import, so restyling does not flood GM Recovery Copies.
+- Run **Import / Update Book Only** once in an existing world to restyle its pages and add the check chips. Played actors, reveals and handout permissions are preserved as before.
+
+## 1.4.0 — Noir emblems
+
+- 140 original noir emblems (venetian-blind key light, film grain, bone-on-ink silhouettes, engraved plaques) in `assets/emblems/`: all 95 Core items, 12 weapon upgrades, 7 Networks, 8 Core adversaries, 4 Cold Storage threats, 3 Benefactors and the adventure's attacks, starting package, credits and Palimpsest fragment. Each family has its own frame and accent: Armory, Munitions, Apparel, Field Kit, Decks/Virtual, Pharma, Sleeve Mod, Weapon Mod, Network seal and Wanted/Classified badges.
+- New Items, Networks and opponent Actors in an Altered Carbon world (including gear dragged from the system compendiums, Character Creator packages and GM Operations adversaries) get their emblem — and opponents their token art — whenever they would otherwise use a generic Foundry icon. Custom art is never replaced. Toggle: Module Settings → Noir emblems.
+- Cold Storage Setup → **Apply Noir Emblems** dresses an existing world, including Items inside Actors; also `game.coldStorage.applyEmblems()`.
+- Source generator in `scripts/emblems/` (run with `AC_SYSTEM_PATH` pointing at the system) and tests that every Core catalog record and every Cold Storage opponent and attack has an emblem.
+
 ## 1.3.0 — Altered Carbon RPG 2.4.0 alignment
 
 - **Requires Altered Carbon RPG 2.4.0+.** Manifest dependency, setup screen and a ready-time GM warning enforce it; system manifest now uses `releases/latest/download/system.json`.

@@ -1,0 +1,1320 @@
+{
+ "version": "1.7.0",
+ "maps": [
+  {
+   "id": "SCENE-WARD",
+   "name": "The Resurrection Ward",
+   "code": "SC01",
+   "journal": "G08",
+   "file": "sc01-resurrection-ward.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "bed-row",
+     "name": "Bed Row",
+     "rect": [
+      100,
+      100,
+      1600,
+      1000
+     ],
+     "adjacent": [
+      "nurse-station",
+      "reserve-bays",
+      "service-door"
+     ]
+    },
+    {
+     "id": "reserve-bays",
+     "name": "Reserve Bays",
+     "rect": [
+      1700,
+      100,
+      1000,
+      600
+     ],
+     "adjacent": [
+      "bed-row"
+     ]
+    },
+    {
+     "id": "nurse-station",
+     "name": "Nurse Station",
+     "rect": [
+      100,
+      1100,
+      1000,
+      600
+     ],
+     "adjacent": [
+      "bed-row"
+     ]
+    },
+    {
+     "id": "service-door",
+     "name": "Service Door",
+     "rect": [
+      1700,
+      700,
+      1000,
+      660.0
+     ],
+     "adjacent": [
+      "bed-row"
+     ]
+    }
+   ],
+   "exits": [
+    "FRONT DESK",
+    "CORRIDOR"
+   ],
+   "cover": [
+    {
+     "id": "scene-ward-cover-0",
+     "x": 960.0,
+     "y": 1340.0,
+     "radius": 140.0,
+     "kind": "wood",
+     "partial": true,
+     "zone": "nurse-station"
+    }
+   ]
+  },
+  {
+   "id": "SCENE-BREACH",
+   "name": "Breach of Cold Storage",
+   "code": "SC02",
+   "journal": "G09",
+   "file": "sc02-breach-of-cold-storage.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "ward",
+     "name": "The Ward",
+     "rect": [
+      100,
+      100,
+      1100,
+      1560.0
+     ],
+     "adjacent": [
+      "service-stair",
+      "ward-entrance"
+     ]
+    },
+    {
+     "id": "ward-entrance",
+     "name": "Ward Entrance",
+     "rect": [
+      1200,
+      100,
+      600,
+      700
+     ],
+     "adjacent": [
+      "service-stair",
+      "viewing-corridor",
+      "ward"
+     ]
+    },
+    {
+     "id": "viewing-corridor",
+     "name": "Viewing Corridor",
+     "rect": [
+      1800,
+      100,
+      900,
+      700
+     ],
+     "adjacent": [
+      "ward-entrance"
+     ]
+    },
+    {
+     "id": "service-stair",
+     "name": "Service Stair",
+     "rect": [
+      1200,
+      800,
+      700,
+      760.0
+     ],
+     "adjacent": [
+      "ward",
+      "ward-entrance"
+     ]
+    }
+   ],
+   "exits": [
+    "RECOVERY VAN",
+    "THE RAINLINE"
+   ],
+   "cover": [
+    {
+     "id": "scene-breach-cover-0",
+     "x": 650.0,
+     "y": 990.0,
+     "radius": 140.0,
+     "kind": "wood",
+     "partial": false,
+     "zone": "ward"
+    },
+    {
+     "id": "scene-breach-cover-1",
+     "x": 880.0,
+     "y": 1390.0,
+     "radius": 140.0,
+     "kind": "metal",
+     "partial": true,
+     "zone": "ward"
+    }
+   ]
+  },
+  {
+   "id": "SCENE-RAINLINE",
+   "name": "The Rainline",
+   "code": "SC03",
+   "journal": "G10",
+   "file": "sc03-rainline.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "canal-walk",
+     "name": "Canal Walk",
+     "rect": [
+      100,
+      100,
+      2600,
+      360.0
+     ],
+     "adjacent": [
+      "billboard-plaza",
+      "clinic-intake",
+      "memorial-corner"
+     ]
+    },
+    {
+     "id": "memorial-corner",
+     "name": "Memorial Corner",
+     "rect": [
+      100,
+      460.0,
+      760.0,
+      640.0
+     ],
+     "adjacent": [
+      "billboard-plaza",
+      "canal-walk",
+      "chapel-lane"
+     ]
+    },
+    {
+     "id": "billboard-plaza",
+     "name": "Billboard Plaza",
+     "rect": [
+      860.0,
+      460.0,
+      1080.0,
+      640.0
+     ],
+     "adjacent": [
+      "bathhouse-steps",
+      "canal-walk",
+      "clinic-intake",
+      "memorial-corner"
+     ]
+    },
+    {
+     "id": "clinic-intake",
+     "name": "Clinic Intake",
+     "rect": [
+      1940.0,
+      460.0,
+      760.0,
+      640.0
+     ],
+     "adjacent": [
+      "billboard-plaza",
+      "canal-walk"
+     ]
+    },
+    {
+     "id": "chapel-lane",
+     "name": "Chapel Lane",
+     "rect": [
+      100,
+      1100,
+      860.0,
+      600
+     ],
+     "adjacent": [
+      "bathhouse-steps",
+      "memorial-corner"
+     ]
+    },
+    {
+     "id": "bathhouse-steps",
+     "name": "Bathhouse Steps",
+     "rect": [
+      960.0,
+      1100,
+      840.0,
+      600
+     ],
+     "adjacent": [
+      "billboard-plaza",
+      "chapel-lane"
+     ]
+    }
+   ],
+   "exits": [
+    "RELAY SEVENTEEN",
+    "QUIET ARCHIVE",
+    "BLUE LOTUS"
+   ],
+   "cover": []
+  },
+  {
+   "id": "SCENE-ARCHIVE",
+   "name": "The Quiet Archive",
+   "code": "LEAD A",
+   "journal": "G11",
+   "file": "lead-a-quiet-archive.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "nave",
+     "name": "The Nave",
+     "rect": [
+      100,
+      100,
+      1400,
+      1600
+     ],
+     "adjacent": [
+      "reading-table",
+      "records-cabinet"
+     ]
+    },
+    {
+     "id": "reading-table",
+     "name": "Reading Table",
+     "rect": [
+      1500,
+      100,
+      1200,
+      750.0
+     ],
+     "adjacent": [
+      "nave",
+      "public-back-door",
+      "records-cabinet"
+     ]
+    },
+    {
+     "id": "records-cabinet",
+     "name": "Records Cabinet",
+     "rect": [
+      1500,
+      850.0,
+      700,
+      650.0
+     ],
+     "adjacent": [
+      "nave",
+      "public-back-door",
+      "reading-table"
+     ]
+    },
+    {
+     "id": "public-back-door",
+     "name": "Public Back Door",
+     "rect": [
+      2200,
+      850.0,
+      500,
+      650.0
+     ],
+     "adjacent": [
+      "reading-table",
+      "records-cabinet"
+     ]
+    }
+   ],
+   "exits": [
+    "STREET",
+    "BACK DOOR"
+   ],
+   "cover": []
+  },
+  {
+   "id": "SCENE-LOTUS",
+   "name": "Blue Lotus, Black Water",
+   "code": "LEAD B",
+   "journal": "G12",
+   "file": "lead-b-blue-lotus.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "street-entrance",
+     "name": "Street Entrance",
+     "rect": [
+      100,
+      100,
+      600,
+      500
+     ],
+     "adjacent": [
+      "maintenance-stair",
+      "pool-deck"
+     ]
+    },
+    {
+     "id": "pool-deck",
+     "name": "Pool Deck",
+     "rect": [
+      700,
+      100,
+      2000,
+      440.0
+     ],
+     "adjacent": [
+      "cracked-window",
+      "deep-pool",
+      "street-entrance"
+     ]
+    },
+    {
+     "id": "deep-pool",
+     "name": "The Deep Pool",
+     "rect": [
+      700,
+      540.0,
+      1200,
+      1120.0
+     ],
+     "adjacent": [
+      "cracked-window",
+      "maintenance-stair",
+      "pool-deck"
+     ]
+    },
+    {
+     "id": "cracked-window",
+     "name": "Cracked Window",
+     "rect": [
+      1900,
+      540.0,
+      800,
+      600
+     ],
+     "adjacent": [
+      "deep-pool",
+      "pool-deck"
+     ]
+    },
+    {
+     "id": "maintenance-stair",
+     "name": "Maintenance Stair",
+     "rect": [
+      100,
+      600,
+      600,
+      1060.0
+     ],
+     "adjacent": [
+      "deep-pool",
+      "street-entrance"
+     ]
+    }
+   ],
+   "exits": [
+    "STREET",
+    "CANAL / ANANSI"
+   ],
+   "cover": [
+    {
+     "id": "scene-lotus-cover-0",
+     "x": 1640.0,
+     "y": 1460.0,
+     "radius": 140.0,
+     "kind": "metal",
+     "partial": true,
+     "zone": "deep-pool"
+    }
+   ]
+  },
+  {
+   "id": "SCENE-RELAY",
+   "name": "Relay Seventeen",
+   "code": "LEAD C",
+   "journal": "G13",
+   "file": "lead-c-relay-seventeen.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "canal-gantry",
+     "name": "Canal Gantry",
+     "rect": [
+      100,
+      100,
+      700,
+      1600
+     ],
+     "adjacent": [
+      "cabinet-hall",
+      "diagnostic-store"
+     ]
+    },
+    {
+     "id": "cabinet-hall",
+     "name": "Cabinet Hall",
+     "rect": [
+      800,
+      100,
+      1200,
+      900
+     ],
+     "adjacent": [
+      "canal-gantry",
+      "diagnostic-store",
+      "fan-shaft"
+     ]
+    },
+    {
+     "id": "diagnostic-store",
+     "name": "Diagnostic Store",
+     "rect": [
+      800,
+      1000,
+      1140.0,
+      600
+     ],
+     "adjacent": [
+      "cabinet-hall",
+      "canal-gantry"
+     ]
+    },
+    {
+     "id": "fan-shaft",
+     "name": "Fan Shaft",
+     "rect": [
+      2000,
+      100,
+      700,
+      900
+     ],
+     "adjacent": [
+      "cabinet-hall"
+     ]
+    }
+   ],
+   "exits": [
+    "CANAL",
+    "SERVICE LADDER"
+   ],
+   "cover": []
+  },
+  {
+   "id": "SCENE-SAFEHOUSE",
+   "name": "Anansi House",
+   "code": "SC04",
+   "journal": "G14",
+   "file": "sc04-anansi-house.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "lobby",
+     "name": "Lobby & Desk",
+     "rect": [
+      100,
+      100,
+      900,
+      900
+     ],
+     "adjacent": [
+      "dining-room",
+      "parlour"
+     ]
+    },
+    {
+     "id": "dining-room",
+     "name": "Dining Room",
+     "rect": [
+      1000,
+      100,
+      1000,
+      900
+     ],
+     "adjacent": [
+      "guest-rooms",
+      "lobby",
+      "parlour"
+     ]
+    },
+    {
+     "id": "guest-rooms",
+     "name": "Guest Rooms",
+     "rect": [
+      2000,
+      100,
+      700,
+      1300
+     ],
+     "adjacent": [
+      "dining-room"
+     ]
+    },
+    {
+     "id": "parlour",
+     "name": "Replay Parlour",
+     "rect": [
+      100,
+      1000,
+      1200,
+      700
+     ],
+     "adjacent": [
+      "dining-room",
+      "lobby"
+     ]
+    }
+   ],
+   "exits": [
+    "STREET"
+   ],
+   "cover": []
+  },
+  {
+   "id": "SCENE-VIRTUAL",
+   "name": "Palimpsest Virtuality",
+   "code": "SC05",
+   "journal": "G15",
+   "file": "sc05-palimpsest-virtuality.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "exit-anchor",
+     "name": "Exit Anchor",
+     "rect": [
+      100,
+      500,
+      600,
+      600
+     ],
+     "adjacent": [
+      "archive-atrium"
+     ]
+    },
+    {
+     "id": "archive-atrium",
+     "name": "Archive Atrium",
+     "rect": [
+      860.0,
+      200,
+      940.0,
+      1000
+     ],
+     "adjacent": [
+      "broadcast-gate",
+      "court-gate",
+      "exit-anchor",
+      "fourth-window",
+      "theatre-gate"
+     ]
+    },
+    {
+     "id": "court-gate",
+     "name": "Court Gate",
+     "rect": [
+      1960.0,
+      100,
+      740.0,
+      420.0
+     ],
+     "adjacent": [
+      "archive-atrium"
+     ]
+    },
+    {
+     "id": "theatre-gate",
+     "name": "Theatre Gate",
+     "rect": [
+      1960.0,
+      590.0,
+      740.0,
+      420.0
+     ],
+     "adjacent": [
+      "archive-atrium"
+     ]
+    },
+    {
+     "id": "broadcast-gate",
+     "name": "Broadcast Gate",
+     "rect": [
+      1960.0,
+      1080.0,
+      740.0,
+      420.0
+     ],
+     "adjacent": [
+      "archive-atrium"
+     ]
+    },
+    {
+     "id": "fourth-window",
+     "name": "Fourth Window",
+     "rect": [
+      860.0,
+      1340.0,
+      940.0,
+      360.0
+     ],
+     "adjacent": [
+      "archive-atrium"
+     ]
+    }
+   ],
+   "exits": [],
+   "cover": []
+  },
+  {
+   "id": "SCENE-COURT",
+   "name": "The Court of Unreliable Witnesses",
+   "code": "NODE A",
+   "journal": "G16",
+   "file": "node-a-court-of-unreliable-witnesses.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "service-door",
+     "name": "Service Door",
+     "rect": [
+      100,
+      100,
+      700,
+      500
+     ],
+     "adjacent": [
+      "judges-bench",
+      "witness-chairs"
+     ]
+    },
+    {
+     "id": "judges-bench",
+     "name": "Judge's Bench",
+     "rect": [
+      800,
+      100,
+      1200,
+      500
+     ],
+     "adjacent": [
+      "clerks-desk",
+      "gallery",
+      "service-door",
+      "witness-chairs"
+     ]
+    },
+    {
+     "id": "witness-chairs",
+     "name": "Witness Chairs",
+     "rect": [
+      100,
+      600,
+      1300,
+      800
+     ],
+     "adjacent": [
+      "clerks-desk",
+      "judges-bench",
+      "service-door"
+     ]
+    },
+    {
+     "id": "clerks-desk",
+     "name": "Clerk's Desk",
+     "rect": [
+      1400,
+      600,
+      600,
+      800
+     ],
+     "adjacent": [
+      "gallery",
+      "judges-bench",
+      "witness-chairs"
+     ]
+    },
+    {
+     "id": "gallery",
+     "name": "Gallery",
+     "rect": [
+      2000,
+      100,
+      700,
+      1300
+     ],
+     "adjacent": [
+      "clerks-desk",
+      "judges-bench"
+     ]
+    }
+   ],
+   "exits": [
+    "DIRTY MIRRORS"
+   ],
+   "cover": []
+  },
+  {
+   "id": "SCENE-THEATRE",
+   "name": "The Operating Theatre",
+   "code": "NODE B",
+   "journal": "G17",
+   "file": "node-b-operating-theatre.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "observation-gallery",
+     "name": "Observation Gallery",
+     "rect": [
+      100,
+      100,
+      2600,
+      300
+     ],
+     "adjacent": [
+      "clone-cradle",
+      "interface-wall",
+      "operating-floor"
+     ]
+    },
+    {
+     "id": "clone-cradle",
+     "name": "Clone Cradle",
+     "rect": [
+      100,
+      400,
+      600,
+      900
+     ],
+     "adjacent": [
+      "observation-gallery",
+      "operating-floor",
+      "records-desk"
+     ]
+    },
+    {
+     "id": "operating-floor",
+     "name": "Operating Floor",
+     "rect": [
+      700,
+      400,
+      1200,
+      900
+     ],
+     "adjacent": [
+      "clone-cradle",
+      "interface-wall",
+      "observation-gallery",
+      "records-desk"
+     ]
+    },
+    {
+     "id": "interface-wall",
+     "name": "Interface Wall",
+     "rect": [
+      1900,
+      400,
+      800,
+      900
+     ],
+     "adjacent": [
+      "observation-gallery",
+      "operating-floor"
+     ]
+    },
+    {
+     "id": "records-desk",
+     "name": "Records Desk",
+     "rect": [
+      100,
+      1300,
+      1200,
+      400
+     ],
+     "adjacent": [
+      "clone-cradle",
+      "operating-floor"
+     ]
+    }
+   ],
+   "exits": [],
+   "cover": []
+  },
+  {
+   "id": "SCENE-BROADCAST",
+   "name": "The Last Broadcast",
+   "code": "NODE C",
+   "journal": "G18",
+   "file": "node-c-last-broadcast.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "rain-window",
+     "name": "Rain Window",
+     "rect": [
+      100,
+      100,
+      700,
+      1200
+     ],
+     "adjacent": [
+      "archive-racks",
+      "transmitter"
+     ]
+    },
+    {
+     "id": "archive-racks",
+     "name": "Archive Racks",
+     "rect": [
+      800,
+      100,
+      1100,
+      300
+     ],
+     "adjacent": [
+      "attestation-door",
+      "rain-window",
+      "transmitter"
+     ]
+    },
+    {
+     "id": "transmitter",
+     "name": "Transmitter",
+     "rect": [
+      800,
+      400,
+      1100,
+      900
+     ],
+     "adjacent": [
+      "archive-racks",
+      "attestation-door",
+      "rain-window",
+      "service-entrance"
+     ]
+    },
+    {
+     "id": "attestation-door",
+     "name": "Attestation Door",
+     "rect": [
+      1900,
+      100,
+      800,
+      600
+     ],
+     "adjacent": [
+      "archive-racks",
+      "service-entrance",
+      "transmitter"
+     ]
+    },
+    {
+     "id": "service-entrance",
+     "name": "Service Entrance",
+     "rect": [
+      1900,
+      700,
+      800,
+      600
+     ],
+     "adjacent": [
+      "attestation-door",
+      "transmitter"
+     ]
+    }
+   ],
+   "exits": [
+    "CANAL ACCESS"
+   ],
+   "cover": [
+    {
+     "id": "scene-broadcast-cover-0",
+     "x": 2560.0,
+     "y": 940.0,
+     "radius": 140.0,
+     "kind": "concrete",
+     "partial": true,
+     "zone": "service-entrance"
+    }
+   ]
+  },
+  {
+   "id": "SCENE-SPIRE",
+   "name": "Entering the Spire",
+   "code": "SC06 \u00b7 I",
+   "journal": "G19",
+   "file": "sc06-entering-the-spire.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "public-reception",
+     "name": "Public Reception",
+     "rect": [
+      100,
+      100,
+      1000,
+      1000
+     ],
+     "adjacent": [
+      "canal-quay",
+      "interview-room",
+      "lift-lobby"
+     ]
+    },
+    {
+     "id": "interview-room",
+     "name": "Interview Room",
+     "rect": [
+      1100,
+      100,
+      600,
+      500
+     ],
+     "adjacent": [
+      "final-corridor",
+      "lift-lobby",
+      "public-reception"
+     ]
+    },
+    {
+     "id": "final-corridor",
+     "name": "Final Corridor",
+     "rect": [
+      1700,
+      100,
+      1000,
+      500
+     ],
+     "adjacent": [
+      "interview-room",
+      "lift-lobby"
+     ]
+    },
+    {
+     "id": "lift-lobby",
+     "name": "Lift Lobby",
+     "rect": [
+      1100,
+      600,
+      1000,
+      500
+     ],
+     "adjacent": [
+      "final-corridor",
+      "interview-room",
+      "maintenance-station",
+      "public-reception",
+      "pump-walkway"
+     ]
+    },
+    {
+     "id": "maintenance-station",
+     "name": "Maintenance Station",
+     "rect": [
+      2100,
+      600,
+      600,
+      500
+     ],
+     "adjacent": [
+      "lift-lobby",
+      "pump-walkway"
+     ]
+    },
+    {
+     "id": "canal-quay",
+     "name": "Canal Quay",
+     "rect": [
+      100,
+      1100,
+      1000,
+      600
+     ],
+     "adjacent": [
+      "public-reception",
+      "pump-walkway"
+     ]
+    },
+    {
+     "id": "pump-walkway",
+     "name": "Pump Walkway",
+     "rect": [
+      1100,
+      1100,
+      840.0,
+      600
+     ],
+     "adjacent": [
+      "canal-quay",
+      "lift-lobby",
+      "maintenance-station"
+     ]
+    }
+   ],
+   "exits": [
+    "CANAL"
+   ],
+   "cover": [
+    {
+     "id": "scene-spire-cover-0",
+     "x": 1840.0,
+     "y": 900.0,
+     "radius": 140.0,
+     "kind": "ferrocrete",
+     "partial": false,
+     "zone": "lift-lobby"
+    }
+   ]
+  },
+  {
+   "id": "SCENE-COUNCIL",
+   "name": "The Council Beneath the Skin",
+   "code": "SC06 \u00b7 II",
+   "journal": "G20",
+   "file": "sc06-council-beneath-the-skin.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "genesis-register",
+     "name": "Genesis Register",
+     "rect": [
+      100,
+      300,
+      600,
+      500
+     ],
+     "adjacent": [
+      "council-table",
+      "runtime-wafer"
+     ]
+    },
+    {
+     "id": "runtime-wafer",
+     "name": "Runtime Wafer",
+     "rect": [
+      100,
+      800,
+      600,
+      400
+     ],
+     "adjacent": [
+      "council-table",
+      "genesis-register"
+     ]
+    },
+    {
+     "id": "council-table",
+     "name": "Council Table",
+     "rect": [
+      700,
+      300,
+      1300,
+      900
+     ],
+     "adjacent": [
+      "antechamber",
+      "clinical-console",
+      "genesis-register",
+      "runtime-wafer"
+     ]
+    },
+    {
+     "id": "clinical-console",
+     "name": "Clinical Console",
+     "rect": [
+      2000,
+      300,
+      700,
+      900
+     ],
+     "adjacent": [
+      "council-table"
+     ]
+    },
+    {
+     "id": "antechamber",
+     "name": "Antechamber",
+     "rect": [
+      700,
+      1200,
+      1300,
+      460.0
+     ],
+     "adjacent": [
+      "council-table"
+     ]
+    }
+   ],
+   "exits": [
+    "THE WAY IN"
+   ],
+   "cover": [
+    {
+     "id": "scene-council-cover-0",
+     "x": 2560.0,
+     "y": 1040.0,
+     "radius": 140.0,
+     "kind": "steel",
+     "partial": true,
+     "zone": "clinical-console"
+    }
+   ]
+  },
+  {
+   "id": "SCENE-CORE",
+   "name": "The Final Operation",
+   "code": "SC06 \u00b7 III",
+   "journal": "G21",
+   "file": "sc06-final-operation.webp",
+   "width": 2800,
+   "height": 1800,
+   "gridSize": 100,
+   "zones": [
+    {
+     "id": "evidence-port",
+     "name": "Evidence Port",
+     "rect": [
+      100,
+      100,
+      800,
+      600
+     ],
+     "adjacent": [
+      "chamber-floor"
+     ]
+    },
+    {
+     "id": "chamber-floor",
+     "name": "Chamber Floor",
+     "rect": [
+      900,
+      400,
+      1000,
+      900
+     ],
+     "adjacent": [
+      "civic-lease",
+      "evidence-port",
+      "life-safety-bus",
+      "palimpsest-engine",
+      "secure-exit"
+     ]
+    },
+    {
+     "id": "civic-lease",
+     "name": "Civic Lease",
+     "rect": [
+      1900,
+      100,
+      800,
+      600
+     ],
+     "adjacent": [
+      "chamber-floor"
+     ]
+    },
+    {
+     "id": "palimpsest-engine",
+     "name": "Palimpsest Engine",
+     "rect": [
+      1900,
+      700,
+      800,
+      600
+     ],
+     "adjacent": [
+      "chamber-floor"
+     ]
+    },
+    {
+     "id": "life-safety-bus",
+     "name": "Life-Safety Bus",
+     "rect": [
+      100,
+      860.0,
+      700,
+      840.0
+     ],
+     "adjacent": [
+      "chamber-floor"
+     ]
+    },
+    {
+     "id": "secure-exit",
+     "name": "Secure Exit",
+     "rect": [
+      900,
+      1300,
+      1000,
+      400
+     ],
+     "adjacent": [
+      "chamber-floor"
+     ]
+    }
+   ],
+   "exits": [
+    "OUTSIDE"
+   ],
+   "cover": [
+    {
+     "id": "scene-core-cover-0",
+     "x": 1060.0,
+     "y": 1140.0,
+     "radius": 140.0,
+     "kind": "steel",
+     "partial": true,
+     "zone": "chamber-floor"
+    },
+    {
+     "id": "scene-core-cover-1",
+     "x": 1740.0,
+     "y": 540.0,
+     "radius": 140.0,
+     "kind": "steel",
+     "partial": true,
+     "zone": "chamber-floor"
+    }
+   ]
+  }
+ ]
+}

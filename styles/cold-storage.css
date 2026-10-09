@@ -100,3 +100,68 @@
 @media(max-width:850px){.cs-continuity-grid{grid-template-columns:1fr}.cs-continuity-header{flex-direction:column}.cs-continuity-header-actions{max-width:none;justify-content:flex-start}.cs-continuity-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:550px){.cs-continuity-stats{grid-template-columns:1fr 1fr}.cs-continuity-pc-head{flex-direction:column}.cs-continuity-buttons button{flex:1 1 130px}}
 @media(prefers-reduced-motion:reduce){.cs-continuity *{animation:none!important;transition:none!important}}
+
+/* ===================== Cold Storage 1.5.0 — story journals ===================== */
+/* Journal windows imported by this module (class added by journal-theme.mjs). */
+.cs-journal-sheet{
+  --cs-j-bg:#05080b;--cs-j-panel:rgba(10,24,31,.86);--cs-j-line:rgba(91,211,224,.24);--cs-j-cyan:#78ecf3;--cs-j-text:#eefbfc;--cs-j-soft:#c2d9dd;--cs-j-muted:#7f9da3;
+  --color-text-primary:#eefbfc;--color-text-secondary:#c2d9dd;--color-text-subtle:#7f9da3;--color-border:rgba(91,211,224,.24);
+  font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+.cs-journal-sheet .window-header{background:linear-gradient(90deg,#071015,#0b171d);border-bottom:1px solid var(--cs-j-line);color:var(--cs-j-soft)}
+.cs-journal-sheet .window-title{letter-spacing:.06em;text-transform:uppercase;font-size:.82rem}
+.cs-journal-sheet .window-content{background:radial-gradient(circle at 80% 0%,rgba(50,199,214,.10),transparent 30%),linear-gradient(145deg,#05080b,#081116 42%,#071017);color:var(--cs-j-text)}
+.cs-journal-sheet .journal-sidebar,.cs-journal-sheet aside.sidebar{background:rgba(5,14,19,.92);border-right:1px solid var(--cs-j-line)}
+.cs-journal-sheet .journal-sidebar .toc li,.cs-journal-sheet .journal-sidebar .page-heading{color:var(--cs-j-soft)}
+.cs-journal-sheet .journal-sidebar .toc li.active,.cs-journal-sheet .journal-sidebar .toc li:hover{background:rgba(50,199,214,.10);color:#fff;box-shadow:inset 3px 0 0 #32c7d6}
+.cs-journal-sheet .journal-entry-page .journal-page-header h1,.cs-journal-sheet .journal-header input{color:#f3ffff;border-bottom:1px solid var(--cs-j-line);font-weight:650;letter-spacing:.02em}
+.cs-journal-sheet .journal-entry-page .journal-page-header{border:0}
+.cs-journal-sheet .journal-entry-content,.cs-journal-sheet .journal-entry-pages{background:transparent}
+.cs-journal-sheet button{color:var(--cs-j-soft);background:linear-gradient(180deg,rgba(19,44,54,.88),rgba(7,20,27,.92));border:1px solid rgba(105,212,222,.28);border-radius:7px}
+.cs-journal-sheet button:hover:not(:disabled){color:#fff;border-color:#32c7d6;box-shadow:0 0 20px rgba(50,199,214,.10)}
+.cs-journal-sheet ::-webkit-scrollbar-thumb{background:rgba(80,186,198,.30);border-radius:12px}
+
+/* The case-file page itself: self-contained, so it reads correctly in any journal theme. */
+.cs-book-journal{
+  --cs-acc:#78ecf3;
+  position:relative;margin:4px 0 12px;padding:22px 26px 26px;border:1px solid rgba(98,194,205,.18);border-radius:14px;
+  background:repeating-linear-gradient(-28deg,rgba(255,255,255,.018) 0 14px,transparent 14px 38px),linear-gradient(145deg,rgba(11,27,34,.97),rgba(5,13,17,.97));
+  box-shadow:0 8px 24px rgba(0,0,0,.25),inset 0 1px rgba(255,255,255,.02);
+  color:#c2d9dd;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1.65;
+}
+.cs-book-journal:before{content:"";position:absolute;left:0;top:0;width:96px;height:2px;background:var(--cs-acc);opacity:.85;border-radius:14px 0 0 0}
+.cs-book-journal.cs-cat-gm{--cs-acc:#ff7180}.cs-book-journal.cs-cat-primer{--cs-acc:#78ecf3}.cs-book-journal.cs-cat-personal{--cs-acc:#b9a2ff}.cs-book-journal.cs-cat-handout{--cs-acc:#ffc467}.cs-book-journal.cs-cat-reference{--cs-acc:#e9cc8c}
+.cs-book-journal .cs-page-kicker{margin:0 0 14px;padding-bottom:9px;border-bottom:1px solid rgba(103,197,208,.14);font-family:ui-monospace,SFMono-Regular,Menlo,"Courier New",monospace;font-size:.68rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--cs-acc)}
+.cs-book-journal h1{position:relative;margin:0 0 14px;padding:0 0 10px;border:0;color:#f5ffff;font-family:inherit;font-size:1.65rem;font-weight:650;letter-spacing:.02em;line-height:1.2}
+.cs-book-journal h1:after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,var(--cs-acc),transparent 38%,#b9a2ff 72%,transparent);opacity:.55}
+.cs-book-journal h2{margin:1.6em 0 .55em;padding:0 0 0 10px;border:0;border-left:3px solid var(--cs-acc);color:#eefbfc;font-family:inherit;font-size:.86rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;line-height:1.3}
+.cs-book-journal p{margin:0 0 .8em;color:#c2d9dd}
+.cs-book-journal strong{color:#f3ffff;font-weight:650}
+.cs-book-journal em{color:#e9cc8c}
+.cs-book-journal blockquote{position:relative;margin:16px 0;padding:26px 18px 12px;border:0;border-left:3px solid var(--cs-acc);border-radius:0 10px 10px 0;background:linear-gradient(90deg,rgba(50,199,214,.08),rgba(0,0,0,.18));font-style:normal}
+.cs-book-journal blockquote:before{content:"READ ALOUD";position:absolute;top:8px;left:18px;font-family:ui-monospace,SFMono-Regular,Menlo,"Courier New",monospace;font-size:.6rem;letter-spacing:.22em;color:var(--cs-acc)}
+.cs-book-journal blockquote p{color:#eefbfc;font-size:1.02em}
+.cs-book-journal table{width:100%;margin:12px 0 16px;border-collapse:collapse;border:1px solid rgba(91,211,224,.14);border-radius:8px;overflow:hidden;background:rgba(0,0,0,.18);font-size:.9em}
+.cs-book-journal th{padding:8px 11px;background:#0d1a21;color:#7f9da3;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;text-align:left;border-bottom:1px solid rgba(91,211,224,.24)}
+.cs-book-journal td{padding:8px 11px;vertical-align:top;color:#c2d9dd;border-bottom:1px solid rgba(91,211,224,.10)}
+.cs-book-journal tr:nth-child(even) td{background:rgba(120,236,243,.02)}
+.cs-book-journal a.content-link{padding:1px 7px;border:1px solid rgba(120,236,243,.32);border-radius:999px;background:rgba(50,199,214,.08);color:#78ecf3;text-decoration:none;white-space:nowrap}
+.cs-book-journal a.content-link:hover{color:#fff;border-color:#32c7d6;box-shadow:0 0 14px rgba(50,199,214,.18)}
+.cs-book-journal a.content-link i{color:inherit}
+/* Evidence handouts read as typed case documents. */
+.cs-book-journal.cs-cat-handout{font-family:"Courier New",Courier,ui-monospace,monospace;background:repeating-linear-gradient(0deg,rgba(255,196,103,.025) 0 1px,transparent 1px 26px),linear-gradient(160deg,rgba(28,24,17,.97),rgba(10,9,7,.98))}
+.cs-book-journal.cs-cat-handout h1{font-family:"Courier New",Courier,monospace;text-transform:uppercase;letter-spacing:.06em;font-size:1.3rem}
+.cs-book-journal.cs-cat-handout:after{content:"EVIDENCE";position:absolute;top:18px;right:20px;padding:3px 10px;border:2px solid rgba(255,196,103,.55);color:rgba(255,196,103,.7);font:700 .7rem/1.2 ui-monospace,"Courier New",monospace;letter-spacing:.24em;transform:rotate(4deg)}
+
+/* Check call-outs: GMs click a Skill to open Altered Carbon GM Control pre-filled. */
+.cs-check{display:inline-flex;align-items:center;gap:6px;margin:0 1px;padding:1px 9px 1px 6px;border:1px solid rgba(255,196,103,.42);border-radius:999px;background:linear-gradient(180deg,rgba(60,42,14,.55),rgba(24,17,6,.55));color:#ffe2b0;font-weight:600;white-space:normal;line-height:1.5;vertical-align:baseline}
+.cs-check>i,.cs-check-open i{color:#ffc467;font-size:.85em}
+.cs-check-open{display:inline-grid;place-items:center;width:20px;height:20px;border-radius:50%;background:rgba(255,196,103,.14);cursor:pointer;text-decoration:none}
+.cs-check-open:hover{background:rgba(255,196,103,.32);box-shadow:0 0 12px rgba(255,196,103,.35)}
+.cs-check-skill{color:#fff3dc;text-decoration:underline dotted rgba(255,196,103,.8);text-underline-offset:3px;cursor:pointer}
+.cs-check-skill:hover{color:#ffc467;text-decoration-style:solid}
+.cs-check-skill:focus-visible,.cs-check-open:focus-visible{outline:2px solid #ffc467;outline-offset:2px}
+/* GM Control: briefly highlight the request the journal just filled in. */
+@keyframes cs-check-incoming{0%{box-shadow:0 0 0 2px rgba(255,196,103,.9),0 0 32px rgba(255,196,103,.45)}100%{box-shadow:0 0 0 0 rgba(255,196,103,0)}}
+.ac-gm-custom.cs-check-incoming{animation:cs-check-incoming 1.6s ease-out}
+@media(prefers-reduced-motion:reduce){.ac-gm-custom.cs-check-incoming{animation:none;outline:2px solid #ffc467}}

@@ -1,9 +1,10 @@
-/** Cold Storage 1.3.0: journal-only updater and manual GM running console.
+/** Cold Storage 1.7.0: journal-only updater and manual GM running console.
  * Uses public Foundry document APIs. Does not change existing actors or items.
  * Live Foundry/Forge QA remains required; see docs/live-qa.md.
  */
+import {markChecks} from './checks.mjs';
 const MOD='cold-storage';
-const VERSION='1.3.0';
+const VERSION='1.7.0';
 const sid=doc=>doc.getFlag(MOD,'sourceId');
 const esc=value=>foundry.utils.escapeHTML(String(value??''));
 const clone=value=>foundry.utils.deepClone(value);
@@ -16,7 +17,8 @@ function lockedOwnership(){const out={default:0};for(const u of game.users)if(!u
 function pageInheritance(){const out={default:-1};for(const u of game.users)if(!u.isGM)out[u.id]=-1;return out;}
 function hash(text){let n=2166136261;for(let i=0;i<text.length;i++){n^=text.charCodeAt(i);n=Math.imul(n,16777619);}return(n>>>0).toString(16);}
 function managedPage(journal){return values(journal.pages).find(p=>p.getFlag(MOD,'managedPage'))??values(journal.pages)[0];}
-function content(entry,docs){return `<article class="cs-book-journal">${entry.body.replace(/\[\[([A-Z][A-Z0-9-]*)(?:\|([^\]]+))?\]\]/g,(_,id,label)=>{const doc=docs.get(id);if(!doc)throw new Error(`Unresolved journal target ${entry.id} -> ${id}`);return `@UUID[JournalEntry.${doc.id}]{${label??doc.name}}`;})}</article>`;}
+const CATEGORY_KICKER={gm:'GM ONLY // ADVENTURE BOOK',primer:'PLAYER BRIEFING',personal:'PRIVATE // DHF CARD',handout:'EVIDENCE // RESTRICTED',reference:'GM REFERENCE'};
+function content(entry,docs){return `<article class="cs-book-journal cs-cat-${entry.category}"><p class="cs-page-kicker">COLD STORAGE // ${CATEGORY_KICKER[entry.category]??'ARCHIVE'} // ${entry.id}</p>${markChecks(entry.body,entry.id).replace(/\[\[([A-Z][A-Z0-9-]*)(?:\|([^\]]+))?\]\]/g,(_,id,label)=>{const doc=docs.get(id);if(!doc)throw new Error(`Unresolved journal target ${entry.id} -> ${id}`);return `@UUID[JournalEntry.${doc.id}]{${label??doc.name}}`;})}</article>`;}
 async function backup(journal,recoveryFolder){
  const original=values(journal.pages).map(p=>p.toObject());
  if(!original.length)return;
@@ -32,7 +34,7 @@ function referenceEntries(factions,revelations){
  return refs;
 }
 export async function bindBookScenes(){
- gm();const map={'SCENE-LANDING':'G00','SCENE-WARD':'G08','SCENE-BREACH':'G09','SCENE-RAINLINE':'G10','SCENE-SAFEHOUSE':'G14','SCENE-VIRTUAL':'G15','SCENE-CORE':'G19','SCENE-EPILOGUE':'G23'};
+ gm();const map={'SCENE-LANDING':'G00','SCENE-WARD':'G08','SCENE-BREACH':'G09','SCENE-RAINLINE':'G10','SCENE-ARCHIVE':'G11','SCENE-LOTUS':'G12','SCENE-RELAY':'G13','SCENE-SAFEHOUSE':'G14','SCENE-VIRTUAL':'G15','SCENE-COURT':'G16','SCENE-THEATRE':'G17','SCENE-BROADCAST':'G18','SCENE-SPIRE':'G19','SCENE-COUNCIL':'G20','SCENE-CORE':'G21','SCENE-EPILOGUE':'G23'};
  for(const scene of game.scenes){const target=map[sid(scene)];if(!target||scene.journal)continue;const j=game.journal.find(x=>sid(x)===target);if(j)await scene.update({journal:j.id});}
 }
 export async function createBenefactors(benefactors){
@@ -61,7 +63,10 @@ async function importImpl({notify=true}={}){
  }
  for(const entry of entries){
   const doc=docs.get(entry.id),html=content(entry,docs),page=managedPage(doc);
-  if(page&&page.text?.content!==html){await backup(doc,folders.recovery);updated++;}
+  if(page&&page.text?.content!==html){
+   // Back up only text a GM edited after the last managed import; untouched source pages are simply refreshed.
+   const stored=page.getFlag?.(MOD,'contentHash');if(!stored||stored!==hash(page.text?.content??''))await backup(doc,folders.recovery);updated++;
+  }
   // Preserve explicit disclosure only for an already migrated personal card/handout.
   const mayPreserve=['personal','handout'].includes(entry.category)&&doc.getFlag(MOD,'bookCategory')===entry.category&&doc.getFlag(MOD,'bookVersion');
   const ownership=entry.visibility==='public'?{...pageInheritance(),default:2}:mayPreserve?clone(doc.ownership):lockedOwnership();
@@ -69,6 +74,8 @@ async function importImpl({notify=true}={}){
   await doc.update({name:`${entry.id} - ${entry.title}`,folder:folders[entry.category].id,sort:(entry.order??1000)*100000,ownership,[`flags.${MOD}.sourceId`]:entry.id,[`flags.${MOD}.bookVersion`]:VERSION,[`flags.${MOD}.bookCategory`]:entry.category,[`flags.${MOD}.visibility`]:entry.visibility,[`flags.${MOD}.pcId`]:entry.pcId??null});
   if(page)await page.update({name:entry.title,type:'text','text.content':html,'text.format':1,ownership:pageInheritance(),[`flags.${MOD}.managedPage`]:true,[`flags.${MOD}.contentHash`]:hash(html)});
   else await doc.createEmbeddedDocuments('JournalEntryPage',[{name:entry.title,type:'text',text:{content:html,format:1},ownership:pageInheritance(),flags:{[MOD]:{managedPage:true,contentHash:hash(html)}}}]);
+  // Record the hash of the text as the server stored it, so later updates can tell GM edits from our own output.
+  const saved=managedPage(doc);if(saved&&saved.getFlag?.(MOD,'contentHash')!==hash(saved.text?.content??''))await saved.update({[`flags.${MOD}.contentHash`]:hash(saved.text?.content??'')});
   // Additional user pages are preserved; GM-only chapters cannot retain stale page grants.
   if(entry.visibility==='gm'&&!mayPreserve)for(const extra of values(doc.pages))if(extra.id!==page?.id)await extra.update({ownership:pageInheritance()});
  }

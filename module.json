@@ -1,8 +1,8 @@
 {
   "id": "cold-storage",
   "title": "Cold Storage: The Faces We Left Behind",
-  "description": "Cold Storage cyber-noir adventure for Altered Carbon RPG 2.4: 74 authored journals, 16 controlled evidence handouts, 8 pregens built with the system's Character Creator rules in non-clone 5th-8th sleeves, 46 archived sleeve records (2 contested), 160 relationship links, ready-to-roll Chapter 7 adversaries, GM Continuity & Psychosurgery Console sharing the system's Baggage workflow, and optional Fray. Foundry 14 live QA outstanding.",
-  "version": "1.3.0",
+  "description": "Cold Storage cyber-noir adventure for Altered Carbon RPG 2.4: 74 authored journals, 16 controlled evidence handouts, 8 pregens built with the system's Character Creator rules in non-clone 5th-8th sleeves, 46 archived sleeve records (2 contested), 160 relationship links, ready-to-roll Chapter 7 adversaries, GM Continuity & Psychosurgery Console sharing the system's Baggage workflow, optional Fray, 140 noir emblems for every Altered Carbon item, network and opponent, story journals in the Altered Carbon look with one-click checks into GM Control, and 14 zoned noir maps wired to the system's zones. Foundry 14 live QA outstanding.",
+  "version": "1.7.0",
   "compatibility": {
     "minimum": "14"
   },
@@ -39,5 +39,5 @@
   },
   "url": "https://github.com/pacts-and-polyhedrals/altered-carbon-cold-storage",
   "manifest": "https://github.com/pacts-and-polyhedrals/altered-carbon-cold-storage/releases/latest/download/module.json",
-  "download": "https://github.com/pacts-and-polyhedrals/altered-carbon-cold-storage/releases/download/v1.3.0/cold-storage-v1.3.0.zip"
+  "download": "https://github.com/pacts-and-polyhedrals/altered-carbon-cold-storage/releases/download/v1.7.0/cold-storage-v1.7.0.zip"
 }
