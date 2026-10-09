@@ -320,7 +320,9 @@
       "An archival or analogue record that can independently verify the claimed identity"
     ],
     "revealState": "unknown",
-    "plotCritical": true
+    "plotCritical": true,
+    "continuityUnverified": true,
+    "continuityNote": "Historical contact is useful but the claimed separate sleeve is not independently verified."
   },
   {
     "id": "R-PC01-5-rival",
@@ -339,7 +341,9 @@
       "An archival or analogue record that can independently verify the claimed identity"
     ],
     "revealState": "unknown",
-    "plotCritical": true
+    "plotCritical": true,
+    "continuityUnverified": true,
+    "continuityNote": "Historical contact is useful but the claimed separate sleeve is not independently verified."
   },
   {
     "id": "R-PC01-5-ally",
@@ -358,7 +362,9 @@
       "An archival or analogue record that can independently verify the claimed identity"
     ],
     "revealState": "unknown",
-    "plotCritical": false
+    "plotCritical": false,
+    "continuityUnverified": true,
+    "continuityNote": "Historical contact is useful but the claimed separate sleeve is not independently verified."
   },
   {
     "id": "R-PC01-5-loved-one",
@@ -377,7 +383,9 @@
       "An archival or analogue record that can independently verify the claimed identity"
     ],
     "revealState": "unknown",
-    "plotCritical": true
+    "plotCritical": true,
+    "continuityUnverified": true,
+    "continuityNote": "Historical contact is useful but the claimed separate sleeve is not independently verified."
   },
   {
     "id": "R-PC02-1-enemy",
@@ -1840,7 +1848,9 @@
       "An archival or analogue record that can independently verify the claimed identity"
     ],
     "revealState": "unknown",
-    "plotCritical": true
+    "plotCritical": true,
+    "continuityUnverified": true,
+    "continuityNote": "Historical contact is useful but the claimed separate sleeve is not independently verified."
   },
   {
     "id": "R-PC05-5-rival",
@@ -1859,7 +1869,9 @@
       "An archival or analogue record that can independently verify the claimed identity"
     ],
     "revealState": "unknown",
-    "plotCritical": true
+    "plotCritical": true,
+    "continuityUnverified": true,
+    "continuityNote": "Historical contact is useful but the claimed separate sleeve is not independently verified."
   },
   {
     "id": "R-PC05-5-ally",
@@ -1878,7 +1890,9 @@
       "An archival or analogue record that can independently verify the claimed identity"
     ],
     "revealState": "unknown",
-    "plotCritical": false
+    "plotCritical": false,
+    "continuityUnverified": true,
+    "continuityNote": "Historical contact is useful but the claimed separate sleeve is not independently verified."
   },
   {
     "id": "R-PC05-5-loved-one",
@@ -1897,7 +1911,9 @@
       "An archival or analogue record that can independently verify the claimed identity"
     ],
     "revealState": "unknown",
-    "plotCritical": true
+    "plotCritical": true,
+    "continuityUnverified": true,
+    "continuityNote": "Historical contact is useful but the claimed separate sleeve is not independently verified."
   },
   {
     "id": "R-PC06-1-enemy",

@@ -1,16 +1,18 @@
-# Content Map
+# Cold Storage 1.2.0 — content map
 
-The module source is stored in `content-src/` and is imported into the active world by `cold-storage.mjs`.
+| Area | Contents | Visibility |
+|---|---|---|
+| G00–G29 | Thirty GM chapters, including G04 Core/Fray separation and Consent, 4/5/6-hour running guide, Conspiracy, NPCs and endings | GM |
+| J00–J18 and P-FRAY | Player primer and voluntary Fray agreement | Public |
+| H01–H16 | Evidence cards, released individually after discovery | GM until explicitly revealed |
+| PC01–PC08 cards | Private chronological reveals, now 5th–8th sleeves | GM until granted to specific player |
+| 22 generated references | Six factions, fifteen source-generated revelation references and adventure guide, 96 total imported book entries | GM |
+| `content-src/pregens.json` | Eight mechanically loaded pregens, non-clone current bodies | Source data |
+| `content-src/previous-sleeves.json` | 46 archival entries (44 confirmed earlier bodies, 2 contested files) | GM source data |
+| `content-src/continuity-plans.json` | Confirmed sleeve ordinals, active source IDs, contested claims, starting Fray | GM source data |
+| `content-src/relationships.json` | 160 original relationship links, contested files identified without deleting the associated leads | GM source data |
+| `continuity.mjs` and `templates/continuity.hbs` | GM Continuity & Psychosurgery Console, Core Baggage choices, safe migration | GM only |
 
-- `pregens.json` — 8 playable DHFs/current sleeves
-- `previous-sleeves.json` — 40 former sleeves, five per pregen
-- `contacts.json` — 20 recurring DHF contacts
-- `relationships.json` — 160 historical relationship links
-- `factions.json` — 6 factions
-- `journals.json` — 19 authored journal entries
-- `adventure.json` — four-hour scene/beat structure
-- `revelations.json` — mystery revelations and redundant clue channels
-- `pregen-loadouts.json` — canonical starting packages and baggage
-- `adversaries.json` — 4 principal adversaries
+Other preserved resources: 20 recurring human contacts, four combat adversaries, three separate Benefactor social reference actors, six factions, eight illustrative placeholder Scenes, package/gear/trait data and the relationship board. The 4-of-8 proof-share fallback keeps reserve PCs from blocking essential evidence.
 
-Final visual maps/audio are deliberately replaceable and are represented by `assets/placeholders/`.
+Source-managed journal updates copy displaced source pages into GM Recovery Copies. Previously acquired evidence grants are retained on reimport. No map, audio or portrait commission is implied by the placeholders.

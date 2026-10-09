@@ -1,65 +1,18 @@
-# START HERE — Cold Storage v1.0.0
+# Cold Storage module v1.3.0 — START HERE
 
-## Repository name
+This is a **Foundry v14 adventure module**, not a rules system. It requires **altered-carbon-rpg v2.4.0 or newer** — update the system first.
 
-Create this repository exactly:
+## Your first installation
 
-`pacts-and-polyhedrals/altered-carbon-cold-storage`
+- Back up your world. Unzip the install archive into `FoundryVTT/Data/modules/cold-storage/` with `module.json` at that directory root.
+- Enable **Cold Storage: The Faces We Left Behind** in the world's Module Management screen.
+- Open Game Settings → Module Settings → **Cold Storage Setup**.
+- **Fresh, empty world:** Full Import installs eight pregens, 46 historic sleeve/archival records, 160 relationship records, 20 human contacts, four adversaries, three special-reference Benefactor actors, eight placeholder scenes and 96 managed journal entries. Select exactly **six** pregens and assign player accounts.
+- **Existing played world:** choose **Book Only**; then **Continuity & Psychosurgery → Review World** for a separate, opt-in migration preview. Full Import refuses to overwrite already imported pregens.
+- Ask players whether to opt into the optional **Fray** track. 5th/6th/7th/8th non-clone sleeves start at Fray **2/3/4/5**; these are **not** automatic Core Personality Frag or Ego penalties.
+- On actors with **Trauma, Personality Frag or Compromised DHF Baggage**, inspect starting resources and previous choices before applying the Core penalty. The dashboard offers either two correct-Attribute Skill downgrades or EP2d6, once.
+- For actual Ego repair, open the **Core Clinical Console** and adjudicate Psychosurgery there. Fray reductions are a separate adventure mechanic. Changes to permanent Ego integrity cannot be restored by merely writing treatment notes.
 
-Make it **Public** if you want Forge/Foundry to install directly from the manifest URL.
+**GM starting chapters:** G00 → G01 → G04 → G06 → G07. The full offline book is supplied in the source ZIP as `book/Cold-Storage-GM-Book.html`; player-safe primers are in `book/Cold-Storage-Player-Briefing.html`.
 
-## Repository root
-
-Upload the contents of the repository ZIP so GitHub shows `module.json` directly at the root:
-
-```
-module.json
-cold-storage.mjs
-assets/
-content-src/
-lang/
-styles/
-templates/
-docs/
-scripts/
-tests/
-.github/
-README.md
-START-HERE.md
-CHANGELOG.md
-package.json
-```
-
-Do not place all of those files inside another `cold-storage/` wrapper folder.
-
-## Release
-
-Create a normal GitHub release (not draft, not prerelease):
-
-- Tag: `v1.0.0`
-- Title: `Cold Storage: The Faces We Left Behind v1.0.0`
-- Asset: `cold-storage-v1.0.0.zip`
-
-## Foundry/Forge manifest
-
-Use:
-
-`https://raw.githubusercontent.com/pacts-and-polyhedrals/altered-carbon-cold-storage/main/module.json`
-
-The module manifest declares the Altered Carbon system dependency and points Foundry at the system's stable manifest.
-
-## First use
-
-1. Install and enable `altered-carbon-rpg` v1.0.0 or newer.
-2. Install this module.
-3. Create/open an Altered Carbon world.
-4. Enable **Cold Storage: The Faces We Left Behind** in Manage Modules.
-5. As GM open **Game Settings → Configure Settings → Module Settings → Cold Storage Setup**.
-6. Click **Import / Update Cold Storage**.
-7. Select exactly six of the eight pregens.
-8. Assign pregens to players.
-9. Use **Cold Storage GM Dashboard** to reveal relationship states during play.
-
-## Live QA
-
-Before a paid session, run the checklist in `docs/live-qa.md` on the actual Forge/Foundry v14 world.
+**Important limitations:** scenes are illustrative placeholders, no new tactical maps/audio/portrait set, never tested in a running Foundry v14/Forge environment. Follow `docs/live-qa.md` before a paid session. Publish by attaching the install ZIP and `module.json` to GitHub release `v1.3.0` and marking it Latest.

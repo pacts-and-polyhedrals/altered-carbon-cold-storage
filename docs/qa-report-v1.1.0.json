@@ -1,0 +1,43 @@
+{
+  "edition": "1.1.0",
+  "date": "2026-09-11",
+  "automatedTests": {
+    "passed": 17,
+    "failed": 0,
+    "runner": "Node.js node:test",
+    "type": "Static assertions plus one multi-step simulated Foundry document-API test"
+  },
+  "syntaxAndJson": "passed",
+  "htmlChromium": {
+    "gmSectionCount": 74,
+    "brokenInternalLinks": [],
+    "desktopOverflow": false,
+    "mobileOverflow": false,
+    "playerSectionCount": 18,
+    "playerBrokenLinks": [],
+    "javascriptErrors": []
+  },
+  "counts": {
+    "authoredJournals": 74,
+    "generatedReferences": 22,
+    "totalManagedJournals": 96,
+    "gmChapters": 30,
+    "evidenceProps": 16,
+    "privateCards": 8,
+    "publicPrimers": 18,
+    "pregens": 8,
+    "archivedSleeves": 40,
+    "humanContacts": 20,
+    "relationshipLinks": 160,
+    "newBenefactors": 3
+  },
+  "liveFoundryTested": false,
+  "forgeTested": false,
+  "publishedOrInstalled": false,
+  "limits": [
+    "No licensed Foundry server or user world was run.",
+    "No system rolls or game-balance playtest was performed.",
+    "Scene artwork is the original placeholder set.",
+    "Manual counters do not implement Ego rules or consent decisions."
+  ]
+}

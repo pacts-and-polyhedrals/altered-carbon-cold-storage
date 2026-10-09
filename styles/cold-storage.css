@@ -1,0 +1,102 @@
+/* Cold Storage 1.3.0 — presented with the Altered Carbon RPG 2.4 interface.
+   Module windows carry the system's `altered-carbon` class, so window chrome, inputs,
+   buttons and scrollbars come from the system stylesheet. Tokens below map the
+   adventure palette onto the system palette, with fallbacks for journal pages. */
+:root{
+  --cs-bg:#071014;
+  --cs-panel:rgba(9,24,30,.93);
+  --cs-panel-2:rgba(13,37,45,.82);
+  --cs-line:#2b7482;
+  --cs-line-soft:rgba(85,202,220,.2);
+  --cs-cyan:#79e9f4;
+  --cs-white:#edf8f8;
+  --cs-muted:#91aeb3;
+  --cs-amber:#f3c26b;
+  --cs-red:#ff6b6b;
+}
+.altered-carbon.cold-storage{
+  --cs-bg:var(--ac-bg-1,#081116);
+  --cs-panel:rgba(11,27,34,.92);
+  --cs-panel-2:rgba(7,19,25,.82);
+  --cs-line:var(--ac-line-strong,rgba(91,211,224,.58));
+  --cs-line-soft:var(--ac-line,rgba(91,211,224,.24));
+  --cs-cyan:var(--ac-cyan,#78ecf3);
+  --cs-white:var(--ac-text,#eefbfc);
+  --cs-muted:var(--ac-muted,#7f9da3);
+  --cs-soft:var(--ac-text-soft,#c2d9dd);
+  --cs-amber:var(--ac-amber,#ffc467);
+  --cs-red:var(--ac-red,#ff7180);
+  --cs-radius:var(--ac-radius,14px);
+}
+
+/* Shell: transparent over the system window gradient, scrolls inside the fixed window. */
+.cold-storage .cs-shell{height:100%;min-height:0;overflow-y:auto;overflow-x:hidden;padding:0 20px 28px;background:transparent;border:0;box-shadow:none;color:var(--cs-white);font-family:inherit;scrollbar-gutter:stable;position:relative}
+.cold-storage .cs-shell:before{display:none}
+.cold-storage .cs-shell p{color:var(--cs-soft);line-height:1.5}
+.cold-storage .cs-shell h2,.cold-storage .cs-shell h3,.cold-storage .cs-shell h4{color:#f3ffff;border:0;font-family:inherit}
+.cold-storage .cs-shell h2{margin:3px 0 5px;font-size:1.4rem;font-weight:650;letter-spacing:.02em;text-transform:none}
+.cold-storage .cs-shell h3{margin:0;font-size:.83rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--cs-soft)}
+
+/* Hero headers match the system GM consoles (.ac-gm-hero). */
+.cold-storage .cs-hero,.cold-storage .cs-dashboard-head,.cold-storage .cs-continuity-header{position:sticky;top:0;z-index:4;display:flex;align-items:center;justify-content:space-between;gap:18px;margin:0 -20px 16px;padding:16px 20px 14px;border-bottom:1px solid var(--cs-line-soft);background:linear-gradient(90deg,rgba(5,16,21,.98),rgba(10,34,42,.94));backdrop-filter:blur(8px)}
+.cold-storage .cs-hero p,.cold-storage .cs-dashboard-head p,.cold-storage .cs-continuity-header p{margin:0;max-width:640px;color:var(--cs-muted);font-size:.78rem}
+.cold-storage .cs-hero>div:first-of-type{flex:1;min-width:0}
+.cold-storage .cs-hero-actions{display:flex;flex-wrap:wrap;gap:7px;justify-content:flex-end;max-width:420px}
+.cold-storage .cs-mark{width:72px;height:72px;flex:0 0 72px;object-fit:contain;padding:6px;background:#02070a;border:1px solid rgba(120,236,243,.32);clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);filter:invert(91%) sepia(20%) saturate(945%) hue-rotate(140deg) brightness(101%) contrast(91%);opacity:.92}
+.cold-storage .cs-shell .cs-kicker,.cold-storage .cs-shell p.cs-kicker{margin:0 0 2px;color:var(--cs-cyan);font-size:.62rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;max-width:none}
+.cold-storage .cs-continuity-pc-head h3{margin:2px 0 4px;font-size:1.12rem;font-weight:650;letter-spacing:.01em;text-transform:none;color:#f3ffff}
+
+/* Panels match .ac-panel. */
+.cold-storage .cs-panel{position:relative;margin:0 0 14px;padding:13px;border:1px solid rgba(98,194,205,.18);border-radius:var(--cs-radius);background:linear-gradient(145deg,var(--cs-panel),var(--cs-panel-2));box-shadow:0 8px 24px rgba(0,0,0,.16),inset 0 1px rgba(255,255,255,.015);overflow:hidden}
+.cold-storage .cs-panel:before{content:"";position:absolute;left:0;top:0;width:72px;height:1px;background:var(--ac-cyan-2,#32c7d6);opacity:.75}
+.cold-storage .cs-panel:after{display:none}
+.cold-storage .cs-panel>h3{margin:-2px 0 10px;padding-bottom:9px;border-bottom:1px solid rgba(103,197,208,.12)}
+.cold-storage .cs-panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:-2px 0 12px;padding-bottom:9px;border-bottom:1px solid rgba(103,197,208,.12)}
+.cold-storage .cs-panel-head span{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;color:var(--cs-muted)}
+
+/* Buttons/selects inherit the system look; only roles are added here. */
+.cold-storage .cs-shell button{color:var(--ac-text-soft,#c2d9dd);background:linear-gradient(180deg,rgba(19,44,54,.88),rgba(7,20,27,.92));border:1px solid rgba(105,212,222,.28);border-radius:7px;min-height:32px;padding:5px 10px;text-transform:none;letter-spacing:.01em;font-size:.76rem;box-shadow:none;cursor:pointer;transition:border-color .16s ease,color .16s ease,background .16s ease,box-shadow .16s ease}
+.cold-storage .cs-shell button:hover:not(:disabled),.cold-storage .cs-shell button:focus:not(:disabled){color:#fff;border-color:var(--ac-cyan-2,#32c7d6);background:linear-gradient(180deg,rgba(26,61,72,.98),rgba(9,30,39,.98));box-shadow:0 0 20px rgba(50,199,214,.10)}
+.cold-storage .cs-shell button:disabled{opacity:.36;cursor:not-allowed}
+.cold-storage .cs-shell select,.cold-storage .cs-shell textarea,.cold-storage .cs-shell input:not([type=checkbox]){color:var(--ac-text,#eefbfc);background:rgba(2,9,13,.72);border:1px solid rgba(122,205,214,.20);border-radius:7px;min-height:32px;padding:4px 9px}
+.cold-storage .cs-shell button i{margin-right:4px}
+.cold-storage .cs-shell button.cs-primary{border-color:rgba(120,236,243,.7);color:#eaffff;background:linear-gradient(180deg,rgba(27,97,106,.85),rgba(9,43,51,.96));box-shadow:inset 0 0 18px rgba(71,220,233,.05);font-weight:650}
+.cold-storage .cs-shell button.cs-primary:hover:not(:disabled){box-shadow:0 0 28px rgba(50,199,214,.18)}
+.cold-storage .cs-shell button:focus-visible,.cold-storage .cs-shell select:focus-visible,.cold-storage .cs-shell textarea:focus-visible{outline:2px solid var(--ac-cyan-2,#32c7d6);outline-offset:2px}
+.cold-storage .cs-command-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 14px}
+.cold-storage .cs-command-row button{flex:1 1 170px}
+.cold-storage .cs-status{font-size:.7rem;letter-spacing:.16em;color:var(--cs-amber)}
+
+/* Setup: six-of-eight selection cards (.ac-gm-ops-record pattern). */
+.cold-storage .cs-pregen-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:0 0 12px}
+.cold-storage .cs-pregen{padding:10px 11px;border:1px solid rgba(91,211,224,.14);border-radius:8px;background:rgba(0,0,0,.17);clip-path:none}
+.cold-storage .cs-pregen label{display:flex;align-items:center;gap:8px;margin:0 0 8px;color:var(--cs-white)}
+.cold-storage .cs-assign{display:flex;gap:6px}.cold-storage .cs-assign select{flex:1;min-width:0}
+
+/* Tables follow the system migration table. */
+.cold-storage .cs-table-wrap{overflow:auto;border:1px solid rgba(91,211,224,.12);border-radius:8px}
+.cold-storage .cs-dashboard table{width:100%;margin:0;border:0;border-collapse:collapse;background:transparent}
+.cold-storage .cs-dashboard th{position:sticky;top:0;z-index:1;background:var(--ac-bg-2,#0d1a21);color:var(--cs-muted);font-size:.6rem;letter-spacing:.13em;text-transform:uppercase}
+.cold-storage .cs-dashboard th,.cold-storage .cs-dashboard td{padding:8px 11px;text-align:left;font-size:.76rem;vertical-align:middle;border-bottom:1px solid var(--cs-line-soft)}
+.cold-storage .cs-dashboard tr:hover td{background:rgba(120,236,243,.035)}
+.cold-storage .cs-actions{white-space:nowrap}.cold-storage .cs-actions button{min-height:26px;padding:2px 8px;font-size:.68rem}
+.cold-storage .cs-tag,.cold-storage .cs-state{display:inline-block;padding:2px 7px;border:1px solid var(--cs-line-soft);border-radius:999px;font-size:.62rem;letter-spacing:.06em;text-transform:uppercase;color:var(--cs-soft)}
+.cold-storage .cs-state{color:var(--cs-cyan);border-color:rgba(120,236,243,.35)}
+.cold-storage .cs-critical{color:var(--cs-amber)}
+
+/* Callouts follow .ac-callout. */
+.cold-storage .cs-hint{margin:12px 0 0;padding:11px 12px;border-left:3px solid var(--cs-amber);border-radius:0 8px 8px 0;background:rgba(255,196,103,.06);color:var(--cs-soft)!important;font-size:.8rem;line-height:1.45}
+
+/* Fallback (no system class, e.g. an embedded preview): the original Cold Storage look. */
+.cold-storage-board,.cs-shell{background:linear-gradient(145deg,rgba(4,12,16,.98),rgba(10,29,35,.96));color:var(--cs-white);border:1px solid var(--cs-line);padding:1rem;font-family:Inter,"Segoe UI",sans-serif;position:relative;overflow:auto}
+.cold-storage-board .unknown{filter:blur(2px)}
+
+@media (max-width:700px){.cold-storage .cs-pregen-grid{grid-template-columns:1fr}.cold-storage .cs-hero,.cold-storage .cs-dashboard-head,.cold-storage .cs-continuity-header{flex-direction:column;align-items:flex-start}.cold-storage .cs-hero-actions{justify-content:flex-start;max-width:none}.cold-storage .cs-panel-head{flex-direction:column;align-items:flex-start}}
+
+/* Adventure book and manual running console, scoped to this module. */
+.cs-book-counters{display:flex;gap:12px;flex-wrap:wrap}.cs-book-counters>div{display:grid;gap:6px;border:1px solid rgba(91,211,224,.14);border-radius:8px;background:rgba(0,0,0,.17);padding:10px;min-width:125px}.cs-book-counters strong{font-size:.6rem;letter-spacing:.13em;text-transform:uppercase;color:var(--cs-muted)}.cs-book-counters b{padding:0 6px}.cs-book-fray{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:15px 0}.cs-book-fray>div{display:flex;align-items:center;gap:9px;padding:8px 10px;border:1px solid rgba(91,211,224,.14);border-radius:8px;background:rgba(0,0,0,.17)}.cs-book-fray span{flex:1}.cs-book-fray b{white-space:nowrap}.cs-book-links{display:grid;grid-template-columns:1fr 1fr;gap:7px}.cs-book-links button{text-align:left;text-transform:none;line-height:1.5}.cs-book-share{display:grid;grid-template-columns:1fr 180px 95px;gap:8px;margin:9px 0}.cs-book-share>button:first-child{text-align:left;text-transform:none}.cs-book-share select{min-width:0}.cs-book-journal{font-size:1.02em;line-height:1.65}.cs-book-journal h1{border-bottom:2px solid #397783;padding-bottom:.5em}.cs-book-journal h2{margin-top:1.4em}.cs-book-journal blockquote{border-left:4px solid #397783;padding:12px 20px;margin:18px 0;font-style:normal;background:rgba(57,119,131,.08)}.cs-book-journal table{font-size:.92em}.cs-book-journal td,.cs-book-journal th{padding:8px;vertical-align:top}
+/* Continuity Console: high-contrast GM operations, no dependency on theme palette. */
+.cs-continuity-header,.cs-continuity-pc-head{display:flex;align-items:start;justify-content:space-between;gap:1rem}.cs-continuity-header-actions,.cs-continuity-controls,.cs-continuity-buttons{display:flex;flex-wrap:wrap;gap:.4rem}.cs-continuity-header-actions{max-width:420px;justify-content:flex-end}.cs-continuity-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.cs-continuity-grid>.cs-panel{margin:0}.cs-continuity-active{border-left-color:var(--cs-cyan)}.cs-continuity-pc-head .cs-ordinal{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;border:1px solid rgba(120,236,243,.22);border-radius:8px;font-weight:800;font-size:1.2rem;color:var(--cs-cyan);padding:.5rem}.cs-continuity-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem;margin:1rem 0}.cs-continuity-stats>div{padding:8px 9px;background:rgba(5,16,21,.96);border:1px solid rgba(104,204,215,.10);border-radius:8px}.cs-continuity-stats span,.cs-continuity-stats small{display:block;font-size:.7rem;color:var(--cs-muted)}.cs-continuity-stats strong{color:var(--cs-white);font-size:1.08rem}.cs-continuity-section{border-top:1px solid var(--cs-line-soft);margin-top:.8rem;padding-top:.7rem}.cs-continuity-section h4{margin:0 0 .3rem;color:var(--cs-cyan);font-size:.92rem}.cs-continuity-section p{margin:.2rem 0 .6rem;font-size:.8rem;line-height:1.5}.cs-continuity-buttons{gap:.35rem}.cs-continuity-buttons button{text-align:left;font-size:.74rem;flex:1 1 190px}.cs-continuity-controls{margin:.65rem 0;align-items:center}.cs-continuity-controls button{flex:1 1 110px}.cs-continuity-danger{border:1px solid rgba(255,113,128,.45);border-left:3px solid var(--cs-red);border-radius:0 8px 8px 0;padding:.65rem!important;color:#fff!important;background:rgba(255,113,128,.08)}.cs-continuity-foot{font-size:.75rem!important;line-height:1.5}.cs-continuity .cs-critical-button:not(:disabled){color:#fff;border-color:rgba(255,196,103,.7);background:linear-gradient(180deg,rgba(94,58,20,.9),rgba(48,28,10,.95))}.cs-continuity button:disabled{opacity:.55;cursor:not-allowed}.cs-continuity button:focus-visible,.cs-continuity select:focus-visible,.cs-continuity textarea:focus-visible{outline:3px solid var(--cs-amber);outline-offset:2px}.cs-continuity-help strong{color:var(--cs-white)}
+@media(max-width:850px){.cs-continuity-grid{grid-template-columns:1fr}.cs-continuity-header{flex-direction:column}.cs-continuity-header-actions{max-width:none;justify-content:flex-start}.cs-continuity-stats{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:550px){.cs-continuity-stats{grid-template-columns:1fr 1fr}.cs-continuity-pc-head{flex-direction:column}.cs-continuity-buttons button{flex:1 1 130px}}
+@media(prefers-reduced-motion:reduce){.cs-continuity *{animation:none!important;transition:none!important}}

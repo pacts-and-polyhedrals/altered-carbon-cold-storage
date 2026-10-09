@@ -1,0 +1,150 @@
+{
+  "version": "1.2.0",
+  "rules": "Core 2020 pp. 73-76, 146-147, 249; house-rule G04",
+  "plans": [
+    {
+      "pcId": "PC01",
+      "name": "Nia Calder",
+      "ordinal": 5,
+      "startingFray": 2,
+      "activeSleeveId": "PC01-S0",
+      "activeSleeveType": "organic",
+      "confirmedSleeves": [
+        "PC01-S1",
+        "PC01-S2",
+        "PC01-S3",
+        "PC01-S4"
+      ],
+      "disputedArchives": [
+        "PC01-S5"
+      ],
+      "countRationale": "Core does not impose a fixed penalty or check based on sleeve ordinal. The Fray start is optional Cold Storage house-rule difficulty."
+    },
+    {
+      "pcId": "PC02",
+      "name": "Tomas “Latch” Araya",
+      "ordinal": 6,
+      "startingFray": 3,
+      "activeSleeveId": "PC02-S0",
+      "activeSleeveType": "synthetic-mid",
+      "confirmedSleeves": [
+        "PC02-S1",
+        "PC02-S2",
+        "PC02-S3",
+        "PC02-S4",
+        "PC02-S5"
+      ],
+      "disputedArchives": [],
+      "countRationale": "Core does not impose a fixed penalty or check based on sleeve ordinal. The Fray start is optional Cold Storage house-rule difficulty."
+    },
+    {
+      "pcId": "PC03",
+      "name": "Sabine Kade",
+      "ordinal": 7,
+      "startingFray": 4,
+      "activeSleeveId": "PC03-S0",
+      "activeSleeveType": "organic",
+      "confirmedSleeves": [
+        "PC03-PREL1",
+        "PC03-S1",
+        "PC03-S2",
+        "PC03-S3",
+        "PC03-S4",
+        "PC03-S5"
+      ],
+      "disputedArchives": [],
+      "countRationale": "Core does not impose a fixed penalty or check based on sleeve ordinal. The Fray start is optional Cold Storage house-rule difficulty."
+    },
+    {
+      "pcId": "PC04",
+      "name": "Imani Voss",
+      "ordinal": 8,
+      "startingFray": 5,
+      "activeSleeveId": "PC04-S0",
+      "activeSleeveType": "organic",
+      "confirmedSleeves": [
+        "PC04-PREL1",
+        "PC04-PREL2",
+        "PC04-S1",
+        "PC04-S2",
+        "PC04-S3",
+        "PC04-S4",
+        "PC04-S5"
+      ],
+      "disputedArchives": [],
+      "countRationale": "Core does not impose a fixed penalty or check based on sleeve ordinal. The Fray start is optional Cold Storage house-rule difficulty."
+    },
+    {
+      "pcId": "PC05",
+      "name": "Cass Ren",
+      "ordinal": 5,
+      "startingFray": 2,
+      "activeSleeveId": "PC05-S0",
+      "activeSleeveType": "synthetic-mid",
+      "confirmedSleeves": [
+        "PC05-S1",
+        "PC05-S2",
+        "PC05-S3",
+        "PC05-S4"
+      ],
+      "disputedArchives": [
+        "PC05-S5"
+      ],
+      "countRationale": "Core does not impose a fixed penalty or check based on sleeve ordinal. The Fray start is optional Cold Storage house-rule difficulty."
+    },
+    {
+      "pcId": "PC06",
+      "name": "Dr Edda Sorn",
+      "ordinal": 6,
+      "startingFray": 3,
+      "activeSleeveId": "PC06-S0",
+      "activeSleeveType": "organic",
+      "confirmedSleeves": [
+        "PC06-S1",
+        "PC06-S2",
+        "PC06-S3",
+        "PC06-S4",
+        "PC06-S5"
+      ],
+      "disputedArchives": [],
+      "countRationale": "Core does not impose a fixed penalty or check based on sleeve ordinal. The Fray start is optional Cold Storage house-rule difficulty."
+    },
+    {
+      "pcId": "PC07",
+      "name": "Anik Rao",
+      "ordinal": 7,
+      "startingFray": 4,
+      "activeSleeveId": "PC07-S0",
+      "activeSleeveType": "synthetic-mid",
+      "confirmedSleeves": [
+        "PC07-PREL1",
+        "PC07-S1",
+        "PC07-S2",
+        "PC07-S3",
+        "PC07-S4",
+        "PC07-S5"
+      ],
+      "disputedArchives": [],
+      "countRationale": "Core does not impose a fixed penalty or check based on sleeve ordinal. The Fray start is optional Cold Storage house-rule difficulty."
+    },
+    {
+      "pcId": "PC08",
+      "name": "Solenne Pryce",
+      "ordinal": 8,
+      "startingFray": 5,
+      "activeSleeveId": "PC08-S0",
+      "activeSleeveType": "organic",
+      "confirmedSleeves": [
+        "PC08-PREL1",
+        "PC08-PREL2",
+        "PC08-S1",
+        "PC08-S2",
+        "PC08-S3",
+        "PC08-S4",
+        "PC08-S5"
+      ],
+      "disputedArchives": [],
+      "countRationale": "Core does not impose a fixed penalty or check based on sleeve ordinal. The Fray start is optional Cold Storage house-rule difficulty."
+    }
+  ]
+}

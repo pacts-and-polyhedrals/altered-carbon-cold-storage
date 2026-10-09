@@ -1,0 +1,44 @@
+{
+  "edition": "1.2.0",
+  "status": "local-validated-live-qa-pending",
+  "automatedTests": {
+    "passed": 57,
+    "failed": 0,
+    "runner": "Node 22 node:test",
+    "coverage": "Pure Fray/Core Baggage rules, source content integrity, mocked Book Only, mocked full import, mocked GM continuity and old-world migration, packaging manifest contracts"
+  },
+  "content": {
+    "authoredJournals": 74,
+    "generatedReferences": 22,
+    "totalManagedJournals": 96,
+    "gmChapters": 30,
+    "evidenceProps": 16,
+    "personalCards": 8,
+    "pregens": 8,
+    "confirmedArchivedBodies": 44,
+    "disputedArchiveClaims": 2,
+    "totalArchiveRecords": 46,
+    "originalHistoricalRelationships": 160,
+    "humanContacts": 20,
+    "adversaries": 4,
+    "benefactorNPCs": 3,
+    "placeholderScenes": 8
+  },
+  "compatibility": {
+    "foundryMinimum": "14",
+    "systemMinimum": "2.0.0",
+    "foundryLiveTested": false,
+    "forgeLiveTested": false,
+    "moduleInstallationTestedLive": false,
+    "runtimeSchemaCheckedWithMockOnly": true
+  },
+  "risks": [
+    "Foundry AppV2 render, strict Actor/Item TypeDataModel, chat rolls and permissions require live v14 acceptance",
+    "Compatibility with installed system 2.0.0 must be tested in real world before release",
+    "Eight illustrative scene placeholders are not new maps",
+    "Migration is non-transactional across multiple documents; backup before applying",
+    "Players can request served module data outside in-app journal permissions",
+    "Clinical outcomes rely on separate Altered Carbon v2.0.0 Clinical Console; no medical outcome is invented by this module"
+  ],
+  "releaseIntegrity": "Verify flat ZIP manifest and separate clean-source extraction as part of final release pipeline."
+}

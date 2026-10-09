@@ -28,7 +28,10 @@
     "playerPrivate": {
       "memory": "The last secure memory ends during the 2274 Palimpsest crisis.",
       "secretFragment": "Names of compromised officials"
-    }
+    },
+    "currentSleeveOrdinal": 5,
+    "startingFray": 2,
+    "continuityVersion": "1.2.0"
   },
   {
     "id": "PC02",
@@ -59,7 +62,10 @@
     "playerPrivate": {
       "memory": "The last secure memory ends during the 2274 Palimpsest crisis.",
       "secretFragment": "Palimpsest's encryption seed"
-    }
+    },
+    "currentSleeveOrdinal": 6,
+    "startingFray": 3,
+    "continuityVersion": "1.2.0"
   },
   {
     "id": "PC03",
@@ -79,8 +85,8 @@
     "currentSleeve": {
       "id": "PC03-S0",
       "name": "Sabine Kade — Current Sleeve",
-      "concept": "Municipal labour clone with old surgical scarring and no luxury enhancements",
-      "type": "clone",
+      "concept": "Non-clone organic municipal labour sleeve, independently sourced; Sabine retains a Meth history but no clone exemption or linked clone bank",
+      "type": "organic",
       "strength": 36,
       "perception": 37,
       "healthMax": 11,
@@ -90,7 +96,10 @@
     "playerPrivate": {
       "memory": "The last secure memory ends during the 2274 Palimpsest crisis.",
       "secretFragment": "Funding and ownership records"
-    }
+    },
+    "currentSleeveOrdinal": 7,
+    "startingFray": 4,
+    "continuityVersion": "1.2.0"
   },
   {
     "id": "PC04",
@@ -121,7 +130,10 @@
     "playerPrivate": {
       "memory": "The last secure memory ends during the 2274 Palimpsest crisis.",
       "secretFragment": "Security recordings of the 2274 raid"
-    }
+    },
+    "currentSleeveOrdinal": 8,
+    "startingFray": 5,
+    "continuityVersion": "1.2.0"
   },
   {
     "id": "PC05",
@@ -152,7 +164,10 @@
     "playerPrivate": {
       "memory": "The last secure memory ends during the 2274 Palimpsest crisis.",
       "secretFragment": "Stack-transfer and smuggling routes"
-    }
+    },
+    "currentSleeveOrdinal": 5,
+    "startingFray": 2,
+    "continuityVersion": "1.2.0"
   },
   {
     "id": "PC06",
@@ -183,7 +198,10 @@
     "playerPrivate": {
       "memory": "The last secure memory ends during the 2274 Palimpsest crisis.",
       "secretFragment": "Original memory-editing procedure"
-    }
+    },
+    "currentSleeveOrdinal": 6,
+    "startingFray": 3,
+    "continuityVersion": "1.2.0"
   },
   {
     "id": "PC07",
@@ -214,7 +232,10 @@
     "playerPrivate": {
       "memory": "The last secure memory ends during the 2274 Palimpsest crisis.",
       "secretFragment": "Virtuality architecture and access path"
-    }
+    },
+    "currentSleeveOrdinal": 7,
+    "startingFray": 4,
+    "continuityVersion": "1.2.0"
   },
   {
     "id": "PC08",
@@ -245,6 +266,9 @@
     "playerPrivate": {
       "memory": "The last secure memory ends during the 2274 Palimpsest crisis.",
       "secretFragment": "Publication key and complete accusation"
-    }
+    },
+    "currentSleeveOrdinal": 8,
+    "startingFray": 5,
+    "continuityVersion": "1.2.0"
   }
 ]
