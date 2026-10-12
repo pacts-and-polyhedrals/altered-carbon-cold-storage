@@ -50,6 +50,12 @@ export function emblemFor(documentName,data,index=INDEX){
  if(!GEAR_TYPES.has(data.type))return null;
  return file(index.byName?.[norm(data.name)]);
 }
+/** Actor art: unique portrait + token for Cold Storage pregens, the emblem (for both) for opponents. */
+export function actorArtFor(data,index=INDEX){
+ const sid=data?.flags?.[MOD]?.sourceId,pre=sid&&index?.pregens?.[sid];
+ if(pre)return {img:pre.portrait,token:pre.token};
+ const e=emblemFor('Actor',data,index);return e?{img:e,token:e}:null;
+}
 function autoEnabled(){try{return game.settings.get(MOD,'autoEmblems')!==false;}catch{return true;}}
 
 /** preCreate hooks: dress new Items/Actors whose image is still a placeholder. */
@@ -58,9 +64,9 @@ function onPreCreate(documentName){
   if(game.system?.id!==SYS||userId!==game.user?.id||!INDEX||!autoEnabled())return;
   const source=typeof doc.toObject==='function'?doc.toObject():{...data};
   if(!isPlaceholderImage(source.img))return;
-  const img=emblemFor(documentName,source);if(!img)return;
-  const changes={img};
-  if(documentName==='Actor'&&isPlaceholderImage(source.prototypeToken?.texture?.src))changes['prototypeToken.texture.src']=img;
+  const art=documentName==='Actor'?actorArtFor(source):{img:emblemFor(documentName,source)};if(!art?.img)return;
+  const changes={img:art.img};
+  if(documentName==='Actor'&&isPlaceholderImage(source.prototypeToken?.texture?.src))changes['prototypeToken.texture.src']=art.token;
   doc.updateSource(changes);
  };
 }
@@ -81,7 +87,13 @@ export async function applyEmblemsToWorld({includeTokens=true}={}){
  if(itemUpdates.length){await Item.updateDocuments(itemUpdates);items+=itemUpdates.length;}
  for(const actor of game.actors??[]){
   const data=actor.toObject?actor.toObject():actor;
-  if(isPlaceholderImage(actor.img)){const img=emblemFor('Actor',data,index);if(img){const changes={img};if(includeTokens&&isPlaceholderImage(actor.prototypeToken?.texture?.src))changes['prototypeToken.texture.src']=img;await actor.update(changes);actors++;}}
+  const art=actorArtFor(data,index),tokenSrc=actor.prototypeToken?.texture?.src;
+  if(art&&(isPlaceholderImage(actor.img)||(includeTokens&&isPlaceholderImage(tokenSrc)))){
+   const changes={};if(isPlaceholderImage(actor.img))changes.img=art.img;if(includeTokens&&isPlaceholderImage(tokenSrc))changes['prototypeToken.texture.src']=art.token;
+   await actor.update(changes);actors++;
+   // Tokens already placed on scenes keep their own texture unless it is still a placeholder.
+   for(const token of actor.getActiveTokens?.(false,true)??[])if(includeTokens&&isPlaceholderImage(token.texture?.src))await token.update({'texture.src':art.token});
+  }
   const embedded=[];
   for(const item of actor.items??[]){if(!isPlaceholderImage(item.img))continue;const img=emblemFor('Item',item.toObject?item.toObject():item,index);if(img)embedded.push({_id:item.id,img});}
   if(embedded.length){await actor.updateEmbeddedDocuments('Item',embedded);items+=embedded.length;}

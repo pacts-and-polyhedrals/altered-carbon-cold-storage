@@ -1,10 +1,10 @@
-/** Cold Storage 1.7.0: journal-only updater and manual GM running console.
+/** Cold Storage 1.9.0: journal-only updater and manual GM running console.
  * Uses public Foundry document APIs. Does not change existing actors or items.
  * Live Foundry/Forge QA remains required; see docs/live-qa.md.
  */
 import {markChecks} from './checks.mjs';
 const MOD='cold-storage';
-const VERSION='1.7.0';
+const VERSION='1.9.0';
 const sid=doc=>doc.getFlag(MOD,'sourceId');
 const esc=value=>foundry.utils.escapeHTML(String(value??''));
 const clone=value=>foundry.utils.deepClone(value);

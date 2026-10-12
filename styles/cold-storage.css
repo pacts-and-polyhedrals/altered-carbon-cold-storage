@@ -165,3 +165,5 @@
 @keyframes cs-check-incoming{0%{box-shadow:0 0 0 2px rgba(255,196,103,.9),0 0 32px rgba(255,196,103,.45)}100%{box-shadow:0 0 0 0 rgba(255,196,103,0)}}
 .ac-gm-custom.cs-check-incoming{animation:cs-check-incoming 1.6s ease-out}
 @media(prefers-reduced-motion:reduce){.ac-gm-custom.cs-check-incoming{animation:none;outline:2px solid #ffc467}}
+.cold-storage .cs-setup .cs-command-row button.cs-critical-button{color:#fff;border-color:rgba(255,113,128,.7);background:linear-gradient(180deg,rgba(110,24,36,.92),rgba(52,10,16,.96))}
+.cold-storage .cs-setup .cs-command-row button.cs-critical-button:hover:not(:disabled){border-color:#ff7180;box-shadow:0 0 22px rgba(255,113,128,.25)}

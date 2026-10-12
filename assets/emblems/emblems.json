@@ -332,5 +332,39 @@
     "broker"
    ]
   }
- ]
+ ],
+ "pregens": {
+  "PC01": {
+   "portrait": "modules/cold-storage/assets/portraits/pc01-nia-calder-portrait.svg",
+   "token": "modules/cold-storage/assets/portraits/pc01-nia-calder-token.svg"
+  },
+  "PC02": {
+   "portrait": "modules/cold-storage/assets/portraits/pc02-tomas-latch-araya-portrait.svg",
+   "token": "modules/cold-storage/assets/portraits/pc02-tomas-latch-araya-token.svg"
+  },
+  "PC03": {
+   "portrait": "modules/cold-storage/assets/portraits/pc03-sabine-kade-portrait.svg",
+   "token": "modules/cold-storage/assets/portraits/pc03-sabine-kade-token.svg"
+  },
+  "PC04": {
+   "portrait": "modules/cold-storage/assets/portraits/pc04-imani-voss-portrait.svg",
+   "token": "modules/cold-storage/assets/portraits/pc04-imani-voss-token.svg"
+  },
+  "PC05": {
+   "portrait": "modules/cold-storage/assets/portraits/pc05-cass-ren-portrait.svg",
+   "token": "modules/cold-storage/assets/portraits/pc05-cass-ren-token.svg"
+  },
+  "PC06": {
+   "portrait": "modules/cold-storage/assets/portraits/pc06-dr-edda-sorn-portrait.svg",
+   "token": "modules/cold-storage/assets/portraits/pc06-dr-edda-sorn-token.svg"
+  },
+  "PC07": {
+   "portrait": "modules/cold-storage/assets/portraits/pc07-anik-rao-portrait.svg",
+   "token": "modules/cold-storage/assets/portraits/pc07-anik-rao-token.svg"
+  },
+  "PC08": {
+   "portrait": "modules/cold-storage/assets/portraits/pc08-solenne-pryce-portrait.svg",
+   "token": "modules/cold-storage/assets/portraits/pc08-solenne-pryce-token.svg"
+  }
+ }
 }

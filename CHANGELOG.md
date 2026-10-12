@@ -1,5 +1,20 @@
 # Cold Storage — release history
 
+## 1.9.0 — Foundry v14 scene fix, scene folder, Full Reinstall
+
+- **Fixed: maps were black in Foundry v14.** v14 stores a scene's image on its Levels; 1.6–1.8 wrote the deprecated top-level Scene background, leaving the initial Level empty. Scenes are now created with an embedded Level carrying the map (and the landing/epilogue backdrops), and **Install / Update Zoned Maps** repairs existing black scenes by setting the image on their initial Level — tokens, walls, notes and zones are kept.
+- All 16 scenes are filed in a **Cold Storage** scene folder in adventure order (landing → ward → … → final operation → epilogue). Existing Cold Storage scenes without a folder are moved into it; scenes you placed elsewhere stay put.
+- **New: Full Reinstall — Wipe & Rebuild** in Cold Storage Setup (also `game.coldStorage.fullReinstall()`): deletes every actor, journal, scene and folder Cold Storage created, resets Fray, Heat and continuity, then runs a fresh Full Import so the world gets all pregens, portraits, tokens, emblems, maps and journals. Requires an explicit confirmation; keeps GM Recovery Copies by default; never touches your own documents or other modules' content.
+- Full Import's "already installed" message now points to Full Reinstall.
+
+## 1.8.0 — Unique pregen portraits and tokens
+
+- Eight original noir portraits in the emblem style, one per pregen, each built from the character's current sleeve so they are distinguishable at token size, with a per-character accent colour, chiaroscuro half-lit face and slatted light.
+- Each pregen gets a square portrait card (name, role, DHF number) as its sheet image and a round token (accent ring, PC number) as its token art.
+- Full Import sets portrait and token art and makes pregen tokens linked to their actor and friendly.
+- Existing worlds: **Cold Storage Setup → Apply Noir Emblems** now also gives the pregens their portraits and tokens, including tokens already placed on scenes. Any art you set yourself is kept.
+- Generator in `scripts/emblems/portraits.py`.
+
 ## 1.7.0 — Mechanical cover on the zoned maps
 
 - Every cover marker on the maps is now a cover position: a dashed ring with its material and partial/full printed on the map (e.g. the Breach's ward partition is full wood cover; the movable trolley is partial metal; the Spire lift lobby has full ferrocrete heavy cover).

@@ -1,0 +1,16 @@
+{
+  "name": "altered-carbon-cold-storage",
+  "private": true,
+  "version": "1.2.0",
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/*.test.mjs",
+    "validate": "node scripts/validate.mjs",
+    "build": "bash scripts/build.sh",
+    "release:check": "npm test && npm run validate && npm run build",
+    "book": "python3 scripts/compile_book.py"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}
