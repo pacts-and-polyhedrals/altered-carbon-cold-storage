@@ -1,0 +1,27 @@
+<section class="cs-shell cs-tracker">
+  <header class="cs-hero cs-tracker-hero">
+    <div>
+      <p class="cs-kicker">CASE BOARD // BAY CITY 2384 // GM ONLY</p>
+      <h2>Investigation Tracker</h2>
+      <p class="cs-tracker-now"><strong>Now:</strong> {{current}}</p>
+      <div class="cs-tracker-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="{{percent}}" aria-label="Main line progress"><span style="width:{{percent}}%"></span><b>{{percent}}%</b></div>
+    </div>
+    <div class="cs-hero-actions">
+      <button type="button" class="cs-primary" data-action="setupAll"><i class="fa-solid fa-people-group" aria-hidden="true"></i> Set Up All Scenes</button>
+      <button type="button" data-cs-act="casefile"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Players' Case File</button>
+      <button type="button" class="cs-critical-button" data-action="reset"><i class="fa-solid fa-eraser" aria-hidden="true"></i> Reset Tracker</button>
+    </div>
+  </header>
+  <div class="cs-tracker-top">
+    <section class="cs-panel"><div class="cs-panel-head"><h3>Pressure</h3><span>G07 · HEAT / RENEWAL / FINAL TRACKS</span></div>{{{clocks}}}</section>
+    <section class="cs-panel"><div class="cs-panel-head"><h3>Evidence docket</h3><span>G06 · AUTO FROM REVEALED HANDOUTS</span></div>{{{evidence}}}</section>
+  </div>
+  {{#each acts}}{{#if html}}<section class="cs-act"><h3 class="cs-act-title">{{label}}</h3><div class="cs-mission-grid">{{{html}}}</div></section>{{/if}}{{/each}}
+  <section class="cs-panel cs-tracker-end">
+    <div class="cs-panel-head"><h3>Ending</h3><span>G22 / G23</span></div>
+    <label class="cs-ending"><span>Chosen ending</span><select name="cs-ending"><option value="">— not yet —</option>{{#each endings}}<option value="{{name}}" {{#if selected}}selected{{/if}}>{{name}}</option>{{/each}}</select></label>
+    <h4>Recent</h4>
+    <ol class="cs-log">{{#each log}}<li><time>{{when}}</time> {{text}}</li>{{else}}<li>No entries yet.</li>{{/each}}</ol>
+  </section>
+  <p class="cs-hint"><i class="fa-solid fa-bolt" aria-hidden="true"></i> Objectives marked <em>auto</em> tick themselves when you reveal a handout, run a continuity pulse or anchor, move a clock or activate a scene. Click any box to override. The same panels sit at the top of every chapter journal; the players see only the Case File.</p>
+</section>

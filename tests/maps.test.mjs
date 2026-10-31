@@ -58,7 +58,8 @@ test('installer files scenes in a Cold Storage folder, repairs black v14 scenes 
  class Doc{constructor(d){const {levels,...rest}=structuredClone(d);Object.assign(this,rest);this.levels={contents:(levels||[]).map(l=>new Level(l))};}
   getFlag(m,k){return this.flags?.[m]?.[k];}
   async update(c){for(const [k,v] of Object.entries(c)){const parts=k.split('.');let o=this;for(const p of parts.slice(0,-1))o=o[p]??={};o[parts.at(-1)]=v;}return this;}
-  async createEmbeddedDocuments(t,arr){assert.equal(t,'Level');this.levels.contents.push(...arr.map(l=>new Level(l)));}}
+  async createEmbeddedDocuments(t,arr){if(t==='Wall'){this.walls??=[];this.walls.push(...arr.map((w,i)=>({...structuredClone(w),id:`W${this.walls.length+i}`,getFlag(m,k){return this.flags?.[m]?.[k];}})));return;}assert.equal(t,'Level');this.levels.contents.push(...arr.map(l=>new Level(l)));}
+  async deleteEmbeddedDocuments(t,ids){assert.equal(t,'Wall');this.walls=this.walls.filter(w=>!ids.includes(w.id));}}
  globalThis.Scene={create:async d=>{const s=new Doc(d);game.scenes.push(s);return s;}};
  globalThis.Folder={create:async d=>{const f={id:'SCENEFOLDER',...d};game.folders.push(f);return f;}};
  globalThis.fetch=async()=>({ok:true,json:async()=>({maps})});
@@ -67,14 +68,15 @@ test('installer files scenes in a Cold Storage folder, repairs black v14 scenes 
  const custom=new Doc({name:'My Spire',folder:'MINE',levels:[{background:{src:'worlds/x/spire.webp'}}],flags:{'cold-storage':{sourceId:'SCENE-SPIRE'}}});
  globalThis.game={user:{isGM:true},scenes:[black,custom],folders:[]};
  const r=await scenes.installMaps({thumbnails:false});
- assert.deepEqual(r,{created:14,upgraded:1,skipped:1,maps:14});
+ assert.deepEqual(r,{created:14,upgraded:1,skipped:1,maps:14,walls:{created:13,updated:0,current:0,custom:0}});
+ assert.ok(black.walls.length>10,'repaired scene is walled');assert.equal(custom.walls,undefined,'replaced art gets no walls');
  assert.match(black.levels.contents[0].background.src,/sc01-resurrection-ward\.webp$/,'black scene repaired on its existing Level');assert.equal(black.folder,'SCENEFOLDER');
  assert.ok(black.flags['altered-carbon-rpg'].zoneGraph.zones.length>=4);
  assert.equal(custom.levels.contents[0].background.src,'worlds/x/spire.webp');assert.equal(custom.name,'My Spire');assert.equal(custom.folder,'MINE');
  assert.ok(game.scenes.every(s=>s.folder),'every scene is in a folder');assert.equal(game.folders.filter(f=>f.type==='Scene').length,1);
  const names=game.scenes.filter(s=>s.folder==='SCENEFOLDER').sort((a,b)=>a.sort-b.sort).map(s=>s.flags['cold-storage'].sourceId);
  assert.equal(names[0],'SCENE-LANDING');assert.equal(names.at(-1),'SCENE-EPILOGUE','adventure order');
- const again=await scenes.installMaps({thumbnails:false});assert.equal(again.created,0,'idempotent');
+ const again=await scenes.installMaps({thumbnails:false});assert.equal(again.created,0,'idempotent');assert.equal(again.walls.created+again.walls.updated,0,'walls not rebuilt when current');
  game.user.isGM=false;await assert.rejects(scenes.installMaps(),/Only a GM/);
 });
 test('every cover marker is a real cover position with a system material inside its zone',()=>{

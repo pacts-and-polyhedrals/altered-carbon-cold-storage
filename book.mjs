@@ -1,10 +1,10 @@
-/** Cold Storage 1.9.0: journal-only updater and manual GM running console.
+/** Cold Storage 1.10.0: journal-only updater and manual GM running console.
  * Uses public Foundry document APIs. Does not change existing actors or items.
  * Live Foundry/Forge QA remains required; see docs/live-qa.md.
  */
 import {markChecks} from './checks.mjs';
 const MOD='cold-storage';
-const VERSION='1.9.0';
+const VERSION='1.10.0';
 const sid=doc=>doc.getFlag(MOD,'sourceId');
 const esc=value=>foundry.utils.escapeHTML(String(value??''));
 const clone=value=>foundry.utils.deepClone(value);
@@ -18,7 +18,9 @@ function pageInheritance(){const out={default:-1};for(const u of game.users)if(!
 function hash(text){let n=2166136261;for(let i=0;i<text.length;i++){n^=text.charCodeAt(i);n=Math.imul(n,16777619);}return(n>>>0).toString(16);}
 function managedPage(journal){return values(journal.pages).find(p=>p.getFlag(MOD,'managedPage'))??values(journal.pages)[0];}
 const CATEGORY_KICKER={gm:'GM ONLY // ADVENTURE BOOK',primer:'PLAYER BRIEFING',personal:'PRIVATE // DHF CARD',handout:'EVIDENCE // RESTRICTED',reference:'GM REFERENCE'};
-function content(entry,docs){return `<article class="cs-book-journal cs-cat-${entry.category}"><p class="cs-page-kicker">COLD STORAGE // ${CATEGORY_KICKER[entry.category]??'ARCHIVE'} // ${entry.id}</p>${markChecks(entry.body,entry.id).replace(/\[\[([A-Z][A-Z0-9-]*)(?:\|([^\]]+))?\]\]/g,(_,id,label)=>{const doc=docs.get(id);if(!doc)throw new Error(`Unresolved journal target ${entry.id} -> ${id}`);return `@UUID[JournalEntry.${doc.id}]{${label??doc.name}}`;})}</article>`;}
+/** Live tracker panels injected at the top of GM chapters (rendered by the @CSMission/@CSClocks/@CSEvidence enrichers). */
+export function livePanels(missions){const out={G06:'@CSEvidence[all]',G07:'@CSClocks[all]'};for(const m of missions?.missions||[])out[m.journal]=`${out[m.journal]??''}@CSMission[${m.id}]`;return out;}
+function content(entry,docs,panels={}){const panel=entry.category==='gm'&&panels[entry.id]?`<div class="cs-live-slot">${panels[entry.id]}</div>`:'';return `<article class="cs-book-journal cs-cat-${entry.category}"><p class="cs-page-kicker">COLD STORAGE // ${CATEGORY_KICKER[entry.category]??'ARCHIVE'} // ${entry.id}</p>${panel}${markChecks(entry.body,entry.id).replace(/\[\[([A-Z][A-Z0-9-]*)(?:\|([^\]]+))?\]\]/g,(_,id,label)=>{const doc=docs.get(id);if(!doc)throw new Error(`Unresolved journal target ${entry.id} -> ${id}`);return `@UUID[JournalEntry.${doc.id}]{${label??doc.name}}`;})}</article>`;}
 async function backup(journal,recoveryFolder){
  const original=values(journal.pages).map(p=>p.toObject());
  if(!original.length)return;
@@ -47,7 +49,8 @@ export async function createBenefactors(benefactors){
  }
 }
 async function importImpl({notify=true}={}){
- const [base,factions,revelations,benefactors]=await Promise.all(['journals.json','factions.json','revelations.json','benefactors.json'].map(read));
+ const [base,factions,revelations,benefactors,missions]=await Promise.all(['journals.json','factions.json','revelations.json','benefactors.json','missions.json'].map(read));
+ const panels=livePanels(missions);
  const entries=[...base,...referenceEntries(factions,revelations)];
  const ids=new Set(entries.map(e=>e.id));if(ids.size!==entries.length)throw new Error('Duplicate book source IDs. Import aborted.');
  for(const entry of entries)for(const m of entry.body.matchAll(/\[\[([A-Z][A-Z0-9-]*)(?:\|[^\]]+)?\]\]/g))if(!ids.has(m[1]))throw new Error(`Missing source target ${m[1]}. Import aborted.`);
@@ -62,7 +65,7 @@ async function importImpl({notify=true}={}){
   docs.set(entry.id,doc);
  }
  for(const entry of entries){
-  const doc=docs.get(entry.id),html=content(entry,docs),page=managedPage(doc);
+  const doc=docs.get(entry.id),html=content(entry,docs,panels),page=managedPage(doc);
   if(page&&page.text?.content!==html){
    // Back up only text a GM edited after the last managed import; untouched source pages are simply refreshed.
    const stored=page.getFlag?.(MOD,'contentHash');if(!stored||stored!==hash(page.text?.content??''))await backup(doc,folders.recovery);updated++;
@@ -118,7 +121,7 @@ export async function changeBookCounter(key,delta,pcId=null){
  await game.settings.set(MOD,'bookState',state);return state;
 }
 export class ColdStorageBookConsole extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2){
- static DEFAULT_OPTIONS={id:'cold-storage-book',classes:['altered-carbon','cold-storage','cs-app'],window:{title:'Cold Storage — GM Book Console',icon:'fa-solid fa-book-open'},position:{width:980,height:800},actions:{importBook:this._importBook,open:this._open,reveal:this._reveal,count:this._count,openContinuity:this._openContinuity}};
+ static DEFAULT_OPTIONS={id:'cold-storage-book',classes:['altered-carbon','cold-storage','cs-app'],window:{title:'Cold Storage — GM Book Console',icon:'fa-solid fa-book-open'},position:{width:980,height:800},actions:{importBook:this._importBook,open:this._open,reveal:this._reveal,count:this._count,openContinuity:this._openContinuity,openTracker:this._openTracker}};
  static PARTS={main:{template:'modules/cold-storage/templates/book.hbs'}};
  async _prepareContext(options){
   gm();const context=await super._prepareContext(options);const index=await read('book-index.json');
@@ -130,6 +133,7 @@ export class ColdStorageBookConsole extends foundry.applications.api.HandlebarsA
  }
  static async _importBook(){try{await importAdventureBook();await this.render({force:true});}catch(e){console.error(e);ui.notifications.error(e.message);}}
  static async _openContinuity(){game.coldStorage?.openContinuity?.();}
+ static async _openTracker(){game.coldStorage?.openTracker?.();}
  static async _open(event,target){const doc=game.journal.find(j=>sid(j)===target.dataset.source);if(doc)doc.sheet.render({force:true});else ui.notifications.warn('Import the book first.');}
  static async _reveal(event,target){
   const id=target.dataset.source,recipient=this.element.querySelector(`[data-recipient-for="${id}"]`)?.value;

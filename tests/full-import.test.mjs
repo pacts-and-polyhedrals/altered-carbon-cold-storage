@@ -32,7 +32,12 @@ class JournalMock extends Document{
 class FolderMock extends Document{static async create(data){const d=new FolderMock(data);game.folders.push(d);return d;}
  get contents(){return [...game.actors,...game.journal,...game.scenes].filter(d=>d.folder===this.id);} get children(){return game.folders.filter(f=>f.folder===this.id);}
  async delete(){game.folders=new Collection(...game.folders.filter(f=>f!==this));}}
-class SceneMock extends Document{static async create(data){const d=new SceneMock(data);game.scenes.push(d);return d;}
+class SceneMock extends Document{
+ constructor(d){super(d);this.walls=new Collection();this.tokens=new Collection();this.notes=new Collection();}
+ async createEmbeddedDocuments(type,list){const key={Wall:'walls',Token:'tokens',Note:'notes',Level:'levelsList'}[type];assert.ok(key,type);this[key]??=new Collection();const out=list.map(x=>new Embedded(x));this[key].push(...out);return out;}
+ async deleteEmbeddedDocuments(type,ids){const key={Wall:'walls',Token:'tokens',Note:'notes'}[type];this[key]=new Collection(...this[key].filter(x=>!ids.includes(x.id)));}
+ async updateEmbeddedDocuments(type,ups){for(const u of ups)Object.assign(this.tokens.get(u._id),u);}
+ static async create(data){const d=new SceneMock(data);game.scenes.push(d);return d;}
  static async deleteDocuments(ids){game.scenes=new Collection(...game.scenes.filter(a=>!ids.includes(a.id)));}}
 class App{async _prepareContext(){return {};}render(){return this;}}
 globalThis.Actor=ActorMock;globalThis.Folder=FolderMock;globalThis.Scene=SceneMock;globalThis.JournalEntry=JournalMock;
@@ -67,7 +72,12 @@ test('fresh-world full import produces the complete playable data model on Alter
  assert.equal(game.actors.filter(a=>a.type==='npc').length,23);
  assert.equal(game.actors.filter(a=>a.type==='threat').length,4);
  assert.equal(game.scenes.length,16,'14 zoned maps + landing and epilogue backdrops');
- assert.equal(game.journal.filter(j=>sid(j)!=='PLAYER-RELATIONSHIP-BOARD').length,96);
+ assert.equal(game.journal.filter(j=>!['PLAYER-RELATIONSHIP-BOARD','CASE-FILE'].includes(sid(j))).length,96);
+ const caseFile=game.journal.find(j=>sid(j)==='CASE-FILE');assert.ok(caseFile,'players\' Case File created');assert.equal(caseFile.ownership.default,2,'players can read the Case File');
+ // every map scene is walled and set up with its cast and journal pins
+ const breach=game.scenes.find(s=>sid(s)==='SCENE-BREACH');assert.ok(breach.walls.length>10,'walls');assert.ok(breach.walls.some(w=>w.door===1),'doors');
+ assert.ok(breach.tokens.some(t=>t.name==='Jalen Cross'),'Breach cast placed');assert.ok(breach.notes.length>=2,'journal pins');
+ const council=game.scenes.find(s=>sid(s)==='SCENE-COUNCIL');assert.equal(council.tokens.length,4,'three Benefactors and Elias North');
  const pcs=game.actors.filter(a=>a.type==='character');
  assert.equal(pcs.flatMap(a=>a.items.filter(i=>i.type==='relationship')).length,160);
  assert.equal(pcs.flatMap(a=>a.items.filter(i=>i.type==='archivedSleeve')).length,46);
@@ -93,7 +103,7 @@ test('repeated full import stops before any modification to a played Actor',asyn
 });
 test('2.4.0 integration: system legacy book is not used, threats are ready to roll, pregens match creator output',async()=>{
  setup();await mod.importColdStorage();
- assert.equal(game.journal.filter(j=>sid(j)!=='PLAYER-RELATIONSHIP-BOARD').length,96,'module book must import even though the system legacy book refuses');
+ assert.equal(game.journal.filter(j=>!['PLAYER-RELATIONSHIP-BOARD','CASE-FILE'].includes(sid(j))).length,96,'module book must import even though the system legacy book refuses');
  const reference=(await systemFile('archetype-reference.json'))??fixtureData['archetype-reference.json'];
  for(const threat of game.actors.filter(a=>a.type==='threat')){
   assert.equal(threat.items.filter(i=>i.type==='skill').length,32,`${threat.name} needs the 32 Core Skill records`);

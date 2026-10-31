@@ -1,0 +1,1347 @@
+{
+ "version": "1.10.0",
+ "missions": [
+  {
+   "id": "M01",
+   "code": "SC01",
+   "act": 1,
+   "title": "The Resurrection Ward",
+   "player": "Wake Up",
+   "journal": "G08",
+   "scene": "SCENE-WARD",
+   "brief": "Six of you wake in sleeves you never chose, in a year you never lived. Someone broke the law to get you out.",
+   "gm": "Establish the sleeves, 2384 and the 110-year gap; Serin, H01 and the first pulse. Exit: the recovery team arrives.",
+   "objectives": [
+    {
+     "id": "M01-1",
+     "text": "Each PC establishes their current sleeve, the year 2384 and the 110-year gap.",
+     "player": "Learn what body you are wearing and what year it is."
+    },
+    {
+     "id": "M01-2",
+     "text": "Give H01, the Continuity Withdrawal Receipt.",
+     "player": "Find the paperwork that explains why you were held.",
+     "auto": {
+      "handout": "H01"
+     }
+    },
+    {
+     "id": "M01-3",
+     "text": "Serin names the two protected reserves.",
+     "player": "Find out who else was stored with you."
+    },
+    {
+     "id": "M01-4",
+     "text": "Run the first announced continuity pulse (Ward).",
+     "player": "Face the first dislocation.",
+     "auto": {
+      "pulse": "ward"
+     }
+    }
+   ],
+   "cast": [
+    {
+     "actor": "C04",
+     "zone": "nurse-station",
+     "role": "ally",
+     "note": "Dr Serin Kael. Offers water to organic sleeves, a diagnostic lead to synthetics. Examines no one without permission.",
+     "label": "Dr Serin Kael"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G08",
+     "zone": "nurse-station",
+     "label": "SC01"
+    },
+    {
+     "journal": "H01",
+     "zone": "nurse-station",
+     "label": "H01"
+    }
+   ]
+  },
+  {
+   "id": "M02",
+   "code": "SC02",
+   "act": 1,
+   "title": "Breach of Cold Storage",
+   "player": "The Recovery Team",
+   "journal": "G09",
+   "scene": "SCENE-BREACH",
+   "after": [
+    "M01"
+   ],
+   "brief": "A recovery team has come for your stacks — intact, and quietly.",
+   "gm": "A custody dispute, not a mandatory fight. Jalen leads; Asha only on a secure call. End on terms, escape or a defensible transfer dispute.",
+   "objectives": [
+    {
+     "id": "M02-1",
+     "text": "Obtain the intact-stack retrieval order H02.",
+     "player": "See the order that came for you.",
+     "auto": {
+      "handout": "H02"
+     }
+    },
+    {
+     "id": "M02-2",
+     "text": "Resolve the custody dispute: negotiate, comply under witnessed custody, deceive or evade.",
+     "player": "Decide how you leave the ward — and in whose custody."
+    },
+    {
+     "id": "M02-3",
+     "text": "Leave by a traceable exit toward the Rainline (or knowingly surrender to the Spire).",
+     "player": "Get out into the city.",
+     "auto": {
+      "visited": "SCENE-RAINLINE"
+     }
+    }
+   ],
+   "cast": [
+    {
+     "actor": "ADV02",
+     "zone": "ward-entrance",
+     "role": "rival",
+     "note": "Jalen Cross leads the team with the Retrieval Hitman profile (G27). Opens with an offer to discuss custody.",
+     "name": "Jalen Cross",
+     "record": "C10",
+     "label": "Palimpsest Retrieval Hitman"
+    },
+    {
+     "actor": "ADV03",
+     "zone": "ward-entrance",
+     "role": "adversary",
+     "note": "Recovery personnel: they do not all attack before the party can act.",
+     "hidden": true,
+     "name": "Recovery Personnel",
+     "count": 2,
+     "label": "Compromised Protectorate Officer"
+    },
+    {
+     "offmap": "Captain Asha Rhyne",
+     "note": "On a secure call only — no token in this scene.",
+     "role": "voice"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G09",
+     "zone": "ward-entrance",
+     "label": "SC02"
+    },
+    {
+     "journal": "H02",
+     "zone": "ward-entrance",
+     "label": "H02"
+    }
+   ]
+  },
+  {
+   "id": "M03",
+   "code": "SC03",
+   "act": 1,
+   "title": "The Rainline",
+   "player": "The Dead City They Remember",
+   "journal": "G10",
+   "scene": "SCENE-RAINLINE",
+   "after": [
+    "M02"
+   ],
+   "brief": "Three doors into the century you lost: paper, cargo or relays. Somebody on each side of them needs something from you.",
+   "gm": "Choose one to three leads by schedule. Skipped packets arrive at Anansi House. One leading contact and one relationship contact per visited location.",
+   "objectives": [
+    {
+     "id": "M03-1",
+     "text": "Choose and visit at least one lead (Archive, Blue Lotus, Relay Seventeen).",
+     "player": "Choose where to start digging.",
+     "auto": {
+      "started": [
+       "M04",
+       "M05",
+       "M06"
+      ]
+     }
+    },
+    {
+     "id": "M03-2",
+     "text": "Verify one historical identity with independent evidence (pulse: contact).",
+     "player": "Prove one face from the past is who you think it is.",
+     "auto": {
+      "any": [
+       {
+        "pulse": "contact"
+       },
+       {
+        "relationship": "confirmed"
+       }
+      ]
+     }
+    },
+    {
+     "id": "M03-3",
+     "text": "Get H03-H05 from their named sources (skipped packets reach Anansi).",
+     "player": "Collect at least one packet from the street.",
+     "auto": {
+      "handouts": [
+       "H03",
+       "H04",
+       "H05"
+      ],
+      "min": 1
+     }
+    }
+   ],
+   "cast": [
+    {
+     "actor": "ADV03",
+     "zone": "billboard-plaza",
+     "role": "rival",
+     "note": "Checkpoint officer: addresses a police chassis as a colleague. Social pressure, not a fight.",
+     "name": "BCPD Checkpoint Officer",
+     "label": "Compromised Protectorate Officer"
+    },
+    {
+     "actor": "C14",
+     "zone": "memorial-corner",
+     "role": "contact",
+     "note": "Tom Arlen can appear in person for Nia, or call through Serin's burner.",
+     "standby": true,
+     "label": "Tom Arlen"
+    },
+    {
+     "actor": "C05",
+     "zone": "clinic-intake",
+     "role": "ally",
+     "note": "Mira Sol, if a PC contacts her for a temporary review.",
+     "standby": true,
+     "label": "Mira Sol"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G10",
+     "zone": "billboard-plaza",
+     "label": "SC03"
+    },
+    {
+     "journal": "H14",
+     "zone": "billboard-plaza",
+     "label": "H14"
+    }
+   ]
+  },
+  {
+   "id": "M04",
+   "code": "LEAD A",
+   "act": 2,
+   "title": "The Quiet Archive",
+   "player": "The Paper Record",
+   "journal": "G11",
+   "scene": "SCENE-ARCHIVE",
+   "after": [
+    "M03"
+   ],
+   "optional": true,
+   "brief": "A chapel of names on paper, kept by someone who refuses to wake the dead.",
+   "gm": "Main contact Father Ash. Optional personal contact: Tom for Nia, Deacon Marr for Edda, Iris Tan for Solenne or Sabine. Evidence E01, E03.",
+   "objectives": [
+    {
+     "id": "M04-1",
+     "text": "Receive H03, the Quiet Archive's paper record.",
+     "player": "Get the Archive's paper record.",
+     "auto": {
+      "handout": "H03"
+     }
+    },
+    {
+     "id": "M04-2",
+     "text": "Agree the Archive's terms: read-only, no waking anyone who declined.",
+     "player": "Agree to the Archive's terms."
+    },
+    {
+     "id": "M04-3",
+     "text": "Resolve a personal contact's scene (optional).",
+     "player": "Speak to someone you used to know.",
+     "optional": true
+    }
+   ],
+   "cast": [
+    {
+     "actor": "C08",
+     "zone": "reading-table",
+     "role": "ally",
+     "note": "Father Ash / Hyeon Park. Holds the sealed paper warrant (E01 fallback).",
+     "label": "Father Ash"
+    },
+    {
+     "actor": "C19",
+     "zone": "nave",
+     "role": "contact",
+     "note": "Deacon Marr, for Edda.",
+     "standby": true,
+     "label": "Deacon Marr"
+    },
+    {
+     "actor": "C20",
+     "zone": "nave",
+     "role": "contact",
+     "note": "Iris Tan, for Solenne or Sabine.",
+     "standby": true,
+     "label": "Iris Tan"
+    },
+    {
+     "actor": "C14",
+     "zone": "public-back-door",
+     "role": "contact",
+     "note": "Tom Arlen, for Nia.",
+     "standby": true,
+     "label": "Tom Arlen"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G11",
+     "zone": "nave",
+     "label": "LEAD A"
+    },
+    {
+     "journal": "H03",
+     "zone": "reading-table",
+     "label": "H03"
+    }
+   ]
+  },
+  {
+   "id": "M05",
+   "code": "LEAD B",
+   "act": 2,
+   "title": "Blue Lotus, Black Water",
+   "player": "The Cargo Ledger",
+   "journal": "G12",
+   "scene": "SCENE-LOTUS",
+   "after": [
+    "M03"
+   ],
+   "optional": true,
+   "brief": "Empty pools, chlorine and a ledger of deliveries nobody signed for.",
+   "gm": "Main contact Niko Saint; Hale Mercer for Cass or Anik. Ren Ko only if time and tension justify it; their objective is the physical ledger, not murder.",
+   "objectives": [
+    {
+     "id": "M05-1",
+     "text": "Receive H04, the Blue Lotus delivery ledger.",
+     "player": "Get the delivery ledger.",
+     "auto": {
+      "handout": "H04"
+     }
+    },
+    {
+     "id": "M05-2",
+     "text": "Decide the ledger: copy it, buy it or take the original.",
+     "player": "Decide what to do with the ledger."
+    },
+    {
+     "id": "M05-3",
+     "text": "Handle Ren Ko's competing offer (optional).",
+     "player": "Deal with the other buyer.",
+     "optional": true
+    }
+   ],
+   "cast": [
+    {
+     "actor": "C07",
+     "zone": "deep-pool",
+     "role": "contact",
+     "note": "Niko Saint / Dax Marrow at his table on the drained pool floor.",
+     "label": "Niko Saint"
+    },
+    {
+     "actor": "ADV02",
+     "zone": "street-entrance",
+     "role": "rival",
+     "note": "Ren Ko arrives to buy the same ledger; fights with the ADV02 profile if violence starts (G27).",
+     "hidden": true,
+     "name": "Ren Ko",
+     "record": "C17",
+     "label": "Palimpsest Retrieval Hitman"
+    },
+    {
+     "actor": "ADV03",
+     "zone": "street-entrance",
+     "role": "adversary",
+     "note": "Ren Ko's assistant.",
+     "hidden": true,
+     "name": "Ren Ko's Assistant",
+     "label": "Compromised Protectorate Officer"
+    },
+    {
+     "actor": "C16",
+     "zone": "pool-deck",
+     "role": "contact",
+     "note": "Hale Mercer, especially for Cass or Anik.",
+     "standby": true,
+     "label": "Hale Mercer"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G12",
+     "zone": "pool-deck",
+     "label": "LEAD B"
+    },
+    {
+     "journal": "H04",
+     "zone": "cracked-window",
+     "label": "H04"
+    }
+   ]
+  },
+  {
+   "id": "M06",
+   "code": "LEAD C",
+   "act": 2,
+   "title": "Relay Seventeen",
+   "player": "The Cold Relay",
+   "journal": "G13",
+   "scene": "SCENE-RELAY",
+   "after": [
+    "M03"
+   ],
+   "optional": true,
+   "brief": "Warm air, humming cabinets and a log that should have been purged a century ago.",
+   "gm": "Main contact Lena Orr; optional Soren Gray. If skipped, her packet reaches Marlowe and she joins by audio.",
+   "objectives": [
+    {
+     "id": "M06-1",
+     "text": "Receive H05, the Relay Seventeen cold log.",
+     "player": "Get the relay's cold log.",
+     "auto": {
+      "handout": "H05"
+     }
+    },
+    {
+     "id": "M06-2",
+     "text": "Choose read, mirror or purge at the console.",
+     "player": "Decide what to do with the relay cache."
+    },
+    {
+     "id": "M06-3",
+     "text": "Secure Lena's maintenance token (E06 fallback).",
+     "player": "Earn the engineer's maintenance token.",
+     "optional": true
+    }
+   ],
+   "cast": [
+    {
+     "actor": "C11",
+     "zone": "diagnostic-store",
+     "role": "ally",
+     "note": "Lena Orr / Keiko Marr at her open panel.",
+     "label": "Lena Orr"
+    },
+    {
+     "actor": "C12",
+     "zone": "cabinet-hall",
+     "role": "ally",
+     "note": "Soren Gray, optional support.",
+     "standby": true,
+     "label": "Soren Gray"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G13",
+     "zone": "canal-gantry",
+     "label": "LEAD C"
+    },
+    {
+     "journal": "H05",
+     "zone": "diagnostic-store",
+     "label": "H05"
+    }
+   ]
+  },
+  {
+   "id": "M07",
+   "code": "SC04",
+   "act": 2,
+   "title": "Anansi House",
+   "player": "The Safehouse",
+   "journal": "G14",
+   "scene": "SCENE-SAFEHOUSE",
+   "after": [
+    "M03"
+   ],
+   "brief": "Rooms kept for you for a hundred and ten years, and a host who never forgot your orders.",
+   "gm": "Marlowe, Serin and one unresolved personal contact. First free anchor. Confront Serin with H06.",
+   "objectives": [
+    {
+     "id": "M07-1",
+     "text": "Establish Marlowe as an independent service AI.",
+     "player": "Meet the house's host."
+    },
+    {
+     "id": "M07-2",
+     "text": "Confront Serin with H06 and confirm the reserves.",
+     "player": "Make Serin explain herself.",
+     "auto": {
+      "handout": "H06"
+     }
+    },
+    {
+     "id": "M07-3",
+     "text": "Offer the first free anchor (Anansi).",
+     "player": "Find something that still feels like yours.",
+     "auto": {
+      "anchor": "anansi"
+     }
+    },
+    {
+     "id": "M07-4",
+     "text": "All three street packets are in hand (H03-H05).",
+     "player": "Gather every packet from the street.",
+     "auto": {
+      "handouts": [
+       "H03",
+       "H04",
+       "H05"
+      ],
+      "min": 3
+     }
+    },
+    {
+     "id": "M07-5",
+     "text": "Offer consent and read-only access alternatives (H15).",
+     "player": "Agree how the archive may be read.",
+     "auto": {
+      "handout": "H15"
+     }
+    }
+   ],
+   "cast": [
+    {
+     "actor": "C04",
+     "zone": "dining-room",
+     "role": "ally",
+     "note": "Serin. If threatened she asks Iris to take custody of her statement.",
+     "label": "Dr Serin Kael"
+    },
+    {
+     "offmap": "Marlowe",
+     "note": "The house AI speaks through the desk speaker; no token.",
+     "role": "voice"
+    },
+    {
+     "actor": "C14",
+     "zone": "lobby",
+     "role": "contact",
+     "note": "Unresolved personal contact: Tom has rebuilt a life.",
+     "standby": true,
+     "label": "Tom Arlen"
+    },
+    {
+     "actor": "C11",
+     "zone": "lobby",
+     "role": "contact",
+     "note": "Unresolved personal contact: Lena has abandoned a promise.",
+     "standby": true,
+     "label": "Lena Orr"
+    },
+    {
+     "actor": "C16",
+     "zone": "lobby",
+     "role": "contact",
+     "note": "Unresolved personal contact: Hale owes restitution.",
+     "standby": true,
+     "label": "Hale Mercer"
+    },
+    {
+     "actor": "C05",
+     "zone": "lobby",
+     "role": "contact",
+     "note": "Unresolved personal contact: Mira protects people from the charity Sabine funded.",
+     "standby": true,
+     "label": "Mira Sol"
+    },
+    {
+     "actor": "C19",
+     "zone": "lobby",
+     "role": "contact",
+     "note": "Unresolved personal contact: Deacon Marr can tell guilt from responsibility.",
+     "standby": true,
+     "label": "Deacon Marr"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G14",
+     "zone": "lobby",
+     "label": "SC04"
+    },
+    {
+     "journal": "H06",
+     "zone": "dining-room",
+     "label": "H06"
+    },
+    {
+     "journal": "H15",
+     "zone": "parlour",
+     "label": "H15"
+    }
+   ]
+  },
+  {
+   "id": "M08",
+   "code": "SC05",
+   "act": 3,
+   "title": "Palimpsest Virtuality",
+   "player": "The Archive Inside",
+   "journal": "G15",
+   "scene": "SCENE-VIRTUAL",
+   "after": [
+    "M07"
+   ],
+   "brief": "The case you died investigating, rebuilt from records — and records are not memories.",
+   "gm": "35/45/55 minutes total for all nodes. Pulses 3 and 4 only. A Dipper only if the party opens the bidirectional channel.",
+   "objectives": [
+    {
+     "id": "M08-1",
+     "text": "Choose access: external replay, supervised dive or read-only.",
+     "player": "Choose how to enter the archive."
+    },
+    {
+     "id": "M08-2",
+     "text": "Reconstruct the gate chronology (H07).",
+     "player": "Rebuild the night of the raid.",
+     "auto": {
+      "handout": "H07"
+     }
+    },
+    {
+     "id": "M08-3",
+     "text": "Expose the forged consent (H08).",
+     "player": "Find out what you supposedly agreed to.",
+     "auto": {
+      "handout": "H08"
+     }
+    },
+    {
+     "id": "M08-4",
+     "text": "Recover the audit credential (H09).",
+     "player": "Recover the key you were carrying.",
+     "auto": {
+      "handout": "H09"
+     }
+    },
+    {
+     "id": "M08-5",
+     "text": "Every PC acts at least once inside.",
+     "player": "Everyone has their moment inside."
+    }
+   ],
+   "cast": [
+    {
+     "actor": "ADV01",
+     "zone": "fourth-window",
+     "role": "adversary",
+     "note": "Recovery Dipper: only after the party knowingly opens the bidirectional diagnostic channel. One Data Engineering or Discipline D0 isolates it.",
+     "hidden": true,
+     "name": "Recovery Dipper",
+     "label": "Palimpsest Recovery Dipper"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G15",
+     "zone": "exit-anchor",
+     "label": "SC05"
+    }
+   ]
+  },
+  {
+   "id": "M09",
+   "code": "NODE A",
+   "act": 3,
+   "title": "The Court of Unreliable Witnesses",
+   "player": "The Court",
+   "journal": "G16",
+   "scene": "SCENE-COURT",
+   "after": [
+    "M08"
+   ],
+   "brief": "Eight chairs, eight outlines, and an accusation with an author.",
+   "gm": "The recorded interrogator's reflection shows Elias North over Lucan Vey. Pulse: Court node.",
+   "objectives": [
+    {
+     "id": "M09-1",
+     "text": "Find the second timestamp (H07).",
+     "player": "Find the timestamp that does not match.",
+     "auto": {
+      "handout": "H07"
+     }
+    },
+    {
+     "id": "M09-2",
+     "text": "Run the Court memory pulse.",
+     "player": "Sit in the witness chair.",
+     "auto": {
+      "pulse": "court"
+     }
+    },
+    {
+     "id": "M09-3",
+     "text": "Draft an audit petition or formal objection (optional).",
+     "player": "Turn the contradiction into a legal tool.",
+     "optional": true
+    }
+   ],
+   "cast": [
+    {
+     "actor": "C01",
+     "zone": "judges-bench",
+     "role": "rival",
+     "note": "Recorded interrogator: Elias North's presentation layered over Lucan Vey's interface.",
+     "hidden": true,
+     "label": "Elias North"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G16",
+     "zone": "service-door",
+     "label": "NODE A"
+    },
+    {
+     "journal": "H07",
+     "zone": "clerks-desk",
+     "label": "H07"
+    }
+   ]
+  },
+  {
+   "id": "M10",
+   "code": "NODE B",
+   "act": 3,
+   "title": "The Operating Theatre",
+   "player": "The Theatre",
+   "journal": "G17",
+   "scene": "SCENE-THEATRE",
+   "after": [
+    "M08"
+   ],
+   "brief": "A clone breathing in an empty cradle, and two versions of one signature.",
+   "gm": "Spotlight Edda, Sabine and Anik. No automatic pulse. Serin's 2274 self knew the sheet overstated consent.",
+   "objectives": [
+    {
+     "id": "M10-1",
+     "text": "Compare the two consent documents (H08).",
+     "player": "Compare the two consent forms.",
+     "auto": {
+      "handout": "H08"
+     }
+    },
+    {
+     "id": "M10-2",
+     "text": "Hear why the exception sheet was reworded.",
+     "player": "Learn who changed the wording, and why."
+    }
+   ],
+   "cast": [
+    {
+     "actor": "C04",
+     "zone": "records-desk",
+     "role": "ally",
+     "note": "Memory of Dr Talia Venn (Serin, 2274) at the records desk.",
+     "hidden": true,
+     "name": "Dr Talia Venn (2274)",
+     "label": "Dr Serin Kael"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G17",
+     "zone": "records-desk",
+     "label": "NODE B"
+    },
+    {
+     "journal": "H08",
+     "zone": "records-desk",
+     "label": "H08"
+    }
+   ]
+  },
+  {
+   "id": "M11",
+   "code": "NODE C",
+   "act": 3,
+   "title": "The Last Broadcast",
+   "player": "The Last Broadcast",
+   "journal": "G18",
+   "scene": "SCENE-BROADCAST",
+   "after": [
+    "M08"
+   ],
+   "brief": "Rain on the glass, four shares and a door marked for someone who was never meant to be there.",
+   "gm": "The recording ends as Asha's second team breaches. Elias North then messages through the audit channel. Pulse: Broadcast node.",
+   "objectives": [
+    {
+     "id": "M11-1",
+     "text": "Recover the audit route (H09).",
+     "player": "Recover the audit route.",
+     "auto": {
+      "handout": "H09"
+     }
+    },
+    {
+     "id": "M11-2",
+     "text": "Run the Last Broadcast memory pulse.",
+     "player": "Hear the last broadcast to its end.",
+     "auto": {
+      "pulse": "broadcast"
+     }
+    },
+    {
+     "id": "M11-3",
+     "text": "Answer Elias North's invitation.",
+     "player": "Answer the man who invited you back."
+    }
+   ],
+   "cast": [
+    {
+     "actor": "ADV03",
+     "zone": "service-entrance",
+     "role": "adversary",
+     "note": "Asha's second team in the 2274 recording: they breach as the record ends. Memory, not a live fight.",
+     "hidden": true,
+     "name": "Asha's Second Team (2274)",
+     "count": 2,
+     "cover": true,
+     "label": "Compromised Protectorate Officer"
+    },
+    {
+     "offmap": "Elias North",
+     "note": "Message through the audit channel; no token.",
+     "role": "voice"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G18",
+     "zone": "rain-window",
+     "label": "NODE C"
+    },
+    {
+     "journal": "H09",
+     "zone": "attestation-door",
+     "label": "H09"
+    }
+   ]
+  },
+  {
+   "id": "M12",
+   "code": "SC06 · I",
+   "act": 4,
+   "title": "Entering the Spire",
+   "player": "The Spire",
+   "journal": "G19",
+   "scene": "SCENE-SPIRE",
+   "after": [
+    "M08"
+   ],
+   "brief": "The city's most public building, and the one door in it that is never open.",
+   "gm": "Turn relationships and evidence into access. Run only the chosen route: public audit, maintenance, witnessed custody or force. Renewal has not started.",
+   "objectives": [
+    {
+     "id": "M12-1",
+     "text": "Choose the entry: public audit, maintenance, witnessed custody or force.",
+     "player": "Choose how you get in."
+    },
+    {
+     "id": "M12-2",
+     "text": "Reach the council.",
+     "player": "Reach the people at the top.",
+     "auto": {
+      "visited": "SCENE-COUNCIL"
+     }
+    }
+   ],
+   "cast": [
+    {
+     "actor": "C02",
+     "zone": "public-reception",
+     "role": "rival",
+     "note": "Captain Asha Rhyne meets a public-audit party in reception.",
+     "label": "Captain Asha Rhyne"
+    },
+    {
+     "actor": "C01",
+     "zone": "interview-room",
+     "role": "rival",
+     "note": "Elias North / Lucan Vey, if the route goes through him.",
+     "hidden": true,
+     "label": "Elias North"
+    },
+    {
+     "actor": "ADV04",
+     "zone": "lift-lobby",
+     "role": "adversary",
+     "note": "Praetorian lead holds the access point and protects staff; withdraws to the council if untenable.",
+     "hidden": true,
+     "name": "Praetorian Lead",
+     "cover": true,
+     "label": "Praetorian Black-Recovery Operative"
+    },
+    {
+     "actor": "ADV03",
+     "zone": "lift-lobby",
+     "role": "adversary",
+     "note": "Spire guards. No automatic second wave.",
+     "hidden": true,
+     "name": "Spire Guard",
+     "count": 2,
+     "label": "Compromised Protectorate Officer"
+    },
+    {
+     "actor": "C11",
+     "zone": "maintenance-station",
+     "role": "ally",
+     "note": "Lena Orr, for the maintenance route.",
+     "standby": true,
+     "label": "Lena Orr"
+    },
+    {
+     "actor": "C20",
+     "zone": "public-reception",
+     "role": "ally",
+     "note": "Iris Tan, sponsoring a public audit.",
+     "standby": true,
+     "label": "Iris Tan"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G19",
+     "zone": "public-reception",
+     "label": "SC06 I"
+    }
+   ]
+  },
+  {
+   "id": "M13",
+   "code": "SC06 · II",
+   "act": 4,
+   "title": "The Council Beneath the Skin",
+   "player": "The Council",
+   "journal": "G20",
+   "scene": "SCENE-COUNCIL",
+   "after": [
+    "M12"
+   ],
+   "brief": "Three rulers at a table too small for a throne room, and the question nobody has been allowed to ask.",
+   "gm": "Establish independent Origin, Embodiment and Authority proofs. Sen volunteers her hand; Holt and Thale agree when all three are tested.",
+   "objectives": [
+    {
+     "id": "M13-1",
+     "text": "Origin: the root genesis register (H10).",
+     "player": "Prove where they came from.",
+     "auto": {
+      "handout": "H10"
+     }
+    },
+    {
+     "id": "M13-2",
+     "text": "Embodiment: the organic attestation (H11).",
+     "player": "Prove what they are wearing.",
+     "auto": {
+      "handout": "H11"
+     }
+    },
+    {
+     "id": "M13-3",
+     "text": "Authority: the civic dispatch (H12).",
+     "player": "Prove what they control.",
+     "auto": {
+      "handout": "H12"
+     }
+    },
+    {
+     "id": "M13-4",
+     "text": "Run the three-voice continuity challenge (core pulse).",
+     "player": "Hold on to who you are.",
+     "auto": {
+      "pulse": "core"
+     }
+    },
+    {
+     "id": "M13-5",
+     "text": "Offer the last grounding before the operation.",
+     "player": "Take one breath before you act.",
+     "auto": {
+      "anchor": "prefinale"
+     },
+     "optional": true
+    }
+   ],
+   "cast": [
+    {
+     "actor": "GOD01",
+     "zone": "council-table",
+     "role": "benefactor",
+     "note": "Dr Adria Sen. Volunteers her hand, pulse and interface port.",
+     "label": "Dr Adria Sen"
+    },
+    {
+     "actor": "GOD02",
+     "zone": "council-table",
+     "role": "benefactor",
+     "note": "Magistrate Severin Holt. Orders witnessed custody and records any attack.",
+     "label": "Magistrate Severin Holt"
+    },
+    {
+     "actor": "GOD03",
+     "zone": "council-table",
+     "role": "benefactor",
+     "note": "Director Oren Thale. Keeps his credentials and an eye on the exit.",
+     "label": "Director Oren Thale"
+    },
+    {
+     "actor": "C01",
+     "zone": "clinical-console",
+     "role": "rival",
+     "note": "Elias North at the clinical console; Lucan Vey's two-finger wrist tap.",
+     "label": "Elias North"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G20",
+     "zone": "antechamber",
+     "label": "SC06 II"
+    },
+    {
+     "journal": "H10",
+     "zone": "genesis-register",
+     "label": "H10"
+    },
+    {
+     "journal": "H11",
+     "zone": "clinical-console",
+     "label": "H11"
+    },
+    {
+     "journal": "H12",
+     "zone": "council-table",
+     "label": "H12"
+    }
+   ]
+  },
+  {
+   "id": "M14",
+   "code": "SC06 · III",
+   "act": 4,
+   "title": "The Final Operation",
+   "player": "The Final Operation",
+   "journal": "G21",
+   "scene": "SCENE-CORE",
+   "after": [
+    "M13"
+   ],
+   "brief": "Four rounds before the city signs itself over again.",
+   "gm": "Start Renewal 0/4 here. Each round every PC contributes once, then Renewal advances. Proof, Control and People each need two contributions; the chosen plan decides which matter.",
+   "objectives": [
+    {
+     "id": "M14-1",
+     "text": "Give H13: the three buses and the evidence port.",
+     "player": "Understand the machine you are standing in.",
+     "auto": {
+      "handout": "H13"
+     }
+    },
+    {
+     "id": "M14-2",
+     "text": "Give H16: what can be chosen tonight.",
+     "player": "Know what can be chosen tonight.",
+     "auto": {
+      "handout": "H16"
+     }
+    },
+    {
+     "id": "M14-3",
+     "text": "Start Renewal.",
+     "player": "The clock starts.",
+     "auto": {
+      "counter": "renewal",
+      "min": 1
+     }
+    },
+    {
+     "id": "M14-4",
+     "text": "Proof track 2/2.",
+     "player": "Get the evidence out.",
+     "auto": {
+      "counter": "proof",
+      "min": 2
+     },
+     "optional": true
+    },
+    {
+     "id": "M14-5",
+     "text": "Control track 2/2.",
+     "player": "Take the controls.",
+     "auto": {
+      "counter": "control",
+      "min": 2
+     },
+     "optional": true
+    },
+    {
+     "id": "M14-6",
+     "text": "People track 2/2.",
+     "player": "Keep the people safe.",
+     "auto": {
+      "counter": "people",
+      "min": 2
+     },
+     "optional": true
+    },
+    {
+     "id": "M14-7",
+     "text": "Carry out the chosen operation.",
+     "player": "Do what you came to do."
+    }
+   ],
+   "cast": [
+    {
+     "actor": "GOD01",
+     "zone": "chamber-floor",
+     "role": "benefactor",
+     "note": "Sen seeks cover and protects clinical residents.",
+     "cover": true,
+     "label": "Dr Adria Sen"
+    },
+    {
+     "actor": "GOD02",
+     "zone": "civic-lease",
+     "role": "benefactor",
+     "note": "Holt orders witnessed custody and records the attack.",
+     "label": "Magistrate Severin Holt"
+    },
+    {
+     "actor": "GOD03",
+     "zone": "secure-exit",
+     "role": "benefactor",
+     "note": "Thale heads for the secure exit with his credentials; at Renewal 2 he offers a logistics bargain.",
+     "label": "Director Oren Thale"
+    },
+    {
+     "actor": "C01",
+     "zone": "palimpsest-engine",
+     "role": "rival",
+     "note": "Vey bargains for his usefulness.",
+     "label": "Elias North"
+    },
+    {
+     "actor": "C02",
+     "zone": "chamber-floor",
+     "role": "rival",
+     "note": "Asha: at Renewal 3 she separates armed participants from clinical staff; can be persuaded to witness.",
+     "label": "Captain Asha Rhyne"
+    },
+    {
+     "actor": "ADV03",
+     "zone": "secure-exit",
+     "role": "adversary",
+     "note": "Spire security; escorts from Renewal 3.",
+     "hidden": true,
+     "name": "Spire Security",
+     "count": 2,
+     "label": "Compromised Protectorate Officer"
+    }
+   ],
+   "pins": [
+    {
+     "journal": "G21",
+     "zone": "chamber-floor",
+     "label": "SC06 III"
+    },
+    {
+     "journal": "H13",
+     "zone": "evidence-port",
+     "label": "H13"
+    },
+    {
+     "journal": "H16",
+     "zone": "chamber-floor",
+     "label": "H16"
+    }
+   ]
+  },
+  {
+   "id": "M15",
+   "code": "SC07",
+   "act": 5,
+   "title": "What Survives the Night",
+   "player": "Epilogue",
+   "journal": "G23",
+   "scene": "SCENE-EPILOGUE",
+   "after": [
+    "M14"
+   ],
+   "brief": "What the city keeps, what it forgets, and what stays yours.",
+   "gm": "Resolve evidence, authority and care separately. End on the last player's chosen detail.",
+   "objectives": [
+    {
+     "id": "M15-1",
+     "text": "Resolve evidence, authority and care separately.",
+     "player": "See what the evidence did."
+    },
+    {
+     "id": "M15-2",
+     "text": "Name consequences for the witnesses, the reserves and civic staff.",
+     "player": "See who carries the cost."
+    },
+    {
+     "id": "M15-3",
+     "text": "Ask every player what remains theirs.",
+     "player": "Say what remains yours."
+    },
+    {
+     "id": "M15-4",
+     "text": "Record the chosen ending.",
+     "player": "The night has an ending.",
+     "auto": {
+      "ending": true
+     }
+    }
+   ],
+   "cast": [],
+   "pins": []
+  }
+ ],
+ "evidence": [
+  {
+   "id": "E01",
+   "claim": "The PCs were held under a 110-year evidence seal.",
+   "player": "The withdrawal record: why you were held",
+   "handouts": [
+    "H01",
+    "H03"
+   ]
+  },
+  {
+   "id": "E02",
+   "claim": "Retrieval orders demand intact stacks and private transfer.",
+   "player": "The recovery order",
+   "handouts": [
+    "H02"
+   ]
+  },
+  {
+   "id": "E03",
+   "claim": "The Foundation inherited Palimpsest's assets and liabilities.",
+   "player": "The paper trail of an old project's money",
+   "handouts": [
+    "H03",
+    "H04",
+    "H05"
+   ]
+  },
+  {
+   "id": "E04",
+   "claim": "Serin arranged the awakening; two reserves are in protected storage.",
+   "player": "Who woke you, and who is still asleep",
+   "handouts": [
+    "H06"
+   ]
+  },
+  {
+   "id": "E05",
+   "claim": "The final raid's chronology and purported group consent were altered.",
+   "player": "The raid record does not match itself",
+   "handouts": [
+    "H07",
+    "H08"
+   ]
+  },
+  {
+   "id": "E06",
+   "claim": "The 2274 archive includes a still-recognised audit credential.",
+   "player": "An audit key that still works",
+   "handouts": [
+    "H09"
+   ]
+  },
+  {
+   "id": "E07",
+   "claim": "Three relevant minds began as AIs, not human DHFs.",
+   "player": "Root genesis register",
+   "handouts": [
+    "H10"
+   ],
+   "pillar": "Origin"
+  },
+  {
+   "id": "E08",
+   "claim": "Those same minds occupy the Benefactors' living organic clones.",
+   "player": "Embodiment attestation",
+   "handouts": [
+    "H11"
+   ],
+   "pillar": "Embodiment"
+  },
+  {
+   "id": "E09",
+   "claim": "Their identities issue binding civic-root instructions.",
+   "player": "Civic authority dispatch",
+   "handouts": [
+    "H12"
+   ],
+   "pillar": "Authority"
+  },
+  {
+   "id": "E10",
+   "claim": "Administrative control can be removed without switching off basic services.",
+   "player": "The three buses",
+   "handouts": [
+    "H13"
+   ]
+  }
+ ],
+ "heat": [
+  "Private search. Most city workers know nothing about the party.",
+  "Private search. Most city workers know nothing about the party.",
+  "Sleeve descriptions reach checkpoints. Officials ask questions rather than opening fire.",
+  "One route becomes watched. Present two alternatives before a choice is made.",
+  "Vey calls with a treatment-and-amnesty offer; known allies receive polite official pressure.",
+  "Asha prepares custody orders. One named contact must relocate or surrender a resource.",
+  "The Spire closes normal public admission. Maintenance entry or supervised custody still reaches the council."
+ ],
+ "heatPlayer": [
+  "Nobody is looking for you yet.",
+  "Nobody is looking for you yet.",
+  "Your new faces are on checkpoint screens.",
+  "One way through the city is being watched.",
+  "The people who know you are getting polite visits.",
+  "Custody orders are being drafted with your names on them.",
+  "The Spire has closed its public doors."
+ ],
+ "renewal": [
+  "The lease is open. Every PC contributes once per round, then Renewal advances.",
+  "One round gone.",
+  "External directors request confirmation; one ruler threatens to leave.",
+  "Security switches from observation to escort.",
+  "The city lease renews unless the control objective for the chosen plan is complete."
+ ],
+ "endings": [
+  "Open Circuit",
+  "Mortal Charter",
+  "Cut the Thread",
+  "Witness Compact",
+  "Throne with New Names",
+  "Carry the Embers"
+ ],
+ "pillars": [
+  "Origin",
+  "Embodiment",
+  "Authority"
+ ]
+}

@@ -1,0 +1,215 @@
+"""Cold Storage 1.10: one source for the Investigation Tracker, scene setup, journal mission panels and the players' Case File.
+Usage: python3 missions.py content-src/missions.json
+GM text (`text`, `gm`, cast notes) never reaches players; the Case File uses only `player` lines.
+"""
+import json, os, sys
+
+def O(i, text, player, auto=None, optional=False):
+    o = {'id': i, 'text': text, 'player': player}
+    if auto: o['auto'] = auto
+    if optional: o['optional'] = True
+    return o
+def NPC(actor, zone, role, note='', hidden=False, standby=False, name=None, record=None, count=1, cover=False):
+    c = {'actor': actor, 'zone': zone, 'role': role, 'note': note}
+    if hidden: c['hidden'] = True
+    if standby: c['standby'] = True
+    if name: c['name'] = name
+    if record: c['record'] = record
+    if count > 1: c['count'] = count
+    if cover: c['cover'] = True
+    return c
+def OFF(name, note): return {'offmap': name, 'note': note, 'role': 'voice'}
+def PIN(journal, zone, label=''): return {'journal': journal, 'zone': zone, 'label': label}
+H = lambda h: {'handout': h}
+
+MISSIONS = [
+ dict(id='M01', code='SC01', act=1, title='The Resurrection Ward', player='Wake Up', journal='G08', scene='SCENE-WARD',
+  brief='Six of you wake in sleeves you never chose, in a year you never lived. Someone broke the law to get you out.',
+  gm='Establish the sleeves, 2384 and the 110-year gap; Serin, H01 and the first pulse. Exit: the recovery team arrives.',
+  objectives=[O('M01-1', 'Each PC establishes their current sleeve, the year 2384 and the 110-year gap.', 'Learn what body you are wearing and what year it is.'),
+              O('M01-2', 'Give H01, the Continuity Withdrawal Receipt.', 'Find the paperwork that explains why you were held.', H('H01')),
+              O('M01-3', 'Serin names the two protected reserves.', 'Find out who else was stored with you.'),
+              O('M01-4', 'Run the first announced continuity pulse (Ward).', 'Face the first dislocation.', {'pulse': 'ward'})],
+  cast=[NPC('C04', 'nurse-station', 'ally', 'Dr Serin Kael. Offers water to organic sleeves, a diagnostic lead to synthetics. Examines no one without permission.')],
+  pins=[PIN('G08', 'nurse-station', 'SC01'), PIN('H01', 'nurse-station', 'H01')]),
+ dict(id='M02', code='SC02', act=1, title='Breach of Cold Storage', player='The Recovery Team', journal='G09', scene='SCENE-BREACH', after=['M01'],
+  brief='A recovery team has come for your stacks — intact, and quietly.',
+  gm='A custody dispute, not a mandatory fight. Jalen leads; Asha only on a secure call. End on terms, escape or a defensible transfer dispute.',
+  objectives=[O('M02-1', 'Obtain the intact-stack retrieval order H02.', 'See the order that came for you.', H('H02')),
+              O('M02-2', 'Resolve the custody dispute: negotiate, comply under witnessed custody, deceive or evade.', 'Decide how you leave the ward — and in whose custody.'),
+              O('M02-3', 'Leave by a traceable exit toward the Rainline (or knowingly surrender to the Spire).', 'Get out into the city.', {'visited': 'SCENE-RAINLINE'})],
+  cast=[NPC('ADV02', 'ward-entrance', 'rival', 'Jalen Cross leads the team with the Retrieval Hitman profile (G27). Opens with an offer to discuss custody.', name='Jalen Cross', record='C10'),
+        NPC('ADV03', 'ward-entrance', 'adversary', 'Recovery personnel: they do not all attack before the party can act.', hidden=True, name='Recovery Personnel', count=2),
+        OFF('Captain Asha Rhyne', 'On a secure call only — no token in this scene.')],
+  pins=[PIN('G09', 'ward-entrance', 'SC02'), PIN('H02', 'ward-entrance', 'H02')]),
+ dict(id='M03', code='SC03', act=1, title='The Rainline', player='The Dead City They Remember', journal='G10', scene='SCENE-RAINLINE', after=['M02'],
+  brief='Three doors into the century you lost: paper, cargo or relays. Somebody on each side of them needs something from you.',
+  gm='Choose one to three leads by schedule. Skipped packets arrive at Anansi House. One leading contact and one relationship contact per visited location.',
+  objectives=[O('M03-1', 'Choose and visit at least one lead (Archive, Blue Lotus, Relay Seventeen).', 'Choose where to start digging.', {'started': ['M04', 'M05', 'M06']}),
+              O('M03-2', 'Verify one historical identity with independent evidence (pulse: contact).', 'Prove one face from the past is who you think it is.', {'any': [{'pulse': 'contact'}, {'relationship': 'confirmed'}]}),
+              O('M03-3', 'Get H03-H05 from their named sources (skipped packets reach Anansi).', 'Collect at least one packet from the street.', {'handouts': ['H03', 'H04', 'H05'], 'min': 1})],
+  cast=[NPC('ADV03', 'billboard-plaza', 'rival', 'Checkpoint officer: addresses a police chassis as a colleague. Social pressure, not a fight.', name='BCPD Checkpoint Officer'),
+        NPC('C14', 'memorial-corner', 'contact', 'Tom Arlen can appear in person for Nia, or call through Serin\'s burner.', standby=True),
+        NPC('C05', 'clinic-intake', 'ally', 'Mira Sol, if a PC contacts her for a temporary review.', standby=True)],
+  pins=[PIN('G10', 'billboard-plaza', 'SC03'), PIN('H14', 'billboard-plaza', 'H14')]),
+ dict(id='M04', code='LEAD A', act=2, title='The Quiet Archive', player='The Paper Record', journal='G11', scene='SCENE-ARCHIVE', after=['M03'], optional=True,
+  brief='A chapel of names on paper, kept by someone who refuses to wake the dead.',
+  gm='Main contact Father Ash. Optional personal contact: Tom for Nia, Deacon Marr for Edda, Iris Tan for Solenne or Sabine. Evidence E01, E03.',
+  objectives=[O('M04-1', 'Receive H03, the Quiet Archive\'s paper record.', 'Get the Archive\'s paper record.', H('H03')),
+              O('M04-2', 'Agree the Archive\'s terms: read-only, no waking anyone who declined.', 'Agree to the Archive\'s terms.'),
+              O('M04-3', 'Resolve a personal contact\'s scene (optional).', 'Speak to someone you used to know.', optional=True)],
+  cast=[NPC('C08', 'reading-table', 'ally', 'Father Ash / Hyeon Park. Holds the sealed paper warrant (E01 fallback).'),
+        NPC('C19', 'nave', 'contact', 'Deacon Marr, for Edda.', standby=True), NPC('C20', 'nave', 'contact', 'Iris Tan, for Solenne or Sabine.', standby=True),
+        NPC('C14', 'public-back-door', 'contact', 'Tom Arlen, for Nia.', standby=True)],
+  pins=[PIN('G11', 'nave', 'LEAD A'), PIN('H03', 'reading-table', 'H03')]),
+ dict(id='M05', code='LEAD B', act=2, title='Blue Lotus, Black Water', player='The Cargo Ledger', journal='G12', scene='SCENE-LOTUS', after=['M03'], optional=True,
+  brief='Empty pools, chlorine and a ledger of deliveries nobody signed for.',
+  gm='Main contact Niko Saint; Hale Mercer for Cass or Anik. Ren Ko only if time and tension justify it; their objective is the physical ledger, not murder.',
+  objectives=[O('M05-1', 'Receive H04, the Blue Lotus delivery ledger.', 'Get the delivery ledger.', H('H04')),
+              O('M05-2', 'Decide the ledger: copy it, buy it or take the original.', 'Decide what to do with the ledger.'),
+              O('M05-3', 'Handle Ren Ko\'s competing offer (optional).', 'Deal with the other buyer.', optional=True)],
+  cast=[NPC('C07', 'deep-pool', 'contact', 'Niko Saint / Dax Marrow at his table on the drained pool floor.'),
+        NPC('ADV02', 'street-entrance', 'rival', 'Ren Ko arrives to buy the same ledger; fights with the ADV02 profile if violence starts (G27).', hidden=True, name='Ren Ko', record='C17'),
+        NPC('ADV03', 'street-entrance', 'adversary', 'Ren Ko\'s assistant.', hidden=True, name="Ren Ko's Assistant"),
+        NPC('C16', 'pool-deck', 'contact', 'Hale Mercer, especially for Cass or Anik.', standby=True)],
+  pins=[PIN('G12', 'pool-deck', 'LEAD B'), PIN('H04', 'cracked-window', 'H04')]),
+ dict(id='M06', code='LEAD C', act=2, title='Relay Seventeen', player='The Cold Relay', journal='G13', scene='SCENE-RELAY', after=['M03'], optional=True,
+  brief='Warm air, humming cabinets and a log that should have been purged a century ago.',
+  gm='Main contact Lena Orr; optional Soren Gray. If skipped, her packet reaches Marlowe and she joins by audio.',
+  objectives=[O('M06-1', 'Receive H05, the Relay Seventeen cold log.', 'Get the relay\'s cold log.', H('H05')),
+              O('M06-2', 'Choose read, mirror or purge at the console.', 'Decide what to do with the relay cache.'),
+              O('M06-3', 'Secure Lena\'s maintenance token (E06 fallback).', 'Earn the engineer\'s maintenance token.', optional=True)],
+  cast=[NPC('C11', 'diagnostic-store', 'ally', 'Lena Orr / Keiko Marr at her open panel.'),
+        NPC('C12', 'cabinet-hall', 'ally', 'Soren Gray, optional support.', standby=True)],
+  pins=[PIN('G13', 'canal-gantry', 'LEAD C'), PIN('H05', 'diagnostic-store', 'H05')]),
+ dict(id='M07', code='SC04', act=2, title='Anansi House', player='The Safehouse', journal='G14', scene='SCENE-SAFEHOUSE', after=['M03'],
+  brief='Rooms kept for you for a hundred and ten years, and a host who never forgot your orders.',
+  gm='Marlowe, Serin and one unresolved personal contact. First free anchor. Confront Serin with H06.',
+  objectives=[O('M07-1', 'Establish Marlowe as an independent service AI.', 'Meet the house\'s host.'),
+              O('M07-2', 'Confront Serin with H06 and confirm the reserves.', 'Make Serin explain herself.', H('H06')),
+              O('M07-3', 'Offer the first free anchor (Anansi).', 'Find something that still feels like yours.', {'anchor': 'anansi'}),
+              O('M07-4', 'All three street packets are in hand (H03-H05).', 'Gather every packet from the street.', {'handouts': ['H03', 'H04', 'H05'], 'min': 3}),
+              O('M07-5', 'Offer consent and read-only access alternatives (H15).', 'Agree how the archive may be read.', H('H15'))],
+  cast=[NPC('C04', 'dining-room', 'ally', 'Serin. If threatened she asks Iris to take custody of her statement.'),
+        OFF('Marlowe', 'The house AI speaks through the desk speaker; no token.'),
+        NPC('C14', 'lobby', 'contact', 'Unresolved personal contact: Tom has rebuilt a life.', standby=True),
+        NPC('C11', 'lobby', 'contact', 'Unresolved personal contact: Lena has abandoned a promise.', standby=True),
+        NPC('C16', 'lobby', 'contact', 'Unresolved personal contact: Hale owes restitution.', standby=True),
+        NPC('C05', 'lobby', 'contact', 'Unresolved personal contact: Mira protects people from the charity Sabine funded.', standby=True),
+        NPC('C19', 'lobby', 'contact', 'Unresolved personal contact: Deacon Marr can tell guilt from responsibility.', standby=True)],
+  pins=[PIN('G14', 'lobby', 'SC04'), PIN('H06', 'dining-room', 'H06'), PIN('H15', 'parlour', 'H15')]),
+ dict(id='M08', code='SC05', act=3, title='Palimpsest Virtuality', player='The Archive Inside', journal='G15', scene='SCENE-VIRTUAL', after=['M07'],
+  brief='The case you died investigating, rebuilt from records — and records are not memories.',
+  gm='35/45/55 minutes total for all nodes. Pulses 3 and 4 only. A Dipper only if the party opens the bidirectional channel.',
+  objectives=[O('M08-1', 'Choose access: external replay, supervised dive or read-only.', 'Choose how to enter the archive.'),
+              O('M08-2', 'Reconstruct the gate chronology (H07).', 'Rebuild the night of the raid.', H('H07')),
+              O('M08-3', 'Expose the forged consent (H08).', 'Find out what you supposedly agreed to.', H('H08')),
+              O('M08-4', 'Recover the audit credential (H09).', 'Recover the key you were carrying.', H('H09')),
+              O('M08-5', 'Every PC acts at least once inside.', 'Everyone has their moment inside.')],
+  cast=[NPC('ADV01', 'fourth-window', 'adversary', 'Recovery Dipper: only after the party knowingly opens the bidirectional diagnostic channel. One Data Engineering or Discipline D0 isolates it.', hidden=True, name='Recovery Dipper')],
+  pins=[PIN('G15', 'exit-anchor', 'SC05')]),
+ dict(id='M09', code='NODE A', act=3, title='The Court of Unreliable Witnesses', player='The Court', journal='G16', scene='SCENE-COURT', after=['M08'],
+  brief='Eight chairs, eight outlines, and an accusation with an author.',
+  gm='The recorded interrogator\'s reflection shows Elias North over Lucan Vey. Pulse: Court node.',
+  objectives=[O('M09-1', 'Find the second timestamp (H07).', 'Find the timestamp that does not match.', H('H07')),
+              O('M09-2', 'Run the Court memory pulse.', 'Sit in the witness chair.', {'pulse': 'court'}),
+              O('M09-3', 'Draft an audit petition or formal objection (optional).', 'Turn the contradiction into a legal tool.', optional=True)],
+  cast=[NPC('C01', 'judges-bench', 'rival', 'Recorded interrogator: Elias North\'s presentation layered over Lucan Vey\'s interface.', hidden=True)],
+  pins=[PIN('G16', 'service-door', 'NODE A'), PIN('H07', 'clerks-desk', 'H07')]),
+ dict(id='M10', code='NODE B', act=3, title='The Operating Theatre', player='The Theatre', journal='G17', scene='SCENE-THEATRE', after=['M08'],
+  brief='A clone breathing in an empty cradle, and two versions of one signature.',
+  gm='Spotlight Edda, Sabine and Anik. No automatic pulse. Serin\'s 2274 self knew the sheet overstated consent.',
+  objectives=[O('M10-1', 'Compare the two consent documents (H08).', 'Compare the two consent forms.', H('H08')),
+              O('M10-2', 'Hear why the exception sheet was reworded.', 'Learn who changed the wording, and why.')],
+  cast=[NPC('C04', 'records-desk', 'ally', 'Memory of Dr Talia Venn (Serin, 2274) at the records desk.', hidden=True, name='Dr Talia Venn (2274)')],
+  pins=[PIN('G17', 'records-desk', 'NODE B'), PIN('H08', 'records-desk', 'H08')]),
+ dict(id='M11', code='NODE C', act=3, title='The Last Broadcast', player='The Last Broadcast', journal='G18', scene='SCENE-BROADCAST', after=['M08'],
+  brief='Rain on the glass, four shares and a door marked for someone who was never meant to be there.',
+  gm='The recording ends as Asha\'s second team breaches. Elias North then messages through the audit channel. Pulse: Broadcast node.',
+  objectives=[O('M11-1', 'Recover the audit route (H09).', 'Recover the audit route.', H('H09')),
+              O('M11-2', 'Run the Last Broadcast memory pulse.', 'Hear the last broadcast to its end.', {'pulse': 'broadcast'}),
+              O('M11-3', 'Answer Elias North\'s invitation.', 'Answer the man who invited you back.')],
+  cast=[NPC('ADV03', 'service-entrance', 'adversary', 'Asha\'s second team in the 2274 recording: they breach as the record ends. Memory, not a live fight.', hidden=True, name="Asha's Second Team (2274)", count=2, cover=True),
+        OFF('Elias North', 'Message through the audit channel; no token.')],
+  pins=[PIN('G18', 'rain-window', 'NODE C'), PIN('H09', 'attestation-door', 'H09')]),
+ dict(id='M12', code='SC06 · I', act=4, title='Entering the Spire', player='The Spire', journal='G19', scene='SCENE-SPIRE', after=['M08'],
+  brief='The city\'s most public building, and the one door in it that is never open.',
+  gm='Turn relationships and evidence into access. Run only the chosen route: public audit, maintenance, witnessed custody or force. Renewal has not started.',
+  objectives=[O('M12-1', 'Choose the entry: public audit, maintenance, witnessed custody or force.', 'Choose how you get in.'),
+              O('M12-2', 'Reach the council.', 'Reach the people at the top.', {'visited': 'SCENE-COUNCIL'})],
+  cast=[NPC('C02', 'public-reception', 'rival', 'Captain Asha Rhyne meets a public-audit party in reception.'),
+        NPC('C01', 'interview-room', 'rival', 'Elias North / Lucan Vey, if the route goes through him.', hidden=True),
+        NPC('ADV04', 'lift-lobby', 'adversary', 'Praetorian lead holds the access point and protects staff; withdraws to the council if untenable.', hidden=True, name='Praetorian Lead', cover=True),
+        NPC('ADV03', 'lift-lobby', 'adversary', 'Spire guards. No automatic second wave.', hidden=True, name='Spire Guard', count=2),
+        NPC('C11', 'maintenance-station', 'ally', 'Lena Orr, for the maintenance route.', standby=True),
+        NPC('C20', 'public-reception', 'ally', 'Iris Tan, sponsoring a public audit.', standby=True)],
+  pins=[PIN('G19', 'public-reception', 'SC06 I')]),
+ dict(id='M13', code='SC06 · II', act=4, title='The Council Beneath the Skin', player='The Council', journal='G20', scene='SCENE-COUNCIL', after=['M12'],
+  brief='Three rulers at a table too small for a throne room, and the question nobody has been allowed to ask.',
+  gm='Establish independent Origin, Embodiment and Authority proofs. Sen volunteers her hand; Holt and Thale agree when all three are tested.',
+  objectives=[O('M13-1', 'Origin: the root genesis register (H10).', 'Prove where they came from.', H('H10')),
+              O('M13-2', 'Embodiment: the organic attestation (H11).', 'Prove what they are wearing.', H('H11')),
+              O('M13-3', 'Authority: the civic dispatch (H12).', 'Prove what they control.', H('H12')),
+              O('M13-4', 'Run the three-voice continuity challenge (core pulse).', 'Hold on to who you are.', {'pulse': 'core'}),
+              O('M13-5', 'Offer the last grounding before the operation.', 'Take one breath before you act.', {'anchor': 'prefinale'}, optional=True)],
+  cast=[NPC('GOD01', 'council-table', 'benefactor', 'Dr Adria Sen. Volunteers her hand, pulse and interface port.'),
+        NPC('GOD02', 'council-table', 'benefactor', 'Magistrate Severin Holt. Orders witnessed custody and records any attack.'),
+        NPC('GOD03', 'council-table', 'benefactor', 'Director Oren Thale. Keeps his credentials and an eye on the exit.'),
+        NPC('C01', 'clinical-console', 'rival', 'Elias North at the clinical console; Lucan Vey\'s two-finger wrist tap.')],
+  pins=[PIN('G20', 'antechamber', 'SC06 II'), PIN('H10', 'genesis-register', 'H10'), PIN('H11', 'clinical-console', 'H11'), PIN('H12', 'council-table', 'H12')]),
+ dict(id='M14', code='SC06 · III', act=4, title='The Final Operation', player='The Final Operation', journal='G21', scene='SCENE-CORE', after=['M13'],
+  brief='Four rounds before the city signs itself over again.',
+  gm='Start Renewal 0/4 here. Each round every PC contributes once, then Renewal advances. Proof, Control and People each need two contributions; the chosen plan decides which matter.',
+  objectives=[O('M14-1', 'Give H13: the three buses and the evidence port.', 'Understand the machine you are standing in.', H('H13')),
+              O('M14-2', 'Give H16: what can be chosen tonight.', 'Know what can be chosen tonight.', H('H16')),
+              O('M14-3', 'Start Renewal.', 'The clock starts.', {'counter': 'renewal', 'min': 1}),
+              O('M14-4', 'Proof track 2/2.', 'Get the evidence out.', {'counter': 'proof', 'min': 2}, optional=True),
+              O('M14-5', 'Control track 2/2.', 'Take the controls.', {'counter': 'control', 'min': 2}, optional=True),
+              O('M14-6', 'People track 2/2.', 'Keep the people safe.', {'counter': 'people', 'min': 2}, optional=True),
+              O('M14-7', 'Carry out the chosen operation.', 'Do what you came to do.')],
+  cast=[NPC('GOD01', 'chamber-floor', 'benefactor', 'Sen seeks cover and protects clinical residents.', cover=True),
+        NPC('GOD02', 'civic-lease', 'benefactor', 'Holt orders witnessed custody and records the attack.'),
+        NPC('GOD03', 'secure-exit', 'benefactor', 'Thale heads for the secure exit with his credentials; at Renewal 2 he offers a logistics bargain.'),
+        NPC('C01', 'palimpsest-engine', 'rival', 'Vey bargains for his usefulness.'),
+        NPC('C02', 'chamber-floor', 'rival', 'Asha: at Renewal 3 she separates armed participants from clinical staff; can be persuaded to witness.'),
+        NPC('ADV03', 'secure-exit', 'adversary', 'Spire security; escorts from Renewal 3.', hidden=True, name='Spire Security', count=2)],
+  pins=[PIN('G21', 'chamber-floor', 'SC06 III'), PIN('H13', 'evidence-port', 'H13'), PIN('H16', 'chamber-floor', 'H16')]),
+ dict(id='M15', code='SC07', act=5, title='What Survives the Night', player='Epilogue', journal='G23', scene='SCENE-EPILOGUE', after=['M14'],
+  brief='What the city keeps, what it forgets, and what stays yours.',
+  gm='Resolve evidence, authority and care separately. End on the last player\'s chosen detail.',
+  objectives=[O('M15-1', 'Resolve evidence, authority and care separately.', 'See what the evidence did.'),
+              O('M15-2', 'Name consequences for the witnesses, the reserves and civic staff.', 'See who carries the cost.'),
+              O('M15-3', 'Ask every player what remains theirs.', 'Say what remains yours.'),
+              O('M15-4', 'Record the chosen ending.', 'The night has an ending.', {'ending': True})],
+  cast=[], pins=[])
+]
+EVIDENCE = [
+ dict(id='E01', claim='The PCs were held under a 110-year evidence seal.', player='The withdrawal record: why you were held', handouts=['H01', 'H03']),
+ dict(id='E02', claim='Retrieval orders demand intact stacks and private transfer.', player='The recovery order', handouts=['H02']),
+ dict(id='E03', claim="The Foundation inherited Palimpsest's assets and liabilities.", player="The paper trail of an old project's money", handouts=['H03', 'H04', 'H05']),
+ dict(id='E04', claim='Serin arranged the awakening; two reserves are in protected storage.', player='Who woke you, and who is still asleep', handouts=['H06']),
+ dict(id='E05', claim="The final raid's chronology and purported group consent were altered.", player='The raid record does not match itself', handouts=['H07', 'H08']),
+ dict(id='E06', claim='The 2274 archive includes a still-recognised audit credential.', player='An audit key that still works', handouts=['H09']),
+ dict(id='E07', claim='Three relevant minds began as AIs, not human DHFs.', player='Root genesis register', handouts=['H10'], pillar='Origin'),
+ dict(id='E08', claim="Those same minds occupy the Benefactors' living organic clones.", player='Embodiment attestation', handouts=['H11'], pillar='Embodiment'),
+ dict(id='E09', claim='Their identities issue binding civic-root instructions.', player='Civic authority dispatch', handouts=['H12'], pillar='Authority'),
+ dict(id='E10', claim='Administrative control can be removed without switching off basic services.', player='The three buses', handouts=['H13'])]
+HEAT = ['Private search. Most city workers know nothing about the party.', 'Private search. Most city workers know nothing about the party.',
+        'Sleeve descriptions reach checkpoints. Officials ask questions rather than opening fire.', 'One route becomes watched. Present two alternatives before a choice is made.',
+        'Vey calls with a treatment-and-amnesty offer; known allies receive polite official pressure.', 'Asha prepares custody orders. One named contact must relocate or surrender a resource.',
+        'The Spire closes normal public admission. Maintenance entry or supervised custody still reaches the council.']
+HEAT_PLAYER = ['Nobody is looking for you yet.', 'Nobody is looking for you yet.', 'Your new faces are on checkpoint screens.', 'One way through the city is being watched.',
+               'The people who know you are getting polite visits.', 'Custody orders are being drafted with your names on them.', 'The Spire has closed its public doors.']
+RENEWAL = ['The lease is open. Every PC contributes once per round, then Renewal advances.', 'One round gone.', 'External directors request confirmation; one ruler threatens to leave.',
+           'Security switches from observation to escort.', 'The city lease renews unless the control objective for the chosen plan is complete.']
+ENDINGS = ['Open Circuit', 'Mortal Charter', 'Cut the Thread', 'Witness Compact', 'Throne with New Names', 'Carry the Embers']
+base = os.path.dirname(os.path.abspath(sys.argv[1]))
+NAMES = {c['id']: c['currentIdentity'] for c in json.load(open(os.path.join(base, 'contacts.json')))}
+NAMES.update({a['id']: a['name'] for a in json.load(open(os.path.join(base, 'adversaries.json')))})
+NAMES.update({b['id']: b['name'] for b in json.load(open(os.path.join(base, 'benefactors.json')))})
+for m in MISSIONS:
+    for c in m['cast']:
+        if 'actor' in c: c['label'] = NAMES[c['actor']]
+json.dump({'version': '1.10.0', 'missions': MISSIONS, 'evidence': EVIDENCE, 'heat': HEAT, 'heatPlayer': HEAT_PLAYER, 'renewal': RENEWAL, 'endings': ENDINGS,
+           'pillars': ['Origin', 'Embodiment', 'Authority']}, open(sys.argv[1], 'w'), indent=1, ensure_ascii=False)
+print(len(MISSIONS), 'missions')

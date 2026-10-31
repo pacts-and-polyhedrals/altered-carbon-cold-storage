@@ -1,5 +1,14 @@
 # Cold Storage — release history
 
+## 1.10.0 — Walls, scene setup and the Investigation Tracker
+
+- **Walls, doors and windows on all 14 maps**, generated from the same geometry as the art so they sit on the printed lines: a door in every printed doorway and labelled exit (the Ward's reserve-bay partition, the Spire's grate and admin gate are locked), glass as windows (the Ward's canal windows, the Breach viewing panel, Blue Lotus's cracked window, the Theatre observation glass with a gallery door, the Broadcast rain window), the Breach partition as a wall, and no walls between the open-air street zones of the Rainline, the Relay gantry and the Spire's canal quay. **Install / Update Zoned Maps** adds them to existing scenes; your own walls are never replaced.
+- **Set Up Scene:** each scene's NPCs, rivals and threats are placed in their zones from one data source — hidden where they arrive later, linked where unique, unlinked numbered copies for personnel — with pins for the chapter and its evidence handouts. Standby personal contacts are dropped from the tracker. Full Import sets up every scene; **Setup → Set Up All Scenes** for existing worlds.
+- **Investigation Tracker:** 15 missions in five acts with GM objectives (auto-ticking from handouts, continuity pulses and anchors, clocks and scene activation), cast and scene buttons, Heat/Renewal/Proof/Control/People clocks, the E01–E10 docket with proof pillars, ending and log. Live panels at the top of every scene chapter (docket in G06, clocks in G07) drive the same state.
+- **Players' Case File** journal, kept up to date automatically with player-safe text only, and optional Case Update chat cards.
+- Book Console and Setup get Investigation Tracker buttons; Full Reinstall also resets the tracker.
+- With Altered Carbon RPG **2.7.6**, the Bay City street entrances to Cold Storage buildings trigger on their ENTER labels, and every Cold Storage map can be re-entered (Breach → Ward, Council ↔ Final Operation, Anansi → Virtuality).
+
 ## 1.9.0 — Foundry v14 scene fix, scene folder, Full Reinstall
 
 - **Fixed: maps were black in Foundry v14.** v14 stores a scene's image on its Levels; 1.6–1.8 wrote the deprecated top-level Scene background, leaving the initial Level empty. Scenes are now created with an embedded Level carrying the map (and the landing/epilogue backdrops), and **Install / Update Zoned Maps** repairs existing black scenes by setting the image on their initial Level — tokens, walls, notes and zones are kept.

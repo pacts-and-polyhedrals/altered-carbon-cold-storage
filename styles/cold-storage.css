@@ -167,3 +167,81 @@
 @media(prefers-reduced-motion:reduce){.ac-gm-custom.cs-check-incoming{animation:none;outline:2px solid #ffc467}}
 .cold-storage .cs-setup .cs-command-row button.cs-critical-button{color:#fff;border-color:rgba(255,113,128,.7);background:linear-gradient(180deg,rgba(110,24,36,.92),rgba(52,10,16,.96))}
 .cold-storage .cs-setup .cs-command-row button.cs-critical-button:hover:not(:disabled){border-color:#ff7180;box-shadow:0 0 22px rgba(255,113,128,.25)}
+
+/* ---------------------------------------------------------------- 1.10.0 Investigation Tracker, mission panels, Case File */
+.cold-storage .cs-tracker-hero{align-items:flex-start}
+.cold-storage .cs-tracker-now{margin:.3rem 0 .5rem;color:var(--ac-text-muted,#b9ae95)}
+.cold-storage .cs-tracker-progress{position:relative;height:14px;max-width:420px;border:1px solid rgba(120,236,243,.4);border-radius:999px;background:rgba(0,0,0,.35);overflow:hidden}
+.cold-storage .cs-tracker-progress span{position:absolute;inset:0 auto 0 0;background:linear-gradient(90deg,#32c7d6,#78ecf3)}
+.cold-storage .cs-tracker-progress b{position:relative;display:block;text-align:center;font-size:10px;line-height:12px;color:#05080a;mix-blend-mode:screen}
+.cold-storage .cs-tracker-top{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:12px}
+@media (max-width:900px){.cold-storage .cs-tracker-top{grid-template-columns:1fr}}
+.cold-storage .cs-act-title{margin:18px 0 8px;font-family:var(--ac-font-display,inherit);letter-spacing:.14em;text-transform:uppercase;color:#78ecf3;border-bottom:1px solid rgba(120,236,243,.25);padding-bottom:4px}
+.cold-storage .cs-mission-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(440px,1fr));gap:12px}
+.cold-storage .cs-mission{border:1px solid rgba(236,228,207,.18);border-left:4px solid #b9ae95;border-radius:6px;background:linear-gradient(180deg,rgba(18,26,31,.92),rgba(8,11,13,.92));padding:10px 12px;color:#ece4cf}
+.cold-storage .cs-mission.cs-status-active{border-left-color:#78ecf3;box-shadow:0 0 0 1px rgba(120,236,243,.15),0 0 18px rgba(120,236,243,.08)}
+.cold-storage .cs-mission.cs-status-complete{border-left-color:#5ef0c4;opacity:.86}
+.cold-storage .cs-mission.cs-status-upcoming{opacity:.72}
+.cold-storage .cs-mission header{display:flex;align-items:baseline;gap:8px}
+.cold-storage .cs-mission header h3{margin:0;flex:1;font-size:1.05rem;border:0}
+.cold-storage .cs-mission-code{font:700 11px/1 'Courier New',monospace;letter-spacing:.12em;color:#ffc467}
+.cold-storage .cs-mission-status{font:700 10px/1 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;padding:3px 7px;border-radius:999px;border:1px solid currentColor;color:#b9ae95}
+.cold-storage .cs-status-active .cs-mission-status{color:#78ecf3}.cold-storage .cs-status-complete .cs-mission-status{color:#5ef0c4}.cold-storage .cs-status-available .cs-mission-status{color:#ffc467}
+.cold-storage .cs-mission-bar{height:4px;margin:7px 0;background:rgba(255,255,255,.08);border-radius:2px;overflow:hidden}
+.cold-storage .cs-mission-bar span{display:block;height:100%;background:#78ecf3}
+.cold-storage .cs-status-complete .cs-mission-bar span{background:#5ef0c4}
+.cold-storage .cs-mission-gm{margin:4px 0 6px;font-size:.86rem;color:#b9ae95}
+.cold-storage .cs-mission h4{margin:8px 0 4px;font:700 11px/1.2 'Courier New',monospace;letter-spacing:.14em;text-transform:uppercase;color:#ffc467;border:0}
+.cold-storage .cs-obj-list,.cold-storage .cs-cast-list,.cold-storage .cs-evidence ul,.cold-storage .cs-log{list-style:none;margin:0;padding:0}
+.cold-storage .cs-obj{display:flex;align-items:flex-start;gap:6px;padding:3px 0;font-size:.9rem}
+.cold-storage .cs-obj.is-done .cs-obj-text{color:#8fa3a0;text-decoration:line-through;text-decoration-color:rgba(94,240,196,.6)}
+.cold-storage .cs-obj.is-optional .cs-obj-text{font-style:italic}
+.cold-storage .cs-obj-box{flex:none;width:24px;height:24px;min-height:0;padding:0;line-height:22px;border:0;background:none;color:#78ecf3;font-size:16px;cursor:pointer}
+.cold-storage .cs-obj.is-done .cs-obj-box,.cold-storage .cs-ev.is-acquired .cs-obj-box{color:#5ef0c4}
+.cold-storage .cs-obj-box:focus-visible{outline:2px solid #ffc467;outline-offset:1px}
+.cold-storage .cs-obj-auto,.cold-storage .cs-obj-opt,.cold-storage .cs-cast-flag{flex:none;font:700 9px/1 'Courier New',monospace;letter-spacing:.1em;text-transform:uppercase;padding:3px 5px;border-radius:3px;background:rgba(255,196,103,.12);color:#ffc467;margin-top:3px}
+.cold-storage .cs-obj-opt{background:rgba(185,174,149,.12);color:#b9ae95}
+.cold-storage .cs-cast{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;padding:4px 0;border-top:1px dashed rgba(236,228,207,.1);font-size:.86rem}
+.cold-storage .cs-cast-role{font:700 9px/1 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;padding:3px 5px;border-radius:3px;background:rgba(120,236,243,.12);color:#78ecf3}
+.cold-storage .cs-role-rival .cs-cast-role,.cold-storage .cs-role-adversary .cs-cast-role{background:rgba(255,90,110,.14);color:#ff5a6e}
+.cold-storage .cs-role-benefactor .cs-cast-role{background:rgba(233,204,140,.14);color:#e9cc8c}
+.cold-storage .cs-role-voice .cs-cast-role{background:rgba(185,162,255,.14);color:#b9a2ff}
+.cold-storage .cs-cast-name{font-weight:700;color:#ece4cf;cursor:pointer;text-decoration:underline dotted rgba(236,228,207,.4)}
+.cold-storage .cs-cast-zone{color:#8fa3a0;font-size:.8rem}
+.cold-storage .cs-cast-note{flex-basis:100%;color:#8fa3a0;font-size:.8rem}
+.cold-storage .cs-mini{min-height:0;width:auto;padding:2px 8px;font-size:.78rem;line-height:1.4}
+.cold-storage .cs-mission-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.cold-storage .cs-mission-actions button{flex:0 1 auto;width:auto;min-height:0;padding:4px 10px;font-size:.8rem}
+.cold-storage .cs-clocks{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.cold-storage .cs-clock-head{display:flex;align-items:center;gap:6px}
+.cold-storage .cs-clock-head strong{flex:1;letter-spacing:.08em;text-transform:uppercase;font-size:.8rem}
+.cold-storage .cs-clock-pips{display:flex;gap:4px;margin:5px 0}
+.cold-storage .cs-clock-pips span{flex:1;height:8px;border:1px solid rgba(236,228,207,.3);transform:skewX(-18deg)}
+.cold-storage .cs-clock-pips span.on{background:#ffc467;border-color:#ffc467}
+.cold-storage .cs-clock-heat .cs-clock-pips span.on{background:#ff5a6e;border-color:#ff5a6e}
+.cold-storage .cs-clock-renewal .cs-clock-pips span.on{background:#b9a2ff;border-color:#b9a2ff}
+.cold-storage .cs-clock p{margin:0;font-size:.8rem;color:#8fa3a0}
+.cold-storage .cs-pillars{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-bottom:6px}
+.cold-storage .cs-pillar{font:700 10px/1 'Courier New',monospace;letter-spacing:.12em;text-transform:uppercase;padding:5px 8px;border:1px solid rgba(236,228,207,.3);border-radius:3px;color:#8fa3a0}
+.cold-storage .cs-pillar.on{background:rgba(94,240,196,.14);border-color:#5ef0c4;color:#5ef0c4}
+.cold-storage .cs-pillars small{color:#8fa3a0}
+.cold-storage .cs-ev{display:grid;grid-template-columns:auto auto 1fr;gap:2px 8px;align-items:start;padding:3px 0;font-size:.86rem;border-top:1px dashed rgba(236,228,207,.08)}
+.cold-storage .cs-ev b{font-family:'Courier New',monospace;color:#ffc467}
+.cold-storage .cs-ev em{grid-column:3;font-size:.75rem;color:#8fa3a0}
+.cold-storage .cs-ev.is-acquired span{color:#ece4cf}.cold-storage .cs-ev:not(.is-acquired) span{color:#8fa3a0}
+.cold-storage .cs-ending{display:flex;align-items:center;gap:10px;max-width:420px}
+.cold-storage .cs-log li{font-size:.82rem;color:#b9ae95;padding:2px 0}.cold-storage .cs-log time{font-family:'Courier New',monospace;color:#78ecf3;margin-right:6px}
+.cold-storage .cs-live-panel{margin:0 0 14px}
+.cold-storage .cs-live-panel .cs-mission{border-left-width:5px}
+.cold-storage .cs-case-file h2{border-bottom:1px solid rgba(120,236,243,.25)}
+.cold-storage .cs-case-stamp{font:700 .7em/1 'Courier New',monospace;letter-spacing:.2em;color:#5ef0c4;border:2px solid #5ef0c4;padding:2px 6px;transform:rotate(-4deg);display:inline-block;margin-left:8px}
+.cold-storage .cs-case-mission.is-closed{opacity:.85}
+.cold-storage .cs-case-ref{font-family:'Courier New',monospace;color:#ffc467;font-size:.8em}
+.cold-storage.cs-chat-card .cs-chat-kicker,.cs-chat-card .cs-chat-kicker{margin:0;font:700 10px/1.2 'Courier New',monospace;letter-spacing:.16em;color:#78ecf3}
+.cs-chat-card h3{margin:2px 0 4px;border:0}.cs-chat-card .cs-chat-foot{margin:4px 0 0;font-size:.8em;opacity:.7}
+@media (prefers-reduced-motion:reduce){.cold-storage .cs-mission{transition:none}}
+.cold-storage .cs-obj-box{display:inline-grid;place-items:center;border:0!important;background:none!important;box-shadow:none!important}
+.cold-storage .cs-tick{display:inline-block;position:relative;width:15px;height:15px;border:2px solid #78ecf3;border-radius:3px;background:rgba(0,0,0,.35);vertical-align:-2px}
+.cold-storage .cs-obj.is-done .cs-tick,.cold-storage .cs-ev.is-acquired .cs-tick{border-color:#5ef0c4;background:rgba(94,240,196,.18)}
+.cold-storage .cs-obj.is-done .cs-tick::after,.cold-storage .cs-ev.is-acquired .cs-tick::after{content:'';position:absolute;left:3px;top:-1px;width:5px;height:9px;border:solid #5ef0c4;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.cold-storage .cs-obj.is-done .cs-obj-text{text-decoration:none;color:#8fa3a0}

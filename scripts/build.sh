@@ -8,7 +8,7 @@ mkdir -p "$DIST"
 # Flat Foundry module archive: excludes editable source/tests and standalone books.
 (
  cd "$ROOT"
- zip -qr "$DIST/cold-storage-v${VERSION}.zip" module.json cold-storage.mjs book.mjs continuity.mjs continuity-rules.mjs system-bridge.mjs emblems.mjs checks.mjs journal-theme.mjs scenes.mjs content-src styles templates lang assets README.md START-HERE.md CHANGELOG.md docs publishing
+ zip -qr "$DIST/cold-storage-v${VERSION}.zip" module.json cold-storage.mjs book.mjs continuity.mjs continuity-rules.mjs system-bridge.mjs emblems.mjs checks.mjs journal-theme.mjs scenes.mjs missions.mjs content-src styles templates lang assets README.md START-HERE.md CHANGELOG.md docs publishing
 )
 python3 - "$DIST/cold-storage-v${VERSION}.zip" <<'PY'
 import sys,zipfile,json

@@ -4,6 +4,7 @@ import {registerEmblems,readyEmblems,applyEmblemsToWorld,loadEmblemIndex} from '
 import {registerChecks,openCheckInGMControl} from './checks.mjs';
 import {registerJournalTheme} from './journal-theme.mjs';
 import {registerScenes,installMaps} from './scenes.mjs';
+import {registerMissions,readyMissions,missionsAPI,setupAllScenes,openTracker,writeCaseFile,DEFAULT_MISSION_STATE} from './missions.mjs';
 import {SYS,REQUIRED_SYSTEM,assertSystem,versionAtLeast,systemVersion,commonality,traitRuleElements,creatorBuild,gmContent,sleeveLimits} from './system-bridge.mjs';
 const MOD='cold-storage';
 const CURRENT_YEAR=2384;
@@ -33,7 +34,7 @@ async function createPregenActors({pregens,past,coreSkills,archetypeSkills,arche
      const look=art[p.id];
      actor=await Actor.create({name:p.name,type:'character',folder:root.id,...(look?{img:look.portrait}:{}),prototypeToken:{name:p.name,actorLink:true,disposition:1,...(look?{texture:{src:look.token}}:{})},
        system:{identity:{trueName:p.name,publicName:p.name,dhfAge:currentAge,storageYears:p.storageYears,archetype:p.archetype,variant:variantFor(p),currentObjective:`Recover the ${p.fragment}.`},attributes:{strength:p.currentSleeve.strength,perception:p.currentSleeve.perception,...p.stackAttributes},resources:{health:{value:p.currentSleeve.healthMax,max:p.currentSleeve.healthMax},ego:{value:ep,max:ep},wounds:{value:0,max:threshold},stackPoints:{value:starting.stackPoints,max:starting.stackPoints},influence:{value:ip,max:ip}},wealth,...(isMeth?{backup:{enabled:true,priceLevel:4,routine:false,notes:'Core Meth starting lower-tier backup; update the backup state during play.'}}:{}),stackState:'intact',sleeveState:'healthy'},
-       ownership:{default:0},flags:{[MOD]:{sourceId:p.id,fragment:p.fragment,role:p.role,ageAtStorage,startingResources:starting,currentOrdinal:p.currentSleeveOrdinal,nonCloneCurrent:true,archetypeResourceApplied:true,rulesV1Migrated:true,methVariantApplied:isMeth},[SYS]:{creation:{schema:1,mode:'pregen',archetype:p.archetype,variant:variantFor(p),source:'Cold Storage pregenerated character built with Core Rulebook 2020, Chapter 2 starting rules',creatorVersion:'cold-storage-1.9.0'}}}});
+       ownership:{default:0},flags:{[MOD]:{sourceId:p.id,fragment:p.fragment,role:p.role,ageAtStorage,startingResources:starting,currentOrdinal:p.currentSleeveOrdinal,nonCloneCurrent:true,archetypeResourceApplied:true,rulesV1Migrated:true,methVariantApplied:isMeth},[SYS]:{creation:{schema:1,mode:'pregen',archetype:p.archetype,variant:variantFor(p),source:'Cold Storage pregenerated character built with Core Rulebook 2020, Chapter 2 starting rules',creatorVersion:'cold-storage-1.10.0'}}}});
    } else {
      const updates={'system.identity.dhfAge':currentAge,'system.identity.storageYears':p.storageYears,'system.identity.archetype':p.archetype,'system.identity.variant':variantFor(p),'system.attributes.empathy':p.stackAttributes.empathy,'system.attributes.willpower':p.stackAttributes.willpower,'system.attributes.acuity':p.stackAttributes.acuity,'system.attributes.intelligence':p.stackAttributes.intelligence,'system.resources.health.max':p.currentSleeve.healthMax,'system.resources.wounds.max':threshold,'system.resources.stackPoints.max':starting.stackPoints};
      if(!actor.getFlag(MOD,'rulesV1Migrated')){updates['system.resources.health.value']=p.currentSleeve.healthMax;updates['system.resources.wounds.value']=0;updates['system.resources.stackPoints.value']=starting.stackPoints;updates[`flags.${MOD}.rulesV1Migrated`]=true;}
@@ -217,7 +218,7 @@ export async function fullReinstall({keepRecovery=true}={}){
   const contents=(live.contents?.length??0)+(live.children?.length??0);
   if(!contents)await live.delete?.();
  }
- for(const [key,value] of [['installed',false],['activePregens',[]],['bookState',foundry.utils.deepClone(DEFAULT_STATE)],['continuityState',{pcs:{}}],['bookVersion','']])await game.settings.set(MOD,key,value);
+ for(const [key,value] of [['installed',false],['activePregens',[]],['bookState',foundry.utils.deepClone(DEFAULT_STATE)],['continuityState',{pcs:{}}],['bookVersion',''],['missionState',foundry.utils.deepClone(DEFAULT_MISSION_STATE)]])await game.settings.set(MOD,key,value);
  await importColdStorage();
  return {removed:{scenes:plan.scenes.length,actors:plan.actors.length,journals:plan.journals.length}};
 }
@@ -246,13 +247,16 @@ export async function importColdStorage(){
  await createBenefactors();
  await createScenes();
  await bindBookScenes();
+ // Every scene gets its cast (hidden where the book says so) and journal pins; standby contacts wait in the tracker.
+ let staged=null;try{staged=await setupAllScenes();}catch(error){console.warn('Cold Storage | scene setup skipped',error);}
  await game.settings.set(MOD,'installed',true);
  await initializeContinuity({freshWorld:true});
- ui.notifications.info(`Cold Storage imported: ${pregens.length} pregens built with the Altered Carbon 2.4 creator rules, ${past.length} archived sleeves, ${contacts.length} contacts, ${adversaries.length} ready-to-roll adversaries, ${rels.length} relationship links and ${journals.length} core journals.`);
+ try{await writeCaseFile();}catch(error){console.warn('Cold Storage | case file',error);}
+ ui.notifications.info(`Cold Storage imported: ${pregens.length} pregens built with the Altered Carbon 2.4 creator rules, ${past.length} archived sleeves, ${contacts.length} contacts, ${adversaries.length} ready-to-roll adversaries, ${rels.length} relationship links and ${journals.length} core journals${staged?`; ${staged.scenes} scenes set up with ${staged.tokens} tokens and ${staged.notes} journal pins`:''}.`);
 }
 
 class ColdStorageSetup extends foundry.applications.api.HandlebarsApplicationMixin(foundry.applications.api.ApplicationV2){
- static DEFAULT_OPTIONS={id:'cold-storage-setup',classes:['altered-carbon','cold-storage','cs-app'],window:{title:'Cold Storage — Setup',icon:'fa-solid fa-database'},position:{width:720,height:700},actions:{fullReinstall:this._fullReinstall,installMaps:this._installMaps,applyEmblems:this._applyEmblems,bookOnly:this._bookOnly,openBook:this._openBook,openContinuity:this._openContinuity,import:this._import,applySelection:this._applySelection,assign:this._assign}};
+ static DEFAULT_OPTIONS={id:'cold-storage-setup',classes:['altered-carbon','cold-storage','cs-app'],window:{title:'Cold Storage — Setup',icon:'fa-solid fa-database'},position:{width:720,height:700},actions:{setupScenes:this._setupScenes,openTracker:this._openTracker,fullReinstall:this._fullReinstall,installMaps:this._installMaps,applyEmblems:this._applyEmblems,bookOnly:this._bookOnly,openBook:this._openBook,openContinuity:this._openContinuity,import:this._import,applySelection:this._applySelection,assign:this._assign}};
  static PARTS={main:{template:'modules/cold-storage/templates/setup.hbs'}};
  async _prepareContext(options){const context=await super._prepareContext(options);const active=new Set(game.settings.get(MOD,'activePregens')||[]);const pregens=game.actors.filter(a=>String(sourceId(a)||'').startsWith('PC')).sort((a,b)=>sourceId(a).localeCompare(sourceId(b))).map(a=>({id:sourceId(a),name:a.name,checked:active.has(sourceId(a)),userId:Object.entries(a.ownership||{}).find(([id,lvl])=>id!=='default'&&lvl===3)?.[0]||''}));return {...context,pregens,users:game.users.filter(u=>!u.isGM).map(u=>({id:u.id,name:u.name})),systemVersion:systemVersion(),requiredSystem:REQUIRED_SYSTEM,systemReady:game.system?.id===SYS&&versionAtLeast(systemVersion())};}
  static async _import(){const ok=await foundry.applications.api.DialogV2.confirm({window:{title:'Full import: fresh worlds only'},content:'<p>This imports the original actors, items, scenes and relationships and may reset existing source-controlled actor fields. For a played world use Book Only instead. Back up your world first.</p>',rejectClose:false});if(!ok)return;try{await importColdStorage();await this.render({force:true});}catch(e){console.error(e);ui.notifications.error(e.message);}}
@@ -264,8 +268,10 @@ class ColdStorageSetup extends foundry.applications.api.HandlebarsApplicationMix
   try{const r=await fullReinstall({keepRecovery:Boolean(get('keepRecovery'))});ui.notifications.info(`Cold Storage reinstalled: removed ${r.removed.actors} actors, ${r.removed.journals} journals, ${r.removed.scenes} scenes, then rebuilt everything.`);await this.render({force:true});}
   catch(e){console.error(e);ui.notifications.error(e.message);}
  }
- static async _installMaps(){const ok=await foundry.applications.api.DialogV2.confirm({window:{title:'Install zoned maps'},content:'<p>Create any missing Cold Storage scenes and upgrade scenes that still use the module\'s own art to the zoned maps. Tokens, walls, notes and journal links are kept. Scenes where you replaced the art are left alone (they only receive a zone graph if they have none).</p>',rejectClose:false});if(!ok)return;try{const r=await installMaps();await bindBookScenes();ui.notifications.info(`Zoned maps: ${r.created} created, ${r.upgraded} upgraded, ${r.skipped} left as customised.`);}catch(e){console.error(e);ui.notifications.error(e.message);}}
+ static async _installMaps(){const ok=await foundry.applications.api.DialogV2.confirm({window:{title:'Install zoned maps'},content:'<p>Create any missing Cold Storage scenes and upgrade scenes that still use the module\'s own art to the zoned maps, with walls, doors and windows. Tokens, notes and journal links are kept; walls you drew yourself are never replaced. Scenes where you replaced the art are left alone (they only receive a zone graph if they have none).</p>',rejectClose:false});if(!ok)return;try{const r=await installMaps();await bindBookScenes();ui.notifications.info(`Zoned maps: ${r.created} created, ${r.upgraded} upgraded, ${r.skipped} left as customised. Walls: ${r.walls.created+r.walls.updated} scenes walled${r.walls.custom?`, ${r.walls.custom} kept your own walls`:''}.`);}catch(e){console.error(e);ui.notifications.error(e.message);}}
  static async _applyEmblems(){const ok=await foundry.applications.api.DialogV2.confirm({window:{title:'Apply noir emblems'},content:'<p>Give every Altered Carbon Item, Network and opponent in this world that still uses a generic Foundry icon its Cold Storage noir emblem, and give the eight pregens their own portraits and tokens (including tokens already on scenes). Custom art is never replaced.</p>',rejectClose:false});if(!ok)return;try{const r=await applyEmblemsToWorld();ui.notifications.info(`Noir emblems applied: ${r.items} Items, ${r.actors} opponents.`);}catch(e){console.error(e);ui.notifications.error(e.message);}}
+ static async _setupScenes(){const ok=await foundry.applications.api.DialogV2.confirm({window:{title:'Set up every scene'},content:'<p>Place each scene\'s NPCs, rivals and threats in their zones (threats and surprises hidden) and pin its chapter and evidence journals. Anything a previous setup placed is kept; nothing you placed yourself is touched.</p>',rejectClose:false});if(!ok)return;try{const r=await setupAllScenes();ui.notifications.info(`${r.scenes} scenes set up: ${r.tokens} tokens, ${r.notes} journal pins.${r.missing.length?` Missing actors: ${r.missing.join(', ')} — run Full Import or Full Reinstall.`:''}`);}catch(e){console.error(e);ui.notifications.error(e.message);}}
+ static async _openTracker(){openTracker();}
  static async _bookOnly(){try{await importAdventureBook();await this.render({force:true});}catch(e){console.error(e);ui.notifications.error(e.message);}}
  static async _openBook(){bookAPI().openBook();}
  static async _openContinuity(){continuityAPI().openContinuity();}
@@ -288,9 +294,10 @@ Hooks.once('init',()=>{
  registerJournalTheme();
  registerScenes();
  registerContinuity();
+ registerMissions();
  game.settings.register(MOD,'installed',{scope:'world',config:false,type:Boolean,default:false});
  game.settings.register(MOD,'activePregens',{scope:'world',config:false,type:Array,default:[]});
  game.settings.registerMenu(MOD,'setup',{name:'Cold Storage Setup',label:'Open Setup',hint:'Import/update source-controlled Cold Storage content.',icon:'fa-solid fa-database',type:ColdStorageSetup,restricted:true});
  game.settings.registerMenu(MOD,'dashboard',{name:'Cold Storage GM Dashboard',label:'Open Dashboard',hint:'Manage historical relationship reveals and the player relationship board.',icon:'fa-solid fa-diagram-project',type:ColdStorageDashboard,restricted:true});
 });
-Hooks.once('ready',async()=>{await readyEmblems();if(game.user?.isGM&&game.system?.id===SYS&&!versionAtLeast(systemVersion()))ui.notifications.warn(`Cold Storage 1.9 is built for Altered Carbon RPG ${REQUIRED_SYSTEM}+ (installed ${systemVersion()}). Update the system before importing.`,{permanent:true});game.coldStorage={...bookAPI(),...continuityAPI(),import:importColdStorage,fullReinstall,applyEmblems:applyEmblemsToWorld,openCheck:openCheckInGMControl,installMaps,configureActivePregens,assignPregen,refreshPlayerBoard,openDashboard:()=>new ColdStorageDashboard().render({force:true})};});
+Hooks.once('ready',async()=>{await readyEmblems();await readyMissions();if(game.user?.isGM&&game.system?.id===SYS&&!versionAtLeast(systemVersion()))ui.notifications.warn(`Cold Storage 1.10 is built for Altered Carbon RPG ${REQUIRED_SYSTEM}+ (installed ${systemVersion()}). Update the system before importing.`,{permanent:true});game.coldStorage={...bookAPI(),...continuityAPI(),...missionsAPI(),import:importColdStorage,fullReinstall,applyEmblems:applyEmblemsToWorld,openCheck:openCheckInGMControl,installMaps,configureActivePregens,assignPregen,refreshPlayerBoard,openDashboard:()=>new ColdStorageDashboard().render({force:true})};});

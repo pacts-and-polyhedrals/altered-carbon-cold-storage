@@ -1,4 +1,4 @@
-/** Cold Storage 1.9.0: zoned scene maps for every playable location (Foundry v14 Levels).
+/** Cold Storage 1.10.0: zoned, walled scene maps for every playable location (Foundry v14 Levels).
  * Each map ships the Altered Carbon zone graph (scene flag altered-carbon-rpg.zoneGraph) used by the
  * system Zone Assistant and range rules, plus zone rectangles so tokens are assigned to the zone they
  * stand in automatically. GM-customised scenes are never overwritten.
@@ -23,7 +23,7 @@ export function sceneData(map,{folder=null}={}){
  const src=`${MAP_BASE}${map.file}`;
  return {name:map.name,navigation:true,width:map.width,height:map.height,padding:0,folder,sort:sortFor(map.id),
   grid:{type:0,size:map.gridSize,distance:1,units:'zone'},levels:[{name:map.name,background:{src}}],
-  flags:{[MOD]:{sourceId:map.id,zoneShapes:map.zones.map(z=>({id:z.id,rect:z.rect})),coverSpots:(map.cover||[]).map(c=>({...c})),mapVersion:'1.9.0',journal:map.journal,mapSrc:src},[SYS]:{zoneGraph:zoneGraph(map)}}};
+  flags:{[MOD]:{sourceId:map.id,zoneShapes:map.zones.map(z=>({id:z.id,rect:z.rect})),coverSpots:(map.cover||[]).map(c=>({...c})),mapVersion:'1.10.0',journal:map.journal,mapSrc:src},[SYS]:{zoneGraph:zoneGraph(map)}}};
 }
 export function backdropData([id,name,file,journal],{folder=null}={}){
  const src=`${PLACEHOLDER_BASE}${file}`;
@@ -50,14 +50,41 @@ export async function sceneFolder(){
  return f;
 }
 
+/** Foundry wall data for a map's walls, doors and windows (generated from the map geometry by scripts/maps/walls.py). */
+export const WALLS_VERSION='1.10.0';
+const C=globalThis.CONST??{};
+const MOVE=C.WALL_MOVEMENT_TYPES?.NORMAL??20,SENSE=C.WALL_SENSE_TYPES?.NORMAL??20,NONE=C.WALL_SENSE_TYPES?.NONE??0,LIMITED=C.WALL_SENSE_TYPES?.LIMITED??10;
+const DOOR=C.WALL_DOOR_TYPES?.DOOR??1,CLOSED=C.WALL_DOOR_STATES?.CLOSED??0,LOCKED=C.WALL_DOOR_STATES?.LOCKED??2;
+export function wallData(map){
+ return (map.walls||[]).map(w=>{
+  const base={c:[...w.c],move:MOVE,sight:SENSE,light:SENSE,sound:SENSE,flags:{[MOD]:{wall:w.kind,wallsVersion:WALLS_VERSION,...(w.label?{label:w.label}:{})}}};
+  if(w.kind==='door')return {...base,door:DOOR,ds:w.locked?LOCKED:CLOSED};
+  if(w.kind==='window')return {...base,sight:NONE,light:NONE,sound:LIMITED};   // glass: see and light through, no passage, muffled sound
+  return base;
+ });
+}
+/** Add or refresh the module's walls on one of its scenes. Walls a GM drew themselves are never touched:
+ * a scene that already has unflagged walls and none of ours is left alone. Returns 'created' | 'updated' | 'current' | 'custom'. */
+export async function syncWalls(scene,map){
+ const walls=Array.from(scene?.walls?.contents??scene?.walls??[]);
+ const ours=walls.filter(w=>(w.getFlag?.(MOD,'wall')??w.flags?.[MOD]?.wall));
+ if(walls.length&&!ours.length)return 'custom';
+ const want=wallData(map);if(!want.length)return 'current';
+ if(ours.length===want.length&&ours.every(w=>(w.getFlag?.(MOD,'wallsVersion')??w.flags?.[MOD]?.wallsVersion)===WALLS_VERSION))return 'current';
+ if(ours.length)await scene.deleteEmbeddedDocuments('Wall',ours.map(w=>w.id));
+ await scene.createEmbeddedDocuments('Wall',want);
+ return ours.length?'updated':'created';
+}
+
 /** Create missing scenes and repair/upgrade scenes that still use the module's own art. Returns counts. */
 export async function installMaps({thumbnails=true}={}){
  if(!game.user?.isGM)throw new Error('Only a GM may install scenes.');
- const maps=await loadMaps(),folder=await sceneFolder();let created=0,upgraded=0,skipped=0;
+ const maps=await loadMaps(),folder=await sceneFolder();let created=0,upgraded=0,skipped=0;const walls={created:0,updated:0,current:0,custom:0};
  const entries=[...BACKDROPS.map(b=>({id:b[0],data:backdropData(b,{folder:folder.id})})),...maps.map(m=>({id:m.id,data:sceneData(m,{folder:folder.id})}))];
  for(const {id,data} of entries){
   let scene=game.scenes.find(s=>sid(s)===id);
-  if(!scene){scene=await Scene.create(data);created++;if(thumbnails)await thumbnail(scene);continue;}
+  const map=maps.find(m=>m.id===id);
+  if(!scene){scene=await Scene.create(data);created++;if(map)walls[await syncWalls(scene,map)]++;if(thumbnails)await thumbnail(scene);continue;}
   const src=sceneImage(scene),{levels,...top}=data,img=levels[0].background.src;
   if(isOurArt(src)){
    // Our placeholder, an older map, or a black v14 scene from 1.6–1.8: set the Level image, size, zones and folder.
@@ -65,16 +92,17 @@ export async function installMaps({thumbnails=true}={}){
    const keep={name:String(src||'').startsWith(PLACEHOLDER_BASE)&&!id.match(/LANDING|EPILOGUE/)?data.name:scene.name,navigation:scene.navigation};
    await scene.update({...top,...keep,folder:scene.folder?.id??scene.folder??folder.id,[`flags.${MOD}.placeholder`]:Boolean(data.flags[MOD].placeholder)});
    if(src!==img)await setSceneImage(scene,img,data.name);
+   if(map)walls[await syncWalls(scene,map)]++;
    upgraded++;if(thumbnails)await thumbnail(scene);
   }else{
-   // GM replaced the art: keep it; add a zone graph if missing and file it with the others.
+   // GM replaced the art: keep it (and draw no walls over art they do not match); add a zone graph if missing and file it with the others.
    const changes={};if(data.flags[SYS]&&!scene.getFlag?.(SYS,'zoneGraph')?.zones?.length)changes[`flags.${SYS}.zoneGraph`]=data.flags[SYS].zoneGraph;
    if(!(scene.folder?.id??scene.folder))changes.folder=folder.id;
    if(Object.keys(changes).length)await scene.update(changes);
    skipped++;
   }
  }
- return {created,upgraded,skipped,maps:maps.length};
+ return {created,upgraded,skipped,maps:maps.length,walls};
 }
 
 /** Pure: which zone contains this canvas point? */

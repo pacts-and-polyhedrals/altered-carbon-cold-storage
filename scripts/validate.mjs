@@ -40,7 +40,7 @@ findForbidden(ROOT);
 if(forbidden.length) failures.push(`Rulebook/source PDFs must not be distributed: ${forbidden.join(', ')}`);
 
 if(manifest.id!=='cold-storage') failures.push('module id must remain cold-storage because runtime asset paths depend on it.');
-if(manifest.version!=='1.9.0') failures.push('release manifest must be version 1.9.0.');
+if(manifest.version!=='1.10.0') failures.push('release manifest must be version 1.10.0.');
 const dep=manifest.relationships?.systems?.find(x=>x.id==='altered-carbon-rpg');
 if(dep?.compatibility?.minimum!=='2.4.0') failures.push('Altered Carbon system dependency must require 2.4.0.');
 if(manifest.download&&!manifest.download.endsWith(`/v${manifest.version}/cold-storage-v${manifest.version}.zip`)) failures.push('download URL must name this version\'s release asset.');

@@ -5,7 +5,7 @@ const root=new URL('../',import.meta.url);
 const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const json=p=>JSON.parse(read(p));
 test('module declares Foundry 14 + Altered Carbon 2.4 without asserting live certification',()=>{
- const m=json('module.json');assert.equal(m.id,'cold-storage');assert.equal(m.version,'1.9.0');
+ const m=json('module.json');assert.equal(m.id,'cold-storage');assert.equal(m.version,'1.10.0');
  assert.equal(m.compatibility.minimum,'14');assert.equal(m.compatibility.verified,undefined);
  assert.equal(m.relationships.systems.find(s=>s.id==='altered-carbon-rpg').compatibility.minimum,'2.4.0');
  assert.ok(m.manifest&&m.download);
